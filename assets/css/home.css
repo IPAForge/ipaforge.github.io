@@ -92,6 +92,12 @@ a.eyebrow:hover {
   gap: var(--space-3);
 }
 
+.alt-download {
+  margin: calc(var(--space-3) * -1) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
 .meta {
   display: flex;
   flex-wrap: wrap;
