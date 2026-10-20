@@ -252,7 +252,7 @@ const install = () => {
     kicker: 'Install',
     h1: 'Installing IPAForge',
     intro: 'Download, the first open on each system, what your iPhone needs, and the first run.',
-    body: `      <div class="os-card" id="os-card"><div><b>IPAForge for your computer</b><span>Windows, macOS and Linux</span></div><a class="btn primary" href="${REPO}/releases">Download</a></div>
+    body: `      <div class="os-card" id="os-card"><div><b>IPAForge for your computer</b><span>Windows, macOS and Linux</span></div><a class="btn primary" data-version="${latestVersion()}" href="${REPO}/releases">Download</a></div>
 ${html}`,
     toc,
     source: { label: 'docs/installing.md', url: `${REPO}/blob/main/docs/installing.md` }

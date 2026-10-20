@@ -59,9 +59,17 @@
     })
   })
 
-  // The download button names the visitor's system.
+  // The download button names the visitor's system and, on a Mac or Windows, downloads its file straight away (the
+  // Apple silicon build on a Mac, with a link to the Intel one). Linux has several packages: the release page.
   const ua = navigator.userAgent
   const os = /Mac/.test(ua) ? 'macOS' : /Win/.test(ua) ? 'Windows' : /Linux|X11/.test(ua) && !/Android/.test(ua) ? 'Linux' : ''
   const label = document.getElementById('download-label')
   if (os && label) label.textContent = 'Download for ' + os
+  const button = document.getElementById('download')
+  const version = button?.dataset.version
+  const files = { macOS: 'mac-arm64.dmg', Windows: 'win-x64.exe' }
+  if (button && version && files[os])
+    button.href = `https://github.com/IPAForge/ipaforge/releases/download/v${version}/IPAForge-${version}-${files[os]}`
+  const intel = document.getElementById('alt-download')
+  if (intel && os === 'macOS') intel.hidden = false
 })()

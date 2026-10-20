@@ -3,17 +3,29 @@
   const picker = document.getElementById('docs-picker')
   if (picker) picker.addEventListener('change', () => (location.href = picker.value))
 
-  // Install: the card at the top names the visitor's system and its file.
+  // Install: the card at the top names the visitor's system and its file, and downloads it on a Mac (the Apple
+  // silicon build, with a link to the Intel one) or Windows. Linux has several packages: the release page.
   const osCard = document.getElementById('os-card')
   if (osCard) {
     const ua = navigator.userAgent
     const os = /Mac/.test(ua)
-      ? ['macOS', 'The .dmg for Apple silicon (M1 and later) or Intel']
+      ? ['macOS', 'The .dmg for Apple silicon (M1 and later)', 'mac-arm64.dmg']
       : /Win/.test(ua)
-        ? ['Windows', 'The .exe installer, which updates itself']
+        ? ['Windows', 'The .exe installer, which updates itself', 'win-x64.exe']
         : ['Linux', 'The AppImage, or a .deb or .rpm package']
+    const button = osCard.querySelector('.btn')
+    const version = button.dataset.version
+    const file = (name) => `https://github.com/IPAForge/ipaforge/releases/download/v${version}/IPAForge-${version}-${name}`
     osCard.querySelector('b').textContent = 'IPAForge for ' + os[0]
-    osCard.querySelector('span').textContent = os[1]
+    const note = osCard.querySelector('span')
+    note.textContent = os[1]
+    if (version && os[2]) button.href = file(os[2])
+    if (version && os[0] === 'macOS') {
+      const intel = document.createElement('a')
+      intel.href = file('mac-x64.dmg')
+      intel.textContent = 'Intel Mac?'
+      note.append(' · ', intel)
+    }
   }
 
   // Troubleshooting: every error is in the page (for search engines too); this only hides the ones that don't match.
