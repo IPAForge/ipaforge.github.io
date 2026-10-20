@@ -36,7 +36,7 @@
   "operatingSystem": "Windows, macOS, Linux",
   "softwareVersion": "0.1.0-alpha.4",
   "downloadUrl": "https://github.com/SirReaDy/ipaforge/releases",
-  "license": "https://opensource.org/licenses/MIT",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
   "isAccessibleForFree": true,
   "offers": {
     "@type": "Offer",
@@ -278,7 +278,7 @@ footer a:hover { color: var(--ink); }
         <a class="btn" href="https://github.com/SirReaDy/ipaforge"><svg><use href="#i-gh"/></svg>View on GitHub</a>
         <a class="btn" href="https://discord.gg/C87DKmAWhr"><svg><use href="#i-discord"/></svg>Join the Discord</a>
       </div>
-      <div class="meta"><span>Free and open source (MIT)</span><span>Windows · macOS · Linux</span><span>English, Deutsch, Română, Русский, العربية, 日本語</span></div>
+      <div class="meta"><span>Free and open source (AGPL-3.0)</span><span>Windows · macOS · Linux</span><span>English, Deutsch, Română, Русский, العربية, 日本語</span></div>
     </div>
   </section>
 
@@ -356,7 +356,7 @@ footer a:hover { color: var(--ink); }
           <li><svg><use href="#i-check"/></svg><span><b>All TypeScript, no closed helpers.</b> Code signing, talking to the device and signing in to Apple are written from scratch and open to read.</span></li>
           <li><svg><use href="#i-check"/></svg><span><b>Signs like Apple.</b> The signer's output matches Apple's own <span class="mono">codesign</span> byte for byte on its test fixtures, and Apple's verifier accepts it.</span></li>
           <li><svg><use href="#i-check"/></svg><span><b>Signed releases.</b> Every file of every release carries a Sigstore signature from the release workflow, and IPAForge checks it before installing an update.</span></li>
-          <li><svg><use href="#i-check"/></svg><span><b>MIT licensed.</b> Free to use, study and build on.</span></li>
+          <li><svg><use href="#i-check"/></svg><span><b>AGPL-3.0, and it stays open.</b> Free to use, study, change and share, and anything built from it must stay open source too.</span></li>
         </ul>
       </div>
       <div class="terminal" aria-label="Checking a download with cosign">
@@ -398,7 +398,7 @@ $ cosign verify-blob \
       <p class="kicker">FAQ</p>
       <h2>Good to know.</h2>
       <div class="faq">
-        <details><summary>Is IPAForge free?</summary><p>Yes. IPAForge is free and open source under the MIT license, and a free Apple ID is enough to use it.</p></details>
+        <details><summary>Is IPAForge free?</summary><p>Yes. IPAForge is free and open source under the GNU AGPL-3.0, and a free Apple ID is enough to use it.</p></details>
         <details><summary>Why does macOS or Windows warn me when I open it?</summary><p>IPAForge isn't notarised by Apple or code-signed for Windows yet. On macOS, open it once, then choose Open Anyway in System Settings › Privacy &amp; Security. On Windows, choose More info › Run anyway. Both are on the roadmap.</p></details>
         <details><summary>What do I need on Windows and Linux?</summary><p>On Windows, install Apple Devices from the Microsoft Store, so your computer can talk to the iPhone. On Linux, install usbmuxd.</p></details>
         <details><summary>Which iPhones and iPads work?</summary><p>iOS 15 or later with a passcode. On iOS 16 and later, Developer Mode must be on; the checklist shows you how.</p></details>
@@ -425,7 +425,7 @@ $ cosign verify-blob \
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Dan Motpan · MIT license</span>
+    <span>© 2026 Dan Motpan · <a href="https://github.com/SirReaDy/ipaforge/blob/main/LICENSE">AGPL-3.0 license</a></span>
     <nav aria-label="Links">
       <a href="https://github.com/SirReaDy/ipaforge">GitHub</a>
       <a href="https://github.com/SirReaDy/ipaforge/releases">Releases</a>
