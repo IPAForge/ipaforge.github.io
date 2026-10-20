@@ -1,0 +1,14 @@
+{
+  "name": "ipaforge-site",
+  "private": true,
+  "type": "module",
+  "description": "IPAForge's website, ipaforge.com: the landing page and the docs, built from the IPAForge repository.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "marked": "15.0.12"
+  },
+  "license": "AGPL-3.0-or-later"
+}

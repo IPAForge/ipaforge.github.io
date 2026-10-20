@@ -1,0 +1,29 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "IPAForge",
+  "description": "A free, open-source desktop app that installs SideStore and your own apps onto iPhone and iPad with a free Apple ID, from Windows, macOS or Linux.",
+  "url": "https://ipaforge.com/",
+  "image": "https://ipaforge.com/og.png",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Windows, macOS, Linux",
+  "softwareVersion": "0.1.0-alpha.5",
+  "downloadUrl": "https://github.com/IPAForge/ipaforge/releases",
+  "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Dan Motpan",
+    "url": "https://github.com/SirReaDy"
+  },
+  "sameAs": [
+    "https://discord.gg/C87DKmAWhr",
+    "https://github.com/IPAForge/ipaforge",
+    "https://github.com/IPAForge"
+  ]
+}

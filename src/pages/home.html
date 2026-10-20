@@ -1,0 +1,152 @@
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <a class="eyebrow" href="/releases/#v{{latest-version}}"><svg class="spark"><use href="#i-spark"/></svg><b>{{latest-version}}</b> See what's new<span aria-hidden="true">→</span></a>
+      <h1><span class="line">Sideload from any computer.</span> <em class="line">Keep it working.</em></h1>
+      <p class="lede">IPAForge installs SideStore and your own apps onto iPhone and iPad with a free Apple ID, from Windows, macOS or Linux. It checks everything before it changes anything, and when something fails, it tells you how to fix it.</p>
+      <div class="ctas">
+        <a class="btn primary" id="download" href="https://github.com/IPAForge/ipaforge/releases/tag/v{{latest-version}}"><svg><use href="#i-down"/></svg><span id="download-label">Download IPAForge</span></a>
+        <a class="btn" href="https://github.com/IPAForge/ipaforge"><svg><use href="#i-gh"/></svg>View on GitHub</a>
+        <a class="btn" href="https://discord.gg/C87DKmAWhr"><svg><use href="#i-discord"/></svg>Join the Discord</a>
+      </div>
+      <div class="meta"><span>Free and open source (AGPL-3.0)</span><span>Windows · macOS · Linux</span><span>English, Deutsch, Română, Русский, العربية, 日本語</span></div>
+    </div>
+  </section>
+
+  <section class="showcase" aria-label="The app">
+    <div class="wrap">
+      <div class="tabs" role="tablist" aria-label="Screens">
+        <button class="tab" role="tab" id="tab-install" aria-selected="true" data-shot="install-home">Install SideStore</button>
+        <button class="tab" role="tab" id="tab-preload" aria-selected="false" data-shot="preload">Preload apps</button>
+        <button class="tab" role="tab" id="tab-apps" aria-selected="false" data-shot="apps">Your apps</button>
+        <button class="tab" role="tab" id="tab-repair" aria-selected="false" data-shot="repair">Repair SideStore</button>
+        <button class="tab" role="tab" id="tab-devices" aria-selected="false" data-shot="devices">Device checklist</button>
+        <button class="tab" role="tab" id="tab-qr" aria-selected="false" data-shot="sidestore-qr">QR codes</button>
+      </div>
+      <p class="caption" id="caption" aria-live="polite">Pick SideStore, or LiveContainer with SideStore, and see what the install will use before anything changes: App IDs left this week, free-app slots, the certificate and the team.</p>
+      <div class="window" role="tabpanel" aria-labelledby="tab-install" id="panel">
+        <div class="bar"><i></i><i></i><i></i><span>IPAForge</span></div>
+        <div class="screen">
+          <img class="l" id="shot-l" src="/img/install-home.webp" alt="IPAForge's Install page: SideStore or LiveContainer with SideStore, the channel, and the install plan with App IDs left this week.">
+          <img class="d" id="shot-d" src="/img/install-home-dark.webp" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="limits">
+    <div class="wrap">
+      <p class="kicker">Free Apple ID</p>
+      <h2>Apple's limits, shown before you hit them.</h2>
+      <p class="sub">A free Apple ID can sideload, within rules most tools leave you to discover. IPAForge counts them for you and says what an install will use.</p>
+      <div class="limits">
+        <div class="limit"><div class="n">3<small>apps</small></div><p>at a time on each device. IPAForge asks which one to replace when you reach it.</p></div>
+        <div class="limit"><div class="n">7<small>days</small></div><p>per signature. IPAForge refreshes your apps by itself before they expire.</p></div>
+        <div class="limit"><div class="n">10<small>App IDs a week</small></div><p>shown before installing, with when the next one frees up.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="features">
+    <div class="wrap">
+      <p class="kicker">Features</p>
+      <h2>Everything sideloading needs, in one app.</h2>
+      <div class="features">
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></span><div><h3>One-click SideStore</h3><p>SideStore, or LiveContainer with SideStore, Stable or Nightly. The pairing file and certificate are placed for you.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></span><div><h3>Preload your apps</h3><p>Drop .ipa files, paste a link, or browse the catalog, SideStore's source and any AltStore-format source you add.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><div><h3>Apps that don't expire</h3><p>See when each app expires. Refresh works like SideStore's: a new profile while your certificate is valid, nothing reinstalled.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4Z"/></svg></span><div><h3>Repair SideStore</h3><p>Checks what keeps SideStore from refreshing by itself, line by line, and fixes it in one go.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg></span><div><h3>QR codes for SideStore</h3><p>Add a source to SideStore on your iPhone, or have SideStore install an app, by scanning a code.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="m9.5 11 1.8 1.8L15 9"/></svg></span><div><h3>A checklist for each iPhone</h3><p>Trust, passcode, Developer Mode, trusting your Apple ID, LocalDevVPN: what your iOS version needs, ticked as you go.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span><div><h3>Recovery, not dead ends</h3><p>Every failure has a screen with the fixes that apply, copyable diagnostics and a pre-filled bug report.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span><div><h3>Live progress</h3><p>Every step shows what it's doing: speed and time left while sending the app, Apple's steps, and iOS's own install progress, over USB or Wi-Fi.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><div><h3>Logs you can share</h3><p>Every step IPAForge took, with search and filters, saved to a file to attach to a bug report.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 20a6.5 6.5 0 0 0-3-5.5"/></svg></span><div><h3>Several Apple IDs</h3><p>Two-factor sign-in with a code on your devices or by text. Kept in your system keychain, free and paid teams, with a quick switch when Apple blocks one on a device.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 14 9l6.5 2-6.5 2-2 6.5-2-6.5-6.5-2L10 9Z"/></svg></span><div><h3>Updates itself</h3><p>A new version installs when IPAForge opens, after its release signature checks out, and What's new tells you what changed.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><div><h3>Your language, your look</h3><p>Six languages, right to left included, and six colour themes in light and dark.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="how">
+    <div class="wrap">
+      <p class="kicker">How it works</p>
+      <h2>Three steps to SideStore.</h2>
+      <div class="steps">
+        <div class="step"><span class="no">Step 1</span><h3>Plug in your iPhone</h3><p>Unlock it and tap Trust. The checklist shows what else your iOS version needs, like Developer Mode.</p></div>
+        <div class="step"><span class="no">Step 2</span><h3>Sign in with your Apple ID</h3><p>A free account works. Your password goes only to Apple, and saved Apple IDs stay in your system keychain.</p></div>
+        <div class="step"><span class="no">Step 3</span><h3>Install</h3><p>IPAForge signs SideStore, places its pairing file and certificate, and installs it, showing every step as it goes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="open">
+    <div class="wrap trust">
+      <div>
+        <p class="kicker">Open by design</p>
+        <h2>You can read every line, and check every download.</h2>
+        <ul>
+          <li><svg><use href="#i-check"/></svg><span><b>All TypeScript, no closed helpers.</b> Code signing, talking to the device and signing in to Apple are written from scratch and open to read.</span></li>
+          <li><svg><use href="#i-check"/></svg><span><b>Signs like Apple.</b> The signer's output matches Apple's own <span class="mono">codesign</span> byte for byte on its test fixtures, and Apple's verifier accepts it.</span></li>
+          <li><svg><use href="#i-check"/></svg><span><b>Signed releases.</b> Every file of every release carries a Sigstore signature from the release workflow, and IPAForge checks it before installing an update.</span></li>
+          <li><svg><use href="#i-check"/></svg><span><b>AGPL-3.0, and it stays open.</b> Free to use, study, change and share, and anything built from it must stay open source too.</span></li>
+        </ul>
+      </div>
+      <div class="terminal" aria-label="Checking a download with cosign">
+        <div class="tb"><i></i><i></i><i></i></div>
+<pre><span class="c"># check a download yourself</span>
+$ cosign verify-blob \
+    --bundle IPAForge-{{latest-version}}-mac-arm64.dmg.sigstore.json \
+    --certificate-identity-regexp \
+      '^https://github.com/IPAForge/ipaforge/.github/workflows/release.yml@' \
+    --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+    IPAForge-{{latest-version}}-mac-arm64.dmg
+<span class="g">Verified OK</span>
+
+<span class="c"># what the app logs before an update installs</span>
+<span class="y">[info]</span> the update is signed by IPAForge's release
+</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="roadmap">
+    <div class="wrap">
+      <p class="kicker">Roadmap</p>
+      <h2>Where IPAForge is going.</h2>
+      <div class="roadmap">
+        <div class="phase"><span class="pn">0–6</span><div><h3>The engine and the app</h3><p>Signer, device layer, Apple sign-in, developer services, the installer and the interface.</p></div><span class="chip done">Done</span></div>
+        <div class="phase"><span class="pn">8</span><div><h3>Install and preload</h3><p>One-click SideStore, app sources, the Apps page, Repair SideStore, QR codes, the checklist.</p></div><span class="chip done">Done</span></div>
+        <div class="phase"><span class="pn">9</span><div><h3>Desktop app</h3><p>Installers for Windows, macOS and Linux, signed releases, and automatic updates.</p></div><span class="chip done">Done</span></div>
+        <div class="phase"><span class="pn">7</span><div><h3>Guided first run</h3><p>A step-by-step setup the first time you open IPAForge.</p></div><span class="chip next">Next</span></div>
+        <div class="phase"><span class="pn">10</span><div><h3>Management tools</h3><p>Certificates, App IDs, pairing files per app, and .p12 import and export.</p></div><span class="chip next">Planned</span></div>
+        <div class="phase"><span class="pn">11</span><div><h3>Wireless and remote pairing</h3><p>Pairing a new device over Wi-Fi, finding devices on your network, and the iOS 17+ remote pairing file for SideStore.</p></div><span class="chip next">Planned</span></div>
+        <div class="phase"><span class="pn">12</span><div><h3>1.0</h3><p>Windows code signing and Apple notarisation, a docs site, more languages and a security review.</p></div><span class="chip next">Planned</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq">
+    <div class="wrap">
+      <p class="kicker">FAQ</p>
+      <h2>Good to know.</h2>
+      <div class="faq">
+{{faq-home}}
+      </div>
+      <p class="faq-more"><a class="btn" href="/faq/">All questions</a></p>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <img src="/img/icon.svg" alt="">
+      <h2>Get IPAForge.</h2>
+      <p class="sub" style="margin-top:0">Free for Windows, macOS and Linux. It keeps itself up to date.</p>
+      <div class="ctas">
+        <a class="btn primary" href="https://github.com/IPAForge/ipaforge/releases/tag/v{{latest-version}}"><svg><use href="#i-down"/></svg>Download <span>{{latest-version}}</span></a>
+        <a class="btn" href="https://github.com/IPAForge/ipaforge"><svg><use href="#i-gh"/></svg>Star on GitHub</a>
+        <a class="btn" href="https://discord.gg/C87DKmAWhr"><svg><use href="#i-discord"/></svg>Join the Discord</a>
+      </div>
+    </div>
+  </section>
+</main>
