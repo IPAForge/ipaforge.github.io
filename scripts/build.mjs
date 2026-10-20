@@ -208,11 +208,23 @@ const qa = (item, open = false) =>
 // ---------------------------------------------------------------------------------------------------------------
 // The pages.
 
-const latestVersion = () =>
+// The versions to show: those with notes in docs/releases/ whose GitHub release is published. Notes merged before
+// their release (the tag is pushed after) stay hidden until the release workflow asks for a rebuild, so the site
+// never links to downloads that aren't there yet. Without an answer from GitHub, every version with notes counts.
+const versionsWithNotes = () =>
   readdirSync(join(CONTENT, 'docs/releases'))
     .filter((file) => file.endsWith('.md'))
     .map((file) => file.replace(/\.md$/, ''))
-    .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }))[0]
+    .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }))
+
+const publishedVersions = (dates) => {
+  const versions = versionsWithNotes()
+  if (Object.keys(dates).length === 0) return versions
+  return versions.filter((version) => dates[version])
+}
+
+let shownVersions = []
+const latestVersion = () => shownVersions[0]
 
 const home = () => {
   const body = read(join(ROOT, 'src/pages/home.html'))
@@ -333,7 +345,12 @@ const releaseDates = async () => {
     })
     if (!response.ok) return {}
     const releases = await response.json()
-    return Object.fromEntries(releases.map((release) => [release.tag_name.replace(/^v/, ''), release.published_at]))
+    // Published releases only: a draft has no date and isn't downloadable.
+    return Object.fromEntries(
+      releases
+        .filter((release) => !release.draft && release.published_at)
+        .map((release) => [release.tag_name.replace(/^v/, ''), release.published_at])
+    )
   } catch {
     return {}
   }
@@ -341,10 +358,7 @@ const releaseDates = async () => {
 
 const releases = (dates) => {
   const dir = join(CONTENT, 'docs/releases')
-  const versions = readdirSync(dir)
-    .filter((file) => file.endsWith('.md'))
-    .map((file) => file.replace(/\.md$/, ''))
-    .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }))
+  const versions = shownVersions
   const formatDate = (iso) =>
     new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
   const sections = versions.map((version, index) => {
@@ -416,6 +430,8 @@ const write = (path, html) => {
 }
 
 const dates = await releaseDates()
+shownVersions = publishedVersions(dates)
+if (shownVersions.length === 0) throw new Error('no released version with notes in docs/releases/')
 write('/', home())
 write('/install/', install())
 write('/troubleshooting/', troubleshooting())
