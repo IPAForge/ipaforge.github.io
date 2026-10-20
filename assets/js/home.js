@@ -14,6 +14,10 @@
       alt: 'The Apps page listing installed apps with when each one expires.',
       caption: 'Every app you sideloaded and when it expires. Refresh, update or remove it, or let IPAForge refresh it by itself before it expires.'
     },
+    developer: {
+      alt: "The Developer Portal page: the team's certificates, with who made each and which apps on the iPhone it signs.",
+      caption: 'See what your Apple ID holds at Apple: certificates and the apps each one signs, App IDs and how many are left this week, the profiles on your iPhone, app groups and registered devices. Clean up what nothing uses.'
+    },
     repair: {
       alt: 'Repair SideStore checking SideStore line by line.',
       caption: 'Repair SideStore checks who signed it, its certificate, its pairing file and when it expires, then fixes what keeps it from refreshing by itself.'
