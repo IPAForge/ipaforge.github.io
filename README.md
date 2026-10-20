@@ -4,13 +4,41 @@ The website of [IPAForge](https://github.com/IPAForge/ipaforge), the free, open-
 
 Live at **https://ipaforge.com**.
 
-A single static page, served by GitHub Pages from `main`: no build step. The domain is set in `CNAME`; its DNS points at GitHub Pages, HTTPS is enforced, and `ipaforge.github.io` and `www.ipaforge.com` redirect to it.
+## Pages
 
-- `index.html`: the page (its styles and script are inline); the download buttons follow the newest release through GitHub's API.
-- `img/`: the icon and screenshots of the app (from its screenshot tests), light and dark.
-- `og.png`: the 1280×640 preview shown when the link is shared.
-- `robots.txt`, `sitemap.xml`: for search engines.
-- `CNAME`: the site's domain, ipaforge.com.
-- `google0b5838584fd20e84.html`: Google Search Console's ownership check; keep it.
+| Page | Made from |
+|---|---|
+| `/` | `src/pages/home.html`, by hand |
+| `/install/` | `docs/installing.md` in IPAForge/ipaforge |
+| `/troubleshooting/` | every error the app shows, from `packages/ui/src/locales/en.json` in IPAForge/ipaforge |
+| `/releases/` | `docs/releases/*.md` in IPAForge/ipaforge, with the dates from its GitHub releases |
+| `/faq/` | `src/content/faq.mjs` (the landing page shows its first questions) |
 
-To preview it locally: `python3 -m http.server` in this folder, then open http://localhost:8000.
+The docs pages are made from the app's repository, so they say what the app says: change `docs/installing.md` there, and the site follows on its next deploy.
+
+## How it's built
+
+`scripts/build.mjs` writes the whole site into `dist/`: every page in one layout (the top bar, the docs sidebar, the footer), the sitemap, and the static files. No framework: plain HTML, CSS and a little JavaScript.
+
+- `assets/css/tokens.css`: every colour, size and space, light and dark. `base.css` (shared), `home.css` and `docs.css` build on it.
+- `assets/js/`: the theme switch (`site.js`), the landing page's screens and newest release (`home.js`), the docs' page picker and error search (`docs.js`).
+- `img/`: the icon and screenshots of the app, light and dark. `og.png`: the preview shown when a link is shared.
+- `CNAME`: the domain. `google0b5838584fd20e84.html`: Google Search Console's ownership check; keep it.
+
+## Deploying
+
+`.github/workflows/deploy.yml` builds the site and publishes it to GitHub Pages (Settings › Pages › Source: GitHub Actions). It runs:
+
+- on every push to `main`;
+- when IPAForge publishes a release: its release workflow sends this repository an `app-released` event;
+- by hand, from the Actions tab.
+
+## Locally
+
+With a checkout of IPAForge/ipaforge next to this one:
+
+```sh
+npm install
+CONTENT_DIR=../ipaforge npm run build
+npm run preview   # http://localhost:4321
+```

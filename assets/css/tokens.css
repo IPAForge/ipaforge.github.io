@@ -1,0 +1,141 @@
+/*
+ * IPAForge's design tokens: every colour, size and space the site uses comes from here.
+ * Colours follow the app's icon: deep indigo, with the amber-to-orange spark as the one bright accent.
+ * Light is the default; dark applies with the system setting, unless the visitor chose light (data-theme),
+ * and always when they chose dark.
+ */
+:root {
+  /* Surfaces and text */
+  --color-bg: #f7f7fb;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0f0f7;
+  --color-ink: #13132b;
+  --color-ink-soft: #2a2b45;
+  --color-muted: #5a5b76;
+  --color-line: #e3e3ee;
+
+  /* Brand */
+  --color-accent: #3730a3;
+  --color-accent-ink: #ffffff;
+  --color-accent-soft: #ecedff;
+  --color-spark-from: #fbbf24;
+  --color-spark-to: #f97316;
+  --gradient-spark: linear-gradient(100deg, var(--color-spark-from), var(--color-spark-to));
+
+  /* States */
+  --color-ok: #15803d;
+  --color-ok-soft: #e7f6ec;
+  --color-warn: #b45309;
+  --color-warn-soft: #fdf2e2;
+
+  /* Code */
+  --color-code-bg: #f1f1f8;
+  --color-terminal-bg: #0d0e1f;
+  --color-terminal-ink: #d7d9f2;
+  --color-terminal-dim: #8a8db5;
+  --color-terminal-line: #22243f;
+
+  /* Effects */
+  --glow: rgba(79, 70, 229, 0.16);
+  --shadow-sm: 0 1px 2px rgba(19, 19, 43, 0.06);
+  --shadow-lg: 0 1px 2px rgba(19, 19, 43, 0.06), 0 24px 60px -24px rgba(19, 19, 43, 0.28);
+
+  /* Which of a light/dark image pair shows */
+  --show-light: block;
+  --show-dark: none;
+
+  /* Type */
+  --font-body: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --text-xs: 0.75rem;   /* 12 */
+  --text-sm: 0.875rem;  /* 14 */
+  --text-base: 1rem;    /* 16 */
+  --text-md: 1.0625rem; /* 17 */
+  --text-lg: 1.25rem;   /* 20 */
+  --text-xl: clamp(1.5rem, 2.4vw, 1.75rem);
+  --text-2xl: clamp(1.75rem, 3.6vw, 2.625rem);
+  --text-3xl: clamp(2rem, 4.4vw, 2.75rem);
+  --text-hero: clamp(2.375rem, 6.4vw, 4.5rem);
+  --tracking-tight: -0.035em;
+  --tracking-label: 0.08em;
+  --leading-tight: 1.1;
+  --leading-body: 1.65;
+
+  /* Space (4px steps) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-18: 4.5rem;
+  --space-24: 6rem;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+
+  /* Layout */
+  --width-page: 1120px;
+  --width-docs: 1200px;
+  --width-prose: 76ch;
+  --header-height: 61px;
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-end: max(16px, env(safe-area-inset-right, 0px));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #0b0c19;
+    --color-surface: #13142b;
+    --color-surface-2: #191a36;
+    --color-ink: #ecedf8;
+    --color-ink-soft: #d4d6ee;
+    --color-muted: #a2a4c4;
+    --color-line: #262849;
+    --color-accent: #a5b4fc;
+    --color-accent-ink: #0b0c19;
+    --color-accent-soft: #1d1f48;
+    --color-ok: #4ade80;
+    --color-ok-soft: #12301f;
+    --color-warn: #fbbf24;
+    --color-warn-soft: #2e2410;
+    --color-code-bg: #191a36;
+    --glow: rgba(99, 102, 241, 0.22);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 1px 2px rgba(0, 0, 0, 0.4), 0 30px 70px -28px rgba(0, 0, 0, 0.8);
+    --show-light: none;
+    --show-dark: block;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #0b0c19;
+  --color-surface: #13142b;
+  --color-surface-2: #191a36;
+  --color-ink: #ecedf8;
+  --color-ink-soft: #d4d6ee;
+  --color-muted: #a2a4c4;
+  --color-line: #262849;
+  --color-accent: #a5b4fc;
+  --color-accent-ink: #0b0c19;
+  --color-accent-soft: #1d1f48;
+  --color-ok: #4ade80;
+  --color-ok-soft: #12301f;
+  --color-warn: #fbbf24;
+  --color-warn-soft: #2e2410;
+  --color-code-bg: #191a36;
+  --glow: rgba(99, 102, 241, 0.22);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 1px 2px rgba(0, 0, 0, 0.4), 0 30px 70px -28px rgba(0, 0, 0, 0.8);
+  --show-light: none;
+  --show-dark: block;
+  color-scheme: dark;
+}
