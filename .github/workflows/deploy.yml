@@ -1,13 +1,14 @@
 # Builds ipaforge.com and publishes it to GitHub Pages: the landing page, and the docs pages made from the
 # IPAForge repository's own docs, release notes and error texts. It runs when the site changes, when the app
-# publishes a release (IPAForge/ipaforge's release workflow sends an "app-released" event), or by hand.
+# publishes a release ("app-released", from IPAForge/ipaforge's release workflow), when what the docs pages are
+# made from changes on the app's main ("app-docs-changed", from its website workflow), or by hand.
 name: Deploy
 
 on:
   push:
     branches: [main]
   repository_dispatch:
-    types: [app-released]
+    types: [app-released, app-docs-changed]
   workflow_dispatch:
 
 permissions:
