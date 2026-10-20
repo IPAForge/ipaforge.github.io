@@ -1,6 +1,6 @@
 # ipaforge.github.io
 
-The website of [IPAForge](https://github.com/SirReaDy/ipaforge), the free, open-source desktop app that installs SideStore and your own apps onto iPhone and iPad from Windows, macOS and Linux.
+The website of [IPAForge](https://github.com/IPAForge/ipaforge), the free, open-source desktop app that installs SideStore and your own apps onto iPhone and iPad from Windows, macOS and Linux.
 
 Live at **https://ipaforge.github.io**.
 

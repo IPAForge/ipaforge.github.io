@@ -34,8 +34,8 @@
   "image": "https://ipaforge.github.io/og.png",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Windows, macOS, Linux",
-  "softwareVersion": "0.1.0-alpha.4",
-  "downloadUrl": "https://github.com/SirReaDy/ipaforge/releases",
+  "softwareVersion": "0.1.0-alpha.5",
+  "downloadUrl": "https://github.com/IPAForge/ipaforge/releases",
   "license": "https://www.gnu.org/licenses/agpl-3.0.html",
   "isAccessibleForFree": true,
   "offers": {
@@ -50,7 +50,7 @@
   },
   "sameAs": [
     "https://discord.gg/C87DKmAWhr",
-    "https://github.com/SirReaDy/ipaforge",
+    "https://github.com/IPAForge/ipaforge",
     "https://github.com/IPAForge"
   ]
 }
@@ -276,7 +276,7 @@ footer a:hover { color: var(--ink); }
     <div class="nav-actions">
       <button class="btn small icon" id="theme" type="button" aria-label="Switch to light mode"><svg class="when-dark"><use href="#i-sun"/></svg><svg class="when-light"><use href="#i-moon"/></svg></button>
       <a class="btn small" href="https://discord.gg/C87DKmAWhr" aria-label="Discord"><svg><use href="#i-discord"/></svg><span class="label">Discord</span></a>
-      <a class="btn small" href="https://github.com/SirReaDy/ipaforge" aria-label="GitHub"><svg><use href="#i-gh"/></svg><span class="label">GitHub</span></a>
+      <a class="btn small" href="https://github.com/IPAForge/ipaforge" aria-label="GitHub"><svg><use href="#i-gh"/></svg><span class="label">GitHub</span></a>
     </div>
   </div>
 </header>
@@ -284,12 +284,12 @@ footer a:hover { color: var(--ink); }
 <main id="top">
   <section class="hero">
     <div class="wrap">
-      <span class="eyebrow"><svg class="spark"><use href="#i-spark"/></svg><b data-version>0.1.0-alpha.4</b> IPAForge now updates itself</span>
+      <span class="eyebrow"><svg class="spark"><use href="#i-spark"/></svg><b data-version>0.1.0-alpha.5</b> IPAForge now updates itself</span>
       <h1>Sideload from any computer. <em>Keep it working.</em></h1>
       <p class="lede">IPAForge installs SideStore and your own apps onto iPhone and iPad with a free Apple ID, from Windows, macOS or Linux. It checks everything before it changes anything, and when something fails, it tells you how to fix it.</p>
       <div class="ctas">
-        <a class="btn primary" id="download" data-release href="https://github.com/SirReaDy/ipaforge/releases/tag/v0.1.0-alpha.4"><svg><use href="#i-down"/></svg><span id="download-label">Download IPAForge</span></a>
-        <a class="btn" href="https://github.com/SirReaDy/ipaforge"><svg><use href="#i-gh"/></svg>View on GitHub</a>
+        <a class="btn primary" id="download" data-release href="https://github.com/IPAForge/ipaforge/releases/tag/v0.1.0-alpha.5"><svg><use href="#i-down"/></svg><span id="download-label">Download IPAForge</span></a>
+        <a class="btn" href="https://github.com/IPAForge/ipaforge"><svg><use href="#i-gh"/></svg>View on GitHub</a>
         <a class="btn" href="https://discord.gg/C87DKmAWhr"><svg><use href="#i-discord"/></svg>Join the Discord</a>
       </div>
       <div class="meta"><span>Free and open source (AGPL-3.0)</span><span>Windows · macOS · Linux</span><span>English, Deutsch, Română, Русский, العربية, 日本語</span></div>
@@ -377,11 +377,11 @@ footer a:hover { color: var(--ink); }
         <div class="tb"><i></i><i></i><i></i></div>
 <pre><span class="c"># check a download yourself</span>
 $ cosign verify-blob \
-    --bundle IPAForge-0.1.0-alpha.4-mac-arm64.dmg.sigstore.json \
+    --bundle IPAForge-0.1.0-alpha.5-mac-arm64.dmg.sigstore.json \
     --certificate-identity-regexp \
-      '^https://github.com/SirReaDy/ipaforge/.github/workflows/release.yml@' \
+      '^https://github.com/IPAForge/ipaforge/.github/workflows/release.yml@' \
     --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-    IPAForge-0.1.0-alpha.4-mac-arm64.dmg
+    IPAForge-0.1.0-alpha.5-mac-arm64.dmg
 <span class="g">Verified OK</span>
 
 <span class="c"># what the app logs before an update installs</span>
@@ -417,7 +417,7 @@ $ cosign verify-blob \
         <details><summary>What do I need on Windows and Linux?</summary><p>On Windows, install Apple Devices from the Microsoft Store, so your computer can talk to the iPhone. On Linux, install usbmuxd.</p></details>
         <details><summary>Which iPhones and iPads work?</summary><p>iOS 15 or later with a passcode. On iOS 16 and later, Developer Mode must be on; the checklist shows you how.</p></details>
         <details><summary>Where does my Apple ID password go?</summary><p>Only to Apple. If you choose to save it, it stays encrypted in your system keychain on your computer.</p></details>
-        <details><summary>Where can I get help?</summary><p>Ask on the <a href="https://discord.gg/C87DKmAWhr">IPAForge Discord</a>, or report a problem on <a href="https://github.com/SirReaDy/ipaforge/issues">GitHub</a> with the logs attached (Logs › Save in the app).</p></details>
+        <details><summary>Where can I get help?</summary><p>Ask on the <a href="https://discord.gg/C87DKmAWhr">IPAForge Discord</a>, or report a problem on <a href="https://github.com/IPAForge/ipaforge/issues">GitHub</a> with the logs attached (Logs › Save in the app).</p></details>
         <details><summary>Is IPAForge part of SideStore?</summary><p>No. IPAForge is an independent project that installs SideStore and works alongside it. It isn't affiliated with SideStore or Apple.</p></details>
       </div>
     </div>
@@ -429,8 +429,8 @@ $ cosign verify-blob \
       <h2>Get IPAForge.</h2>
       <p class="sub" style="margin-top:0">Free for Windows, macOS and Linux. It keeps itself up to date.</p>
       <div class="ctas">
-        <a class="btn primary" data-release href="https://github.com/SirReaDy/ipaforge/releases/tag/v0.1.0-alpha.4"><svg><use href="#i-down"/></svg>Download <span data-version>0.1.0-alpha.4</span></a>
-        <a class="btn" href="https://github.com/SirReaDy/ipaforge"><svg><use href="#i-gh"/></svg>Star on GitHub</a>
+        <a class="btn primary" data-release href="https://github.com/IPAForge/ipaforge/releases/tag/v0.1.0-alpha.5"><svg><use href="#i-down"/></svg>Download <span data-version>0.1.0-alpha.5</span></a>
+        <a class="btn" href="https://github.com/IPAForge/ipaforge"><svg><use href="#i-gh"/></svg>Star on GitHub</a>
         <a class="btn" href="https://discord.gg/C87DKmAWhr"><svg><use href="#i-discord"/></svg>Join the Discord</a>
       </div>
     </div>
@@ -439,12 +439,12 @@ $ cosign verify-blob \
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Dan Motpan · <a href="https://github.com/SirReaDy/ipaforge/blob/main/LICENSE">AGPL-3.0 license</a></span>
+    <span>© 2026 Dan Motpan · <a href="https://github.com/IPAForge/ipaforge/blob/main/LICENSE">AGPL-3.0 license</a></span>
     <nav aria-label="Links">
-      <a href="https://github.com/SirReaDy/ipaforge">GitHub</a>
-      <a href="https://github.com/SirReaDy/ipaforge/releases">Releases</a>
-      <a href="https://github.com/SirReaDy/ipaforge/blob/main/docs/installing.md">Installing</a>
-      <a href="https://github.com/SirReaDy/ipaforge/issues">Report a problem</a>
+      <a href="https://github.com/IPAForge/ipaforge">GitHub</a>
+      <a href="https://github.com/IPAForge/ipaforge/releases">Releases</a>
+      <a href="https://github.com/IPAForge/ipaforge/blob/main/docs/installing.md">Installing</a>
+      <a href="https://github.com/IPAForge/ipaforge/issues">Report a problem</a>
       <a href="https://discord.gg/C87DKmAWhr">Discord</a>
     </nav>
   </div>
@@ -506,7 +506,7 @@ $ cosign verify-blob \
   if (document.documentElement.dataset.theme) themeColor()
 
   // The newest release (alphas included): its version and page. Without an answer the links keep the one built in.
-  fetch('https://api.github.com/repos/SirReaDy/ipaforge/releases?per_page=5')
+  fetch('https://api.github.com/repos/IPAForge/ipaforge/releases?per_page=5')
     .then((response) => (response.ok ? response.json() : []))
     .then((releases) => {
       const latest = releases.find((release) => !release.draft)
