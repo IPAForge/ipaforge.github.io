@@ -32,7 +32,7 @@ export const FAQ = [
   },
   {
     q: 'An install failed. What now?',
-    a: 'Every error has a code and its fix right in the app. <a href="/troubleshooting/">Troubleshooting</a> lists every code. Still stuck? Ask on <a href="https://discord.gg/C87DKmAWhr">Discord</a>, or open an issue on GitHub with the logs attached (Logs › Save in the app).'
+    a: 'Every error has a code and its fix right in the app. <a href="/troubleshooting/">Troubleshooting</a> lists every code. Still stuck? Ask on <a href="https://discord.gg/kGJn7NC5Zf">Discord</a>, or open an issue on GitHub with the logs attached (Logs › Save in the app).'
   },
   {
     q: 'Is IPAForge part of SideStore?',

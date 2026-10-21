@@ -18,7 +18,7 @@ const CONTENT = resolve(ROOT, process.env.CONTENT_DIR ?? '../ipaforge')
 const DIST = join(ROOT, 'dist')
 const SITE = 'https://ipaforge.com'
 const REPO = 'https://github.com/IPAForge/ipaforge'
-const DISCORD = 'https://discord.gg/C87DKmAWhr'
+const DISCORD = 'https://discord.gg/kGJn7NC5Zf'
 
 if (!existsSync(join(CONTENT, 'docs/installing.md')))
   throw new Error(`CONTENT_DIR (${CONTENT}) is not a checkout of IPAForge/ipaforge`)
