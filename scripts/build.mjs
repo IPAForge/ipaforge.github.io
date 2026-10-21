@@ -80,34 +80,116 @@ const NAV = [
 
 const SPRITE = read(join(ROOT, 'src/sprite.svg'))
 const SOFTWARE = JSON.parse(read(join(ROOT, 'src/content/software.json')))
+/** The app's screens on the landing page, for the app's structured data. */
+const SCREENSHOTS = ['install-home', 'preload', 'apps', 'developer', 'repair', 'devices', 'sidestore-qr']
+const OG_IMAGE_ALT = 'IPAForge: install SideStore and your own apps onto iPhone and iPad from Windows, macOS and Linux.'
 
-const head = ({ path, title, description, kind, jsonLd, noindex = false }) => `<!doctype html>
+// What Google reads about the site: its name and logo (WebSite, Organization) on the home page with the app itself,
+// and on every docs page where it sits (a breadcrumb), with the page's own data (the FAQ's questions) next to it.
+const WEBSITE = {
+  '@type': 'WebSite',
+  '@id': `${SITE}/#website`,
+  name: 'IPAForge',
+  alternateName: 'ipaforge.com',
+  url: `${SITE}/`,
+  inLanguage: 'en',
+  publisher: { '@id': `${SITE}/#organization` }
+}
+const ORGANIZATION = {
+  '@type': 'Organization',
+  '@id': `${SITE}/#organization`,
+  name: 'IPAForge',
+  url: `${SITE}/`,
+  logo: { '@type': 'ImageObject', url: `${SITE}/img/icon-512.png`, width: 512, height: 512 },
+  sameAs: SOFTWARE.sameAs
+}
+const withoutContext = ({ '@context': _, ...rest }) => rest
+const breadcrumb = (path) => ({
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'IPAForge', item: `${SITE}/` },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: NAV.find((item) => item.path === path)?.label ?? path,
+      item: `${SITE}${path}`
+    }
+  ]
+})
+/** A docs page itself: a TechArticle for a guide, a WebPage otherwise, with when its content last changed. */
+const pageNode = ({ path, title, description, pageType = 'WebPage' }) => {
+  const modified = lastmod[path]?.slice(0, 10)
+
+  return {
+    '@type': pageType,
+    '@id': `${SITE}${path}#page`,
+    url: `${SITE}${path}`,
+    name: title,
+    ...(pageType === 'TechArticle'
+      ? {
+          headline: title,
+          author: { '@id': `${SITE}/#organization` },
+          publisher: { '@id': `${SITE}/#organization` },
+          image: `${SITE}/og.png`,
+          about: { '@id': `${SITE}/#software` },
+          proficiencyLevel: 'Beginner'
+        }
+      : {}),
+    description,
+    inLanguage: 'en',
+    isPartOf: { '@id': `${SITE}/#website` },
+    ...(modified ? { dateModified: modified } : {})
+  }
+}
+const structuredData = ({ path, title, description, jsonLd, pageType, noindex }) => {
+  if (noindex) return ''
+  const graph =
+    path === '/'
+      ? [WEBSITE, ORGANIZATION, ...(jsonLd ? [withoutContext(jsonLd)] : [])]
+      : [
+          // The page's own data (the FAQ's questions) makes the page that type, rather than a second node.
+          { ...pageNode({ path, title, description, pageType: jsonLd?.['@type'] ?? pageType }), ...(jsonLd ? withoutContext(jsonLd) : {}) },
+          breadcrumb(path)
+        ]
+  const data = { '@context': 'https://schema.org', '@graph': graph }
+
+  return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>\n`
+}
+
+const head = ({ path, title, description, kind, jsonLd, pageType, noindex = false }) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${SITE}${path}">`}
+${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${SITE}${path}">\n<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">`}
+<meta name="author" content="Dan Motpan">
+<link rel="alternate" type="application/atom+xml" title="IPAForge releases" href="${SITE}/releases/feed.xml">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f7fb" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b0c19" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/img/icon.svg" type="image/svg+xml">
-<link rel="icon" href="/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/img/icon-96.png" sizes="96x96" type="image/png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="IPAForge">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:url" content="${SITE}${path}">
 <meta property="og:image" content="${SITE}/og.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="${esc(OG_IMAGE_ALT)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
 <meta name="twitter:image" content="${SITE}/og.png">
-${jsonLd ? `<script type="application/ld+json">\n${JSON.stringify(jsonLd, null, 2)}\n</script>\n` : ''}<script>
+<meta name="twitter:image:alt" content="${esc(OG_IMAGE_ALT)}">
+${structuredData({ path, title, description, jsonLd, pageType, noindex })}<script>
   try {
     const theme = localStorage.getItem('theme')
     if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme
@@ -126,7 +208,7 @@ ${jsonLd ? `<script type="application/ld+json">\n${JSON.stringify(jsonLd, null, 
 const header = (path) => `${SPRITE}
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="/"><img src="/img/icon.svg" alt="">IPAForge</a>
+    <a class="brand" href="/"><img src="/img/icon.svg" alt="" width="30" height="30">IPAForge</a>
     <nav class="site-nav" aria-label="Pages">
 ${NAV.map((item) => `      <a href="${item.path}"${item.path === path ? ' aria-current="page"' : ''}>${item.label}</a>`).join('\n')}
     </nav>
@@ -159,7 +241,7 @@ ${kind === 'home' ? '<script src="/assets/js/home.js" defer></script>' : '<scrip
 `
 
 /** A docs page: the sidebar (every docs page, then this page's sections), the picker for phones, the page. */
-const docsPage = ({ path, title, description, kicker, h1, intro, body, toc = [], source, jsonLd, noindex }) => {
+const docsPage = ({ path, title, description, kicker, h1, intro, body, toc = [], source, jsonLd, pageType, noindex }) => {
   const sections = toc.length
     ? `<h2>On this page</h2>
       <ul class="toc">
@@ -167,7 +249,7 @@ ${toc.map((item) => `        <li><a href="#${item.id}"${item.pick ? ` data-pick-
       </ul>`
     : ''
   return (
-    head({ path, title, description, kind: 'docs', jsonLd, noindex }) +
+    head({ path, title, description, kind: 'docs', jsonLd, pageType, noindex }) +
     header(path) +
     `<div class="wrap docs">
   <aside class="docs-side" aria-label="Documentation">
@@ -224,6 +306,8 @@ const publishedVersions = (dates) => {
 }
 
 let shownVersions = []
+/** When each page's content last changed, by path (read before the pages are written: they carry it too). */
+let lastmod = {}
 const latestVersion = () => shownVersions[0]
 
 const home = () => {
@@ -242,7 +326,18 @@ const home = () => {
       description:
         'IPAForge is a free, open-source desktop app for Windows, macOS and Linux that installs SideStore and your own apps onto iPhone and iPad with a free Apple ID.',
       kind: 'home',
-      jsonLd: SOFTWARE
+      // The version is the newest released one, written in on every build.
+      jsonLd: {
+        ...SOFTWARE,
+        '@id': `${SITE}/#software`,
+        softwareVersion: latestVersion(),
+        ...(dates[latestVersion()] ? { dateModified: dates[latestVersion()].slice(0, 10) } : {}),
+        downloadUrl: `${REPO}/releases/tag/v${latestVersion()}`,
+        releaseNotes: `${SITE}/releases/#v${latestVersion()}`,
+        installUrl: `${SITE}/install/`,
+        screenshot: SCREENSHOTS.map((name) => `${SITE}/img/${name}.webp`),
+        publisher: { '@id': `${SITE}/#organization` }
+      }
     }) +
     header('/') +
     body +
@@ -262,6 +357,7 @@ const install = () => {
     description:
       'Download IPAForge, open it the first time on macOS, Windows or Linux, connect your iPhone, and install SideStore.',
     kicker: 'Install',
+    pageType: 'TechArticle',
     h1: 'Installing IPAForge',
     intro: 'Download, the first open on each system, what your iPhone needs, and the first run.',
     body: `      <div class="os-card" id="os-card"><div><b>IPAForge for your computer</b><span>Windows, macOS and Linux</span></div><a class="btn primary" data-version="${latestVersion()}" href="${REPO}/releases">Download</a></div>
@@ -304,6 +400,7 @@ const troubleshooting = () => {
   return docsPage({
     path: '/troubleshooting/',
     title: 'Troubleshooting IPAForge: every error and how to fix it',
+    pageType: 'TechArticle',
     description: `What each of IPAForge's ${errors.length} errors means and how to fix it: device, Apple ID, downloads, signing and installing.`,
     kicker: 'Troubleshooting',
     h1: 'When something fails',
@@ -373,8 +470,9 @@ ${html.replace(/ id="/g, ` id="v${esc(version)}-`)}
   })
   return docsPage({
     path: '/releases/',
-    title: 'IPAForge release notes',
-    description: 'What changed in each version of IPAForge, newest first.',
+    title: 'IPAForge release notes: what changed in every version',
+    description:
+      'What changed in each version of IPAForge, newest first: new features, fixes and the downloads for Windows, macOS and Linux.',
     kicker: 'Release notes',
     h1: 'Every version, newest first',
     intro: "What changed in each release of IPAForge. The app shows the same changes in What's new.",
@@ -384,10 +482,41 @@ ${html.replace(/ id="/g, ` id="v${esc(version)}-`)}
   })
 }
 
+/** An Atom feed of the releases, newest first, each linking to its notes and downloads. */
+const releasesFeed = (dates) => {
+  const entries = shownVersions.map((version) => {
+    const updated = dates[version] ?? new Date(0).toISOString()
+    const source = read(join(CONTENT, 'docs/releases', `${version}.md`)).replace(/\n## (Downloads|Before you start)[\s\S]*?(?=\n## |$)/g, '\n')
+    return `  <entry>
+    <title>IPAForge ${esc(version)}</title>
+    <id>${SITE}/releases/#v${esc(version)}</id>
+    <link href="${SITE}/releases/#v${esc(version)}"/>
+    <link rel="related" href="${REPO}/releases/tag/v${esc(version)}"/>
+    <updated>${updated}</updated>
+    <content type="html">${esc(marked.parse(source))}</content>
+  </entry>`
+  })
+  const updated = dates[shownVersions[0]] ?? new Date(0).toISOString()
+
+  return `<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>IPAForge releases</title>
+  <subtitle>What changed in each version of IPAForge.</subtitle>
+  <id>${SITE}/releases/</id>
+  <link href="${SITE}/releases/"/>
+  <link rel="self" href="${SITE}/releases/feed.xml"/>
+  <icon>${SITE}/img/icon-96.png</icon>
+  <author><name>Dan Motpan</name></author>
+  <updated>${updated}</updated>
+${entries.join('\n')}
+</feed>
+`
+}
+
 const faq = () =>
   docsPage({
     path: '/faq/',
-    title: 'IPAForge FAQ',
+    title: 'IPAForge FAQ: cost, requirements, Apple ID and updates',
     description: 'Short answers about IPAForge: what it costs, what you need, the warnings on first open, your password, updates and getting help.',
     kicker: 'FAQ',
     h1: 'Questions people ask',
@@ -432,6 +561,19 @@ const write = (path, html) => {
 const dates = await releaseDates()
 shownVersions = publishedVersions(dates)
 if (shownVersions.length === 0) throw new Error('no released version with notes in docs/releases/')
+// Each page's lastmod is when its content last changed, not when the site was built: Google trusts dates that move
+// only with the content. The newest of a page's sources counts; without an answer from GitHub, the page has none.
+const APP = 'IPAForge/ipaforge'
+const SITE_REPO = 'IPAForge/ipaforge.github.io'
+const newest = (...dates) => dates.filter(Boolean).sort().at(-1)
+const latestRelease = Object.values(dates).filter(Boolean).sort().at(-1)
+lastmod = {
+  '/': newest(await lastCommitDate(SITE_REPO, 'src/pages/home.html'), await lastCommitDate(SITE_REPO, 'src/content/faq.mjs'), latestRelease),
+  '/install/': await lastCommitDate(APP, 'docs/installing.md'),
+  '/troubleshooting/': await lastCommitDate(APP, 'packages/ui/src/locales/en.json'),
+  '/releases/': newest(latestRelease, await lastCommitDate(APP, 'docs/releases')),
+  '/faq/': await lastCommitDate(SITE_REPO, 'src/content/faq.mjs')
+}
 write('/', home())
 write('/install/', install())
 write('/troubleshooting/', troubleshooting())
@@ -439,22 +581,11 @@ write('/releases/', releases(dates))
 write('/faq/', faq())
 write('/404.html', notFound())
 
-for (const item of ['assets', 'img', 'og.png', 'CNAME', 'robots.txt', 'google0b5838584fd20e84.html'])
+writeFileSync(join(DIST, 'releases/feed.xml'), releasesFeed(dates))
+
+for (const item of ['assets', 'img', 'og.png', 'favicon.ico', 'site.webmanifest', 'CNAME', 'robots.txt', 'google0b5838584fd20e84.html'])
   cpSync(join(ROOT, item), join(DIST, item), { recursive: true })
 
-// Each page's lastmod is when its content last changed, not when the site was built: Google trusts dates that move
-// only with the content. The newest of a page's sources counts; without an answer from GitHub, the page has none.
-const APP = 'IPAForge/ipaforge'
-const SITE_REPO = 'IPAForge/ipaforge.github.io'
-const newest = (...dates) => dates.filter(Boolean).sort().at(-1)
-const latestRelease = Object.values(dates).filter(Boolean).sort().at(-1)
-const lastmod = {
-  '/': newest(await lastCommitDate(SITE_REPO, 'src/pages/home.html'), await lastCommitDate(SITE_REPO, 'src/content/faq.mjs'), latestRelease),
-  '/install/': await lastCommitDate(APP, 'docs/installing.md'),
-  '/troubleshooting/': await lastCommitDate(APP, 'packages/ui/src/locales/en.json'),
-  '/releases/': newest(latestRelease, await lastCommitDate(APP, 'docs/releases')),
-  '/faq/': await lastCommitDate(SITE_REPO, 'src/content/faq.mjs')
-}
 writeFileSync(
   join(DIST, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
