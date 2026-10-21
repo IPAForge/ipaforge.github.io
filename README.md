@@ -22,7 +22,8 @@ The docs pages are made from the app's repository, so they say what the app says
 
 - `assets/css/tokens.css`: every colour, size and space, light and dark. `base.css` (shared), `home.css` and `docs.css` build on it.
 - `assets/js/`: the theme switch (`site.js`), the landing page's screens and newest release (`home.js`), the docs' page picker and error search (`docs.js`).
-- `img/`: the icon and screenshots of the app, light and dark. `og.png`: the preview shown when a link is shared.
+- `img/`: the icon (SVG, and PNGs at 48, 96, 192 and 512 px) and screenshots of the app, light and dark. `favicon.ico` (16, 32, 48 px) and `site.webmanifest` for browsers and search results. `og.png`: the preview shown when a link is shared.
+- Search engines get structured data on every page (`structuredData` in the build): the site's name and logo and the app (with its newest version and screenshots) on `/`, a breadcrumb and the page itself (a TechArticle for the guides, the FAQ's questions) on the docs pages, and an Atom feed of the releases at `/releases/feed.xml`.
 - `CNAME`: the domain. `google0b5838584fd20e84.html`: Google Search Console's ownership check; keep it.
 
 ## Deploying
