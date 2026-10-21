@@ -4,7 +4,7 @@
 export const FAQ = [
   {
     q: 'Is IPAForge free?',
-    a: 'Yes. IPAForge is free and open source under the GNU AGPL-3.0, and a free Apple ID is enough to use it.'
+    a: 'Yes. IPAForge is free and open source under the GNU AGPL-3.0, and a free Apple ID is enough to use it. Every feature is free for everyone; if it saves you time, you can support it on <a href="https://patreon.com/IPAForge">Patreon</a>.'
   },
   {
     q: 'Do I need a paid Apple developer account?',

@@ -19,6 +19,7 @@ const DIST = join(ROOT, 'dist')
 const SITE = 'https://ipaforge.com'
 const REPO = 'https://github.com/IPAForge/ipaforge'
 const DISCORD = 'https://discord.gg/kGJn7NC5Zf'
+const PATREON = 'https://patreon.com/IPAForge'
 
 if (!existsSync(join(CONTENT, 'docs/installing.md')))
   throw new Error(`CONTENT_DIR (${CONTENT}) is not a checkout of IPAForge/ipaforge`)
@@ -231,6 +232,7 @@ const footer = (kind) => `<footer class="site-footer">
       <a href="/troubleshooting/">Troubleshooting</a>
       <a href="${REPO}/issues">Report a problem</a>
       <a href="${DISCORD}">Discord</a>
+      <a href="${PATREON}">Support on Patreon</a>
     </nav>
   </div>
 </footer>
