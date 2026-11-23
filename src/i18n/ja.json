@@ -1,0 +1,273 @@
+{
+  "language": {
+    "label": "言語",
+    "englishOnly": "英語のみ"
+  },
+  "header": {
+    "pages": "ページ",
+    "switchTheme": "テーマを切り替え",
+    "toLight": "ライトモードに切り替え",
+    "toDark": "ダークモードに切り替え"
+  },
+  "nav": {
+    "install": "インストール",
+    "troubleshooting": "トラブルシューティング",
+    "releases": "リリースノート",
+    "faq": "よくある質問"
+  },
+  "footer": {
+    "links": "リンク",
+    "license": "AGPL-3.0 ライセンス",
+    "downloads": "ダウンロード",
+    "report": "問題を報告",
+    "patreon": "Patreon で支援"
+  },
+  "docs": {
+    "sidebar": "ドキュメント",
+    "heading": "ドキュメント",
+    "onThisPage": "このページの内容",
+    "page": "ページ",
+    "madeFrom": "IPAForge リポジトリの <code>{source}</code> から作成しています。",
+    "edit": "GitHub でこのページを編集",
+    "report": "問題を報告"
+  },
+  "meta": {
+    "ogImageAlt": "IPAForge：Windows、macOS、Linux から iPhone と iPad に SideStore や自分のアプリをインストール。",
+    "feedTitle": "IPAForge のリリース"
+  },
+  "home": {
+    "title": "IPAForge：Windows、macOS、Linux から SideStore をインストール",
+    "description": "IPAForge は Windows、macOS、Linux 向けの無料のオープンソースのデスクトップアプリです。無料の Apple ID で、SideStore や自分のアプリを iPhone と iPad にインストールできます。",
+    "hero": {
+      "whatsNew": "新機能を見る",
+      "line1": "どのパソコンからでもサイドロード。",
+      "line2": "そして、使い続けられる。",
+      "lede": "IPAForge は、無料の Apple ID で SideStore や自分のアプリを iPhone と iPad にインストールします。Windows、macOS、Linux のどれからでも使えます。何かを変更する前にすべてを確認し、失敗したときは直し方を教えてくれます。",
+      "download": "IPAForge をダウンロード",
+      "github": "GitHub で見る",
+      "discord": "Discord に参加",
+      "intelQuestion": "Intel Mac をお使いですか？",
+      "intelLink": "Intel 版をダウンロード",
+      "openSource": "無料のオープンソース（AGPL-3.0）",
+      "systems": "Windows · macOS · Linux"
+    },
+    "showcase": {
+      "label": "アプリ",
+      "tabs": "画面",
+      "install-home": "SideStore をインストール",
+      "preload": "アプリをプリロード",
+      "apps": "あなたのアプリ",
+      "developer": "デベロッパーポータル",
+      "repair": "SideStore を修復",
+      "devices": "デバイスのチェックリスト",
+      "sidestore-qr": "QR コード"
+    },
+    "limits": {
+      "kicker": "無料の Apple ID",
+      "title": "Apple の上限を、達する前に表示。",
+      "sub": "無料の Apple ID でもサイドロードできますが、多くのツールでは自分で気づくしかないルールがあります。IPAForge はそれを数え、インストールで何を使うかを表示します。",
+      "appsUnit": "個のアプリ",
+      "apps": "各デバイスで同時に使える数です。上限に達すると、IPAForge がどれを置き換えるか尋ねます。",
+      "daysUnit": "日",
+      "days": "署名の有効期間です。期限が切れる前に、IPAForge が自動でアプリをリフレッシュします。",
+      "appIdsUnit": "個の App ID / 週",
+      "appIds": "インストール前に、次に空くタイミングと一緒に表示します。"
+    },
+    "features": {
+      "kicker": "機能",
+      "title": "サイドロードに必要なものを、ひとつのアプリに。",
+      "sidestore": { "title": "ワンクリックで SideStore", "body": "SideStore、または SideStore 入りの LiveContainer を、安定版かナイトリーで。ペアリングファイルと証明書も自動で配置します。" },
+      "preload": { "title": "アプリをプリロード", "body": ".ipa ファイルをドロップ、リンクを貼り付け、またはカタログ、SideStore のソース、追加した AltStore 形式のソースから探せます。" },
+      "refresh": { "title": "期限切れにならないアプリ", "body": "各アプリの期限を確認できます。リフレッシュは SideStore と同じ仕組みで、証明書が有効な間は新しいプロファイルだけを入れ、再インストールはしません。" },
+      "repair": { "title": "SideStore を修復", "body": "SideStore が自分でリフレッシュできない原因を 1 項目ずつ確認し、まとめて直します。" },
+      "qr": { "title": "SideStore 用の QR コード", "body": "コードをスキャンするだけで、iPhone の SideStore にソースを追加したり、SideStore にアプリをインストールさせたりできます。" },
+      "checklist": { "title": "iPhone ごとのチェックリスト", "body": "信頼、パスコード、デベロッパモード、Apple ID の信頼、LocalDevVPN。お使いの iOS バージョンに必要なことを、進むごとにチェックします。" },
+      "recovery": { "title": "行き止まりではなく、解決策を", "body": "どの失敗にも、当てはまる対処法、コピーできる診断情報、入力済みのバグ報告をまとめた画面があります。" },
+      "progress": { "title": "リアルタイムの進行状況", "body": "各ステップで何をしているかを表示します。アプリ送信中の速度と残り時間、Apple 側の手順、iOS 自体のインストール進行状況を、USB でも Wi-Fi でも。" },
+      "logs": { "title": "共有できるログ", "body": "IPAForge が行ったすべてのステップを、検索とフィルター付きで。ファイルに保存してバグ報告に添付できます。" },
+      "accounts": { "title": "複数の Apple ID", "body": "デバイスに届くコードか SMS による 2 ファクタ認証でサインイン。システムのキーチェーンに保存し、無料チームと有料チームに対応。Apple がデバイスで 1 つをブロックしたときはすぐに切り替えられます。" },
+      "anisette": { "title": "anisette サーバーを自由に", "body": "IPAForge が SideStore のリストから動作するサーバーを自動で選び、予備も用意します。自分で選んだり、独自のサーバーを追加したり、それぞれをテストしたりもできます。" },
+      "updates": { "title": "自動でアップデート", "body": "IPAForge を開いたときに、リリース署名を確認してから新しいバージョンをインストールします。変更点は「新機能」で確認できます。" },
+      "languages": { "title": "あなたの言語、あなたの見た目", "body": "右から左に書く言語を含む {count} の言語と、ライト・ダーク対応の 6 つのカラーテーマ。" }
+    },
+    "how": {
+      "kicker": "使い方",
+      "title": "3 ステップで SideStore。",
+      "step": "ステップ {number}",
+      "plug": { "title": "iPhone を接続", "body": "ロックを解除して「信頼」をタップします。デベロッパモードなど、お使いの iOS バージョンで他に必要なことはチェックリストに表示されます。" },
+      "signIn": { "title": "Apple ID でサインイン", "body": "無料のアカウントで使えます。パスワードは Apple にだけ送られ、保存した Apple ID はシステムのキーチェーンに残ります。" },
+      "install": { "title": "インストール", "body": "IPAForge が SideStore に署名し、ペアリングファイルと証明書を配置してインストールします。各ステップは進行に合わせて表示されます。" }
+    },
+    "open": {
+      "kicker": "オープンな設計",
+      "title": "すべてのコードを読めて、すべてのダウンロードを検証できます。",
+      "typescript": "<b>すべて TypeScript、非公開のヘルパーなし。</b>コード署名、デバイスとの通信、Apple へのサインインはゼロから書かれ、誰でも読めます。",
+      "signs": "<b>Apple と同じ署名。</b>署名機能の出力は、テスト用フィクスチャで Apple 純正の <span class=\"mono\">codesign</span> とバイト単位で一致し、Apple の検証ツールにも受け入れられます。",
+      "signed": "<b>署名付きリリース。</b>すべてのリリースのすべてのファイルに、リリースワークフローによる Sigstore 署名が付いています。IPAForge はアップデートをインストールする前にそれを確認します。",
+      "license": "<b>AGPL-3.0、ずっとオープン。</b>自由に使い、学び、変更し、共有できます。これをもとに作られたものもオープンソースである必要があります。",
+      "terminalLabel": "cosign でダウンロードを検証",
+      "checkYourself": "# ダウンロードを自分で検証する",
+      "appLogs": "# アップデートのインストール前にアプリが記録する内容"
+    },
+    "roadmap": {
+      "kicker": "ロードマップ",
+      "title": "IPAForge のこれから。",
+      "done": "完了",
+      "started": "着手",
+      "next": "次",
+      "planned": "予定",
+      "engine": { "title": "エンジンとアプリ", "body": "署名機能、デバイス層、Apple へのサインイン、デベロッパサービス、インストーラー、インターフェイス。" },
+      "guide": { "title": "初回のガイド", "body": "IPAForge を初めて開いたときのセットアップガイドと、すべてのページのツアー。" },
+      "install": { "title": "インストールとプリロード", "body": "ワンクリックで SideStore、アプリソース、「アプリ」ページ、SideStore の修復、QR コード、チェックリスト。" },
+      "desktop": { "title": "デスクトップアプリ", "body": "Windows、macOS、Linux 向けのインストーラー、署名付きリリース、自動アップデート。" },
+      "management": { "title": "管理ツール", "body": "「デベロッパーポータル」ページ：チームの証明書とそれぞれが署名したアプリ、App ID、プロファイル、App Group、デバイス。アプリごとのペアリングファイルも 1 か所で。" },
+      "wireless": { "title": "ワイヤレスとリモートペアリング", "body": "SideStore 用の iOS 17.4 以降のリモートペアリングファイル、usbmuxd を使わない Wi-Fi 接続、iOS 17.4 以降のデバイストンネル、コードによる Apple TV と Vision Pro のペアリング。次は Apple TV と Vision Pro へのインストールです。" },
+      "release": { "title": "1.0", "body": "Windows のコード署名と Apple の公証、対応言語の追加、セキュリティレビュー、署名機能の npm 公開。" }
+    },
+    "faq": {
+      "kicker": "よくある質問",
+      "title": "知っておきたいこと。",
+      "all": "すべての質問"
+    },
+    "final": {
+      "title": "IPAForge を手に入れよう。",
+      "sub": "Windows、macOS、Linux 向けに無料。自動で最新の状態に保たれます。",
+      "download": "<span class=\"ltr\">{version}</span> をダウンロード",
+      "star": "GitHub でスター",
+      "discord": "Discord に参加",
+      "patreon": "Patreon で支援"
+    },
+    "shots": {
+      "install-home": {
+        "alt": "IPAForge の「インストール」ページ：SideStore または SideStore 入りの LiveContainer、チャンネル、今週残りの App ID を含むインストール計画。",
+        "caption": "SideStore か SideStore 入りの LiveContainer を選び、何かを変更する前にインストールで使うものを確認できます。今週残りの App ID、無料アプリの空き、証明書、チーム。"
+      },
+      "preload": {
+        "alt": "カタログのアプリと選択した .ipa ファイルが並び、確認済みでインストールできる状態の「プリロード」ページ。",
+        "caption": "カタログ、ソース、リンク、.ipa ファイルからアプリを追加します。それぞれを先に iPhone と照らし合わせて確認し、1 回の実行でまとめてインストールします。"
+      },
+      "apps": {
+        "alt": "インストール済みのアプリと各アプリの期限を一覧表示する「アプリ」ページ。",
+        "caption": "サイドロードしたすべてのアプリと、その期限。リフレッシュ、アップデート、削除ができ、期限が切れる前に IPAForge に自動でリフレッシュさせることもできます。"
+      },
+      "developer": {
+        "alt": "「デベロッパーポータル」ページ：チームの証明書と、それぞれの作成者、iPhone 上で署名しているアプリ。",
+        "caption": "Apple ID が Apple 側で持っているものを確認できます。証明書とそれぞれが署名したアプリ、App ID と今週の残り数、iPhone 上のプロファイル、App Group、登録済みデバイス。使われていないものは整理できます。"
+      },
+      "repair": {
+        "alt": "SideStore を 1 項目ずつ確認している「SideStore を修復」。",
+        "caption": "「SideStore を修復」は、署名者、証明書、ペアリングファイル、期限を確認し、SideStore が自分でリフレッシュできない原因を直します。"
+      },
+      "devices": {
+        "alt": "iPhone のチェックリストを表示した「デバイス」ページ。",
+        "caption": "デバイスごと、その iOS バージョンに合わせたチェックリスト。IPAForge が確認できる項目は自動でチェックされ、iPhone でしか確認できない項目には自分でチェックするボックスがあります。"
+      },
+      "sidestore-qr": {
+        "alt": "SideStore にソースを追加する QR コード。",
+        "caption": "iPhone でコードをスキャンして SideStore にソースを追加したり、SideStore にアプリをインストールさせたりできます。"
+      }
+    },
+    "downloadFor": "{os} 版をダウンロード"
+  },
+  "install": {
+    "title": "Windows、macOS、Linux に IPAForge をインストール",
+    "description": "IPAForge をダウンロードし、macOS、Windows、Linux で初めて開き、iPhone を接続して SideStore をインストールする方法。",
+    "kicker": "インストール",
+    "h1": "IPAForge のインストール",
+    "intro": "ダウンロード、各システムでの初回の起動、iPhone に必要なこと、そして初回の実行。",
+    "card": "お使いのパソコン用の IPAForge",
+    "cardSystems": "Windows、macOS、Linux",
+    "download": "ダウンロード",
+    "for": "{os} 版 IPAForge",
+    "mac": "Apple シリコン（M1 以降）用の .dmg",
+    "windows": ".exe インストーラー（自動でアップデート）",
+    "linux": "AppImage、または .deb / .rpm パッケージ",
+    "intel": "Intel Mac をお使いですか？"
+  },
+  "troubleshooting": {
+    "title": "IPAForge のトラブルシューティング：すべてのエラーと直し方",
+    "description": "IPAForge の {count} 種類のエラーそれぞれの意味と直し方：デバイス、Apple ID、ダウンロード、署名、インストール。",
+    "kicker": "トラブルシューティング",
+    "h1": "うまくいかないときは",
+    "intro": "IPAForge が表示するエラーにはすべてコードがあります。コードや画面に表示された言葉で検索すると、意味と直し方がわかります。",
+    "search": "{count} 種類のエラーを検索：apple.app_id_quota のようなコード、または「ロック」のような言葉",
+    "searchLabel": "エラーを検索",
+    "filters": "領域で絞り込み",
+    "all": "すべて",
+    "count": "{count} 件のエラー",
+    "countOf": "{count} 件中 {shown} 件のエラー",
+    "empty": "一致するエラーはありません。言葉を減らして試すか、<a href=\"{discord}\">Discord</a> で質問してください。",
+    "link": "このエラーへのリンク",
+    "areas": {
+      "device": "iPhone・iPad",
+      "apple": "Apple ID",
+      "catalog": "ダウンロードとソース",
+      "app": "アプリ",
+      "net": "ネットワーク",
+      "installer": "インストール",
+      "ipaforge": "IPAForge 本体",
+      "other": "その他"
+    }
+  },
+  "releases": {
+    "title": "IPAForge のリリースノート：各バージョンの変更点",
+    "description": "IPAForge の各バージョンの変更点を新しい順に：新機能、修正、Windows、macOS、Linux 向けのダウンロード。",
+    "kicker": "リリースノート",
+    "h1": "すべてのバージョン（新しい順）",
+    "intro": "IPAForge の各リリースで変わったこと。アプリの「新機能」にも同じ内容が表示されます。",
+    "latest": "最新",
+    "downloads": "ダウンロード",
+    "feedSubtitle": "IPAForge の各バージョンの変更点。"
+  },
+  "faq": {
+    "title": "IPAForge のよくある質問：料金、必要なもの、Apple ID、アップデート",
+    "description": "IPAForge についての短い回答：料金、必要なもの、初回起動時の警告、パスワード、アップデート、サポートの受け方。",
+    "kicker": "よくある質問",
+    "h1": "よくある質問",
+    "intro": "短い回答と、詳しい内容が載っているページへのリンクです。",
+    "items": [
+      {
+        "q": "IPAForge は無料ですか？",
+        "a": "はい。IPAForge は GNU AGPL-3.0 の無料のオープンソースソフトウェアで、無料の Apple ID があれば使えます。すべての機能を誰でも無料で使えます。役に立ったら <a href=\"https://patreon.com/IPAForge\">Patreon</a> で支援していただけます。"
+      },
+      {
+        "q": "有料の Apple デベロッパアカウントは必要ですか？",
+        "a": "いいえ。無料の Apple ID で、Apple の上限の範囲内で使えます。各デバイスで同時にサイドロードできるアプリは 3 個、署名の有効期間は 7 日、App ID は週に 10 個までです。IPAForge は何かを変更する前にそれぞれを表示し、期限が切れる前にアプリをリフレッシュします。有料アカウントなら、これらの上限なしで使えます。"
+      },
+      {
+        "q": "macOS や Windows で開くと警告が出るのはなぜですか？",
+        "a": "IPAForge はまだ Apple の公証も Windows のコード署名も受けていません。各システムでの 1 回だけの手順は<a href=\"/install/#opening-ipaforge-the-first-time\">インストール</a>に載っています。どちらも 1.0 で対応予定です。"
+      },
+      {
+        "q": "Windows と Linux では何が必要ですか？",
+        "a": "Windows では、パソコンが iPhone と通信できるように Microsoft Store から Apple Devices をインストールしてください。Linux では usbmuxd をインストールしてください。macOS では追加のものは必要ありません。"
+      },
+      {
+        "q": "どの iPhone と iPad で使えますか？",
+        "a": "パスコードを設定した iOS 15 以降のデバイスです。iOS 16 以降ではデベロッパモードをオンにする必要があります。方法は「デバイス」ページのチェックリストに表示されます。"
+      },
+      {
+        "q": "Apple ID のパスワードはどこに送られますか？",
+        "a": "Apple だけです。保存を選んだ場合は、お使いのパソコンのシステムのキーチェーンに暗号化して保存されます。"
+      },
+      {
+        "q": "IPAForge は自動でアップデートされますか？",
+        "a": "はい。開いたときに新しいバージョンを確認し、リリース署名を確認できた場合にだけインストールします。.msi、.deb、.rpm からインストールした場合は、新しいバージョンが出たことと、ダウンロードすべきファイルをお知らせします。すべてのバージョンは<a href=\"/releases/\">リリースノート</a>に載っています。"
+      },
+      {
+        "q": "インストールに失敗しました。どうすればいいですか？",
+        "a": "どのエラーにも、アプリ内にコードと直し方が表示されます。すべてのコードは<a href=\"/troubleshooting/\">トラブルシューティング</a>に載っています。それでも解決しない場合は、<a href=\"https://discord.gg/kGJn7NC5Zf\">Discord</a> で質問するか、ログを添付して GitHub で issue を作成してください（アプリの「ログ」›「保存」）。"
+      },
+      {
+        "q": "IPAForge は SideStore の一部ですか？",
+        "a": "いいえ。IPAForge は SideStore をインストールし、SideStore と連携して動く独立したプロジェクトです。SideStore や Apple とは提携していません。"
+      }
+    ]
+  },
+  "notFound": {
+    "title": "ページが見つかりません · IPAForge",
+    "description": "このページは存在しません。",
+    "h1": "このページは存在しません",
+    "intro": "アドレスが変わった可能性があります。すべてのページはサイドバーにあります。または<a href=\"/\">ホームページ</a>に戻ってください。"
+  }
+}

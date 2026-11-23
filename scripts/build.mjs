@@ -1,6 +1,9 @@
 // Builds ipaforge.com into dist/: the hand-made landing page, and the docs pages made from the IPAForge repository
 // (the install guide, the release notes and the app's own error texts), all in one layout.
 //
+// Every language in src/i18n/ gets the landing page, Troubleshooting (from the app's own translated error texts) and
+// the FAQ, under its code (/de/faq/); English stays at the root. Install and the release notes are English only.
+//
 //   CONTENT_DIR=../ipaforge node scripts/build.mjs
 //
 // CONTENT_DIR is a checkout of IPAForge/ipaforge (CI checks it out next to this repo). GITHUB_TOKEN, when set,
@@ -11,7 +14,8 @@ import { fileURLToPath } from 'node:url'
 
 import { marked } from 'marked'
 
-import { FAQ, FAQ_ON_HOME } from '../src/content/faq.mjs'
+import { FAQ_ON_HOME } from '../src/content/faq.mjs'
+import { LANGUAGES, localePath, nativeName, SOURCE, t } from '../src/i18n/index.mjs'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const CONTENT = resolve(ROOT, process.env.CONTENT_DIR ?? '../ipaforge')
@@ -73,17 +77,27 @@ const markdown = (source, { demote = false } = {}) => {
 // The layout every page shares.
 
 const NAV = [
-  { path: '/install/', label: 'Install' },
-  { path: '/troubleshooting/', label: 'Troubleshooting' },
-  { path: '/releases/', label: 'Release notes' },
-  { path: '/faq/', label: 'FAQ' }
+  { path: '/install/', key: 'nav.install' },
+  { path: '/troubleshooting/', key: 'nav.troubleshooting' },
+  { path: '/releases/', key: 'nav.releases' },
+  { path: '/faq/', key: 'nav.faq' }
 ]
+
+/** The pages every language has; the others (Install, Release notes) are English only. */
+const TRANSLATED = ['/', '/troubleshooting/', '/faq/']
+const isTranslated = (path) => TRANSLATED.includes(path)
+/** Where a link to the site's `path` goes from a page in `lang`: its own language's page, when there is one. */
+const href = (lang, path) => (isTranslated(path) ? localePath(lang, path) : path)
+/** Links written in a string (`/troubleshooting/`, `/faq/`, `/`) go to the page in the string's language. */
+const localizeLinks = (lang, html) =>
+  html.replace(/href="(\/(?:troubleshooting\/|faq\/)?)([#"])/g, (_, path, end) => `href="${href(lang, path)}${end}`)
+
+const languageOf = (code) => LANGUAGES.find((language) => language.code === code)
 
 const SPRITE = read(join(ROOT, 'src/sprite.svg'))
 const SOFTWARE = JSON.parse(read(join(ROOT, 'src/content/software.json')))
 /** The app's screens on the landing page, for the app's structured data. */
 const SCREENSHOTS = ['install-home', 'preload', 'apps', 'developer', 'repair', 'devices', 'sidestore-qr']
-const OG_IMAGE_ALT = 'IPAForge: install SideStore and your own apps onto iPhone and iPad from Windows, macOS and Linux.'
 
 // What Google reads about the site: its name and logo (WebSite, Organization) on the home page with the app itself,
 // and on every docs page where it sits (a breadcrumb), with the page's own data (the FAQ's questions) next to it.
@@ -93,7 +107,7 @@ const WEBSITE = {
   name: 'IPAForge',
   alternateName: 'ipaforge.com',
   url: `${SITE}/`,
-  inLanguage: 'en',
+  inLanguage: LANGUAGES.map((language) => language.code),
   publisher: { '@id': `${SITE}/#organization` }
 }
 const ORGANIZATION = {
@@ -105,26 +119,26 @@ const ORGANIZATION = {
   sameAs: SOFTWARE.sameAs
 }
 const withoutContext = ({ '@context': _, ...rest }) => rest
-const breadcrumb = (path) => ({
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'IPAForge', item: `${SITE}/` },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: NAV.find((item) => item.path === path)?.label ?? path,
-      item: `${SITE}${path}`
-    }
-  ]
-})
+const breadcrumb = (lang, path) => {
+  const item = NAV.find((entry) => entry.path === path)
+
+  return {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'IPAForge', item: `${SITE}${href(lang, '/')}` },
+      { '@type': 'ListItem', position: 2, name: item ? t(lang, item.key) : path, item: `${SITE}${href(lang, path)}` }
+    ]
+  }
+}
 /** A docs page itself: a TechArticle for a guide, a WebPage otherwise, with when its content last changed. */
-const pageNode = ({ path, title, description, pageType = 'WebPage' }) => {
+const pageNode = ({ lang, path, title, description, pageType = 'WebPage' }) => {
   const modified = lastmod[path]?.slice(0, 10)
+  const url = `${SITE}${href(lang, path)}`
 
   return {
     '@type': pageType,
-    '@id': `${SITE}${path}#page`,
-    url: `${SITE}${path}`,
+    '@id': `${url}#page`,
+    url,
     name: title,
     ...(pageType === 'TechArticle'
       ? {
@@ -137,36 +151,58 @@ const pageNode = ({ path, title, description, pageType = 'WebPage' }) => {
         }
       : {}),
     description,
-    inLanguage: 'en',
+    inLanguage: lang,
     isPartOf: { '@id': `${SITE}/#website` },
     ...(modified ? { dateModified: modified } : {})
   }
 }
-const structuredData = ({ path, title, description, jsonLd, pageType, noindex }) => {
+const structuredData = ({ lang, path, title, description, jsonLd, pageType, noindex }) => {
   if (noindex) return ''
   const graph =
     path === '/'
       ? [WEBSITE, ORGANIZATION, ...(jsonLd ? [withoutContext(jsonLd)] : [])]
       : [
           // The page's own data (the FAQ's questions) makes the page that type, rather than a second node.
-          { ...pageNode({ path, title, description, pageType: jsonLd?.['@type'] ?? pageType }), ...(jsonLd ? withoutContext(jsonLd) : {}) },
-          breadcrumb(path)
+          {
+            ...pageNode({ lang, path, title, description, pageType: jsonLd?.['@type'] ?? pageType }),
+            ...(jsonLd ? withoutContext(jsonLd) : {})
+          },
+          breadcrumb(lang, path)
         ]
   const data = { '@context': 'https://schema.org', '@graph': graph }
 
   return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>\n`
 }
 
-const head = ({ path, title, description, kind, jsonLd, pageType, noindex = false }) => `<!doctype html>
-<html lang="en">
+/** The same page in every language, for search engines (`x-default` is English); none for an English-only page. */
+const alternates = (path) =>
+  isTranslated(path)
+    ? [
+        ...LANGUAGES.map(({ code }) => `<link rel="alternate" hreflang="${code}" href="${SITE}${localePath(code, path)}">`),
+        `<link rel="alternate" hreflang="x-default" href="${SITE}${path}">`
+      ].join('\n') + '\n'
+    : ''
+
+const head = ({ lang, path, title, description, kind, jsonLd, pageType, noindex = false }) => {
+  const { dir, ogLocale } = languageOf(lang)
+  const url = `${SITE}${href(lang, path)}`
+  const ogImageAlt = t(lang, 'meta.ogImageAlt')
+  const otherLocales = isTranslated(path)
+    ? LANGUAGES.filter(({ code }) => code !== lang)
+        .map((language) => `<meta property="og:locale:alternate" content="${language.ogLocale}">\n`)
+        .join('')
+    : ''
+
+  return `<!doctype html>
+<html lang="${lang}" dir="${dir}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${SITE}${path}">\n<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">`}
-<meta name="author" content="Dan Motpan">
-<link rel="alternate" type="application/atom+xml" title="IPAForge releases" href="${SITE}/releases/feed.xml">
+${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${url}">\n<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">`}
+${noindex ? '' : alternates(path)}<meta name="author" content="Dan Motpan">
+<link rel="alternate" type="application/atom+xml" title="${esc(t(lang, 'meta.feedTitle'))}" href="${SITE}/releases/feed.xml">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f7f7fb" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b0c19" media="(prefers-color-scheme: dark)">
@@ -177,20 +213,20 @@ ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" hr
 <link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="IPAForge">
-<meta property="og:locale" content="en_US">
-<meta property="og:title" content="${esc(title)}">
+<meta property="og:locale" content="${ogLocale}">
+${otherLocales}<meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:url" content="${SITE}${path}">
+<meta property="og:url" content="${url}">
 <meta property="og:image" content="${SITE}/og.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
-<meta property="og:image:alt" content="${esc(OG_IMAGE_ALT)}">
+<meta property="og:image:alt" content="${esc(ogImageAlt)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
 <meta name="twitter:image" content="${SITE}/og.png">
-<meta name="twitter:image:alt" content="${esc(OG_IMAGE_ALT)}">
-${structuredData({ path, title, description, jsonLd, pageType, noindex })}<script>
+<meta name="twitter:image:alt" content="${esc(ogImageAlt)}">
+${structuredData({ lang, path, title, description, jsonLd, pageType, noindex })}<script>
   try {
     const theme = localStorage.getItem('theme')
     if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme
@@ -205,16 +241,64 @@ ${structuredData({ path, title, description, jsonLd, pageType, noindex })}<scrip
 </head>
 <body>
 `
+}
 
-const header = (path) => `${SPRITE}
+/** A nav link: to the page in this language, or to the English page, marked as English. */
+const navLink = (lang, item, current) => {
+  const englishOnly = lang !== SOURCE && !isTranslated(item.path)
+  const tag = englishOnly ? ` <span class="lang-tag" lang="en" title="${esc(t(lang, 'language.englishOnly'))}">EN</span>` : ''
+
+  return `<a href="${href(lang, item.path)}"${englishOnly ? ' hreflang="en"' : ''}${item.path === current ? ' aria-current="page"' : ''}>${esc(t(lang, item.key))}${tag}</a>`
+}
+
+/** The language menu: this page in each language, or that language's home page when this page is English only. */
+const languageMenu = (lang, path) => {
+  if (LANGUAGES.length < 2) return ''
+  const target = (code) => (isTranslated(path) ? localePath(code, path) : localePath(code, '/'))
+  const items = LANGUAGES.map(
+    ({ code, name }) =>
+      `          <li><a href="${target(code)}" hreflang="${code}" lang="${code}"${code === lang ? ' aria-current="true"' : ''}>${esc(name)}</a></li>`
+  ).join('\n')
+
+  return `      <details class="lang-menu">
+        <summary class="btn small" aria-label="${esc(t(lang, 'language.label'))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="label">${esc(languageOf(lang).name)}</span></summary>
+        <ul>
+${items}
+        </ul>
+      </details>
+`
+}
+
+/** The strings the page's scripts need, in its language. */
+const scriptStrings = (lang, kind) => {
+  const strings = {
+    toLight: t(lang, 'header.toLight'),
+    toDark: t(lang, 'header.toDark'),
+    ...(kind === 'home'
+      ? { shots: t(lang, 'home.shots'), downloadFor: t(lang, 'home.downloadFor') }
+      : {
+          count: t(lang, 'troubleshooting.count'),
+          countOf: t(lang, 'troubleshooting.countOf'),
+          installFor: t(lang, 'install.for'),
+          mac: t(lang, 'install.mac'),
+          windows: t(lang, 'install.windows'),
+          linux: t(lang, 'install.linux'),
+          intel: t(lang, 'install.intel')
+        })
+  }
+  // An escaped `<` can't end the script early.
+  return `<script type="application/json" id="strings">${JSON.stringify(strings).replace(/</g, '\\u003c')}</script>\n`
+}
+
+const header = (lang, path) => `${SPRITE}
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="/"><img src="/img/icon.svg" alt="" width="30" height="30">IPAForge</a>
-    <nav class="site-nav" aria-label="Pages">
-${NAV.map((item) => `      <a href="${item.path}"${item.path === path ? ' aria-current="page"' : ''}>${item.label}</a>`).join('\n')}
+    <a class="brand" href="${href(lang, '/')}"><img src="/img/icon.svg" alt="" width="30" height="30">IPAForge</a>
+    <nav class="site-nav" aria-label="${esc(t(lang, 'header.pages'))}">
+${NAV.map((item) => `      ${navLink(lang, item, path)}`).join('\n')}
     </nav>
     <div class="site-actions">
-      <button class="btn small" id="theme" type="button" aria-label="Switch theme"><svg class="when-dark"><use href="#i-sun"/></svg><svg class="when-light"><use href="#i-moon"/></svg></button>
+${languageMenu(lang, path)}      <button class="btn small" id="theme" type="button" aria-label="${esc(t(lang, 'header.switchTheme'))}"><svg class="when-dark"><use href="#i-sun"/></svg><svg class="when-light"><use href="#i-moon"/></svg></button>
       <a class="btn small" href="${DISCORD}" aria-label="Discord"><svg><use href="#i-discord"/></svg><span class="label">Discord</span></a>
       <a class="btn small" href="${REPO}" aria-label="GitHub"><svg><use href="#i-gh"/></svg><span class="label">GitHub</span></a>
     </div>
@@ -222,50 +306,50 @@ ${NAV.map((item) => `      <a href="${item.path}"${item.path === path ? ' aria-c
 </header>
 `
 
-const footer = (kind) => `<footer class="site-footer">
+const footer = (lang, kind) => `<footer class="site-footer">
   <div class="wrap">
-    <span>© 2026 Dan Motpan · <a href="${REPO}/blob/main/LICENSE">AGPL-3.0 license</a></span>
-    <nav aria-label="Links">
+    <span>© 2026 Dan Motpan · <a href="${REPO}/blob/main/LICENSE">${esc(t(lang, 'footer.license'))}</a></span>
+    <nav aria-label="${esc(t(lang, 'footer.links'))}">
       <a href="${REPO}">GitHub</a>
-      <a href="${REPO}/releases">Downloads</a>
-      <a href="/install/">Install</a>
-      <a href="/troubleshooting/">Troubleshooting</a>
-      <a href="${REPO}/issues">Report a problem</a>
+      <a href="${REPO}/releases">${esc(t(lang, 'footer.downloads'))}</a>
+      ${navLink(lang, NAV[0])}
+      ${navLink(lang, NAV[1])}
+      <a href="${REPO}/issues">${esc(t(lang, 'footer.report'))}</a>
       <a href="${DISCORD}">Discord</a>
-      <a href="${PATREON}">Support on Patreon</a>
+      <a href="${PATREON}">${esc(t(lang, 'footer.patreon'))}</a>
     </nav>
   </div>
 </footer>
-<script src="/assets/js/site.js" defer></script>
+${scriptStrings(lang, kind)}<script src="/assets/js/site.js" defer></script>
 ${kind === 'home' ? '<script src="/assets/js/home.js" defer></script>' : '<script src="/assets/js/docs.js" defer></script>'}
 </body>
 </html>
 `
 
 /** A docs page: the sidebar (every docs page, then this page's sections), the picker for phones, the page. */
-const docsPage = ({ path, title, description, kicker, h1, intro, body, toc = [], source, jsonLd, pageType, noindex }) => {
+const docsPage = ({ lang = SOURCE, path, title, description, kicker, h1, intro, body, toc = [], source, jsonLd, pageType, noindex }) => {
   const sections = toc.length
-    ? `<h2>On this page</h2>
+    ? `<h2>${esc(t(lang, 'docs.onThisPage'))}</h2>
       <ul class="toc">
 ${toc.map((item) => `        <li><a href="#${item.id}"${item.pick ? ` data-pick-area="${esc(item.pick)}"` : ''}>${esc(item.text)}</a></li>`).join('\n')}
       </ul>`
     : ''
   return (
-    head({ path, title, description, kind: 'docs', jsonLd, pageType, noindex }) +
-    header(path) +
+    head({ lang, path, title, description, kind: 'docs', jsonLd, pageType, noindex }) +
+    header(lang, path) +
     `<div class="wrap docs">
-  <aside class="docs-side" aria-label="Documentation">
-    <h2>Docs</h2>
+  <aside class="docs-side" aria-label="${esc(t(lang, 'docs.sidebar'))}">
+    <h2>${esc(t(lang, 'docs.heading'))}</h2>
     <ul>
-${NAV.map((item) => `      <li><a href="${item.path}"${item.path === path ? ' aria-current="page"' : ''}>${item.label}</a></li>`).join('\n')}
+${NAV.map((item) => `      <li>${navLink(lang, item, path)}</li>`).join('\n')}
     </ul>
     ${sections}
   </aside>
   <main>
     <div class="docs-picker">
-      <label class="visually-hidden" for="docs-picker">Page</label>
+      <label class="visually-hidden" for="docs-picker">${esc(t(lang, 'docs.page'))}</label>
       <select id="docs-picker">
-${NAV.map((item) => `        <option value="${item.path}"${item.path === path ? ' selected' : ''}>${item.label}</option>`).join('\n')}
+${NAV.map((item) => `        <option value="${href(lang, item.path)}"${item.path === path ? ' selected' : ''}>${esc(t(lang, item.key))}</option>`).join('\n')}
       </select>
     </div>
     <article class="prose" id="top">
@@ -274,20 +358,20 @@ ${NAV.map((item) => `        <option value="${item.path}"${item.path === path ? 
       <p class="intro">${intro}</p>
 ${body}
       <div class="page-foot">
-        <span>Made from <code>${esc(source.label)}</code> in the IPAForge repository.</span>
-        <a href="${source.url}">Edit this page on GitHub</a>
-        <a href="${REPO}/issues/new/choose">Report a problem</a>
+        <span>${t(lang, 'docs.madeFrom', { source: esc(source.label) })}</span>
+        <a href="${source.url}">${esc(t(lang, 'docs.edit'))}</a>
+        <a href="${REPO}/issues/new/choose">${esc(t(lang, 'docs.report'))}</a>
       </div>
     </article>
   </main>
 </div>
 ` +
-    footer('docs')
+    footer(lang, 'docs')
   )
 }
 
-const qa = (item, open = false) =>
-  `<details class="qa"${open ? ' open' : ''}><summary>${esc(item.q)}</summary><p>${item.a}</p></details>`
+const qa = (lang, item, open = false) =>
+  `<details class="qa"${open ? ' open' : ''}><summary>${esc(item.q)}</summary><p>${localizeLinks(lang, item.a)}</p></details>`
 
 // ---------------------------------------------------------------------------------------------------------------
 // The pages.
@@ -312,21 +396,47 @@ let shownVersions = []
 let lastmod = {}
 const latestVersion = () => shownVersions[0]
 
-const home = () => {
-  const body = read(join(ROOT, 'src/pages/home.html'))
-    .replaceAll('{{latest-version}}', latestVersion())
-    .replace(
-    '{{faq-home}}',
-    FAQ.slice(0, FAQ_ON_HOME)
-      .map((item) => `        ${qa(item)}`)
-      .join('\n')
+/** The languages the app itself speaks, by their own names (from the app's `status.json`). */
+const appLanguages = () =>
+  Object.keys(JSON.parse(read(join(CONTENT, 'packages/ui/src/locales/status.json'))))
+
+/**
+ * Fills the landing page's `{{key}}` slots with the language's strings. `{{key|name=value}}` fills a placeholder in
+ * the string; `special` names values worked out at build time (`latest`: the newest version).
+ */
+const fillTemplate = (lang, template, special) =>
+  template.replace(/\{\{([\w.-]+)(?:\|(\w+)=([\w]+))?\}\}/g, (match, key, name, value) => {
+    if (!key.includes('.')) return match
+    const values = name ? { [name]: special[value] ?? value } : {}
+    return localizeLinks(lang, t(lang, key, values))
+  })
+
+const home = (lang) => {
+  const languages = appLanguages()
+  const body = fillTemplate(
+    lang,
+    read(join(ROOT, 'src/pages/home.html'))
+      .replace(
+        '{{app-languages}}',
+        new Intl.ListFormat(lang, { type: 'unit' }).format(languages.map((code) => `<bdi lang="${code}">${esc(nativeName(code))}</bdi>`))
+      )
+      .replace(
+        '{{faq-home}}',
+        t(lang, 'faq.items')
+          .slice(0, FAQ_ON_HOME)
+          .map((item) => `        ${qa(lang, item)}`)
+          .join('\n')
+      ),
+    { latest: latestVersion(), languages: languages.length }
   )
+    .replaceAll('{{latest-version}}', latestVersion())
+    .replace(/href="\/faq\/"/g, `href="${href(lang, '/faq/')}"`)
   return (
     head({
+      lang,
       path: '/',
-      title: 'IPAForge: install SideStore from Windows, macOS and Linux',
-      description:
-        'IPAForge is a free, open-source desktop app for Windows, macOS and Linux that installs SideStore and your own apps onto iPhone and iPad with a free Apple ID.',
+      title: t(lang, 'home.title'),
+      description: t(lang, 'home.description'),
       kind: 'home',
       // The version is the newest released one, written in on every build.
       jsonLd: {
@@ -338,12 +448,13 @@ const home = () => {
         releaseNotes: `${SITE}/releases/#v${latestVersion()}`,
         installUrl: `${SITE}/install/`,
         screenshot: SCREENSHOTS.map((name) => `${SITE}/img/${name}.webp`),
-        publisher: { '@id': `${SITE}/#organization` }
+        publisher: { '@id': `${SITE}/#organization` },
+        inLanguage: lang
       }
     }) +
-    header('/') +
+    header(lang, '/') +
     body +
-    footer('home')
+    footer(lang, 'home')
   )
 }
 
@@ -353,73 +464,94 @@ const install = () => {
     .filter((line) => !/^\[← /.test(line) && !/^# /.test(line))
     .join('\n')
   const { html, toc } = markdown(source)
+  const lang = SOURCE
   return docsPage({
     path: '/install/',
-    title: 'Install IPAForge on Windows, macOS and Linux',
-    description:
-      'Download IPAForge, open it the first time on macOS, Windows or Linux, connect your iPhone, and install SideStore.',
-    kicker: 'Install',
+    title: t(lang, 'install.title'),
+    description: t(lang, 'install.description'),
+    kicker: t(lang, 'install.kicker'),
     pageType: 'TechArticle',
-    h1: 'Installing IPAForge',
-    intro: 'Download, the first open on each system, what your iPhone needs, and the first run.',
-    body: `      <div class="os-card" id="os-card"><div><b>IPAForge for your computer</b><span>Windows, macOS and Linux</span></div><a class="btn primary" data-version="${latestVersion()}" href="${REPO}/releases">Download</a></div>
+    h1: t(lang, 'install.h1'),
+    intro: t(lang, 'install.intro'),
+    body: `      <div class="os-card" id="os-card"><div><b>${esc(t(lang, 'install.card'))}</b><span>${esc(t(lang, 'install.cardSystems'))}</span></div><a class="btn primary" data-version="${latestVersion()}" href="${REPO}/releases">${esc(t(lang, 'install.download'))}</a></div>
 ${html}`,
     toc,
     source: { label: 'docs/installing.md', url: `${REPO}/blob/main/docs/installing.md` }
   })
 }
 
+/** Each error code's area, by its prefix: the key of its label in `troubleshooting.areas`. */
 const AREAS = [
-  ['device', 'iPhone or iPad'],
-  ['apple', 'Apple ID'],
-  ['catalog', 'Downloads and sources'],
-  ['signer', 'The app'],
-  ['plist', 'The app'],
-  ['net', 'Network'],
-  ['installer', 'Installing'],
-  ['rpc', 'IPAForge itself'],
-  ['internal', 'IPAForge itself']
+  ['device', 'device'],
+  ['apple', 'apple'],
+  ['catalog', 'catalog'],
+  ['signer', 'app'],
+  ['plist', 'app'],
+  ['net', 'net'],
+  ['installer', 'installer'],
+  ['rpc', 'ipaforge'],
+  ['internal', 'ipaforge']
 ]
-const areaOf = (code) => (AREAS.find(([prefix]) => code.startsWith(`${prefix}.`)) ?? [null, 'Other'])[1]
+const areaOf = (code) => (AREAS.find(([prefix]) => code.startsWith(`${prefix}.`)) ?? [null, 'other'])[1]
 
 const errorsFrom = (node, prefix = '') =>
   typeof node?.title === 'string'
     ? [{ code: prefix, title: node.title, body: node.body ?? '' }]
     : Object.entries(node ?? {}).flatMap(([key, child]) => errorsFrom(child, prefix ? `${prefix}.${key}` : key))
 
-const troubleshooting = () => {
-  const errors = errorsFrom(JSON.parse(read(join(CONTENT, 'packages/ui/src/locales/en.json'))).errors)
+/** The app's error texts in `lang` (from its own locale file), each falling back to English where it has none. */
+const appErrors = (lang) => {
+  const english = errorsFrom(JSON.parse(read(join(CONTENT, 'packages/ui/src/locales/en.json'))).errors)
+  const file = join(CONTENT, `packages/ui/src/locales/${lang}.json`)
+  if (lang === SOURCE || !existsSync(file)) return english
+  const translated = new Map(errorsFrom(JSON.parse(read(file)).errors).map((error) => [error.code, error]))
+
+  return english.map((error) => {
+    const own = translated.get(error.code)
+    return {
+      code: error.code,
+      title: own?.title || error.title,
+      body: own?.title ? own.body || error.body : error.body
+    }
+  })
+}
+
+const troubleshooting = (lang) => {
+  const errors = appErrors(lang)
+  const count = errors.length
   const areas = [...new Set(errors.map((error) => areaOf(error.code)))]
+  const areaLabel = (area) => t(lang, `troubleshooting.areas.${area}`)
   const list = errors
     .map(
-      (error) => `        <section class="err" id="${esc(error.code)}" data-area="${esc(areaOf(error.code))}" data-text="${esc(`${error.code} ${error.title} ${error.body}`.toLowerCase())}">
-          <header><h3>${esc(error.title)}</h3><code>${esc(error.code)}</code><span class="area">${esc(areaOf(error.code))}</span></header>
+      (error) => `        <section class="err" id="${esc(error.code)}" data-area="${esc(areaOf(error.code))}" data-text="${esc(`${error.code} ${error.title} ${error.body}`.toLocaleLowerCase(lang))}">
+          <header><h3>${esc(error.title)}</h3><code>${esc(error.code)}</code><span class="area">${esc(areaLabel(areaOf(error.code)))}</span></header>
           <p>${esc(error.body)}</p>
-          <a class="anchor" href="#${esc(error.code)}">Link to this error</a>
+          <a class="anchor" href="#${esc(error.code)}">${esc(t(lang, 'troubleshooting.link'))}</a>
         </section>`
     )
     .join('\n')
+  const localeFile = `packages/ui/src/locales/${lang === SOURCE || !existsSync(join(CONTENT, `packages/ui/src/locales/${lang}.json`)) ? SOURCE : lang}.json`
   return docsPage({
+    lang,
     path: '/troubleshooting/',
-    title: 'Troubleshooting IPAForge: every error and how to fix it',
+    title: t(lang, 'troubleshooting.title'),
     pageType: 'TechArticle',
-    description: `What each of IPAForge's ${errors.length} errors means and how to fix it: device, Apple ID, downloads, signing and installing.`,
-    kicker: 'Troubleshooting',
-    h1: 'When something fails',
-    intro:
-      'Every error IPAForge shows has a code. Search for it, or for the words on your screen, to see what it means and how to fix it.',
-    body: `      <div class="search"><svg aria-hidden="true"><use href="#i-search"/></svg><input id="q" type="search" placeholder="Search ${errors.length} errors: a code like apple.app_id_quota, or words like “locked”" aria-label="Search errors"></div>
-      <div class="filters" role="group" aria-label="Filter by area">
-        <button class="filter" type="button" aria-pressed="true" data-area="">All</button>
-${areas.map((area) => `        <button class="filter" type="button" aria-pressed="false" data-area="${esc(area)}">${esc(area)}</button>`).join('\n')}
+    description: t(lang, 'troubleshooting.description', { count }),
+    kicker: t(lang, 'troubleshooting.kicker'),
+    h1: t(lang, 'troubleshooting.h1'),
+    intro: t(lang, 'troubleshooting.intro'),
+    body: `      <div class="search"><svg aria-hidden="true"><use href="#i-search"/></svg><input id="q" type="search" placeholder="${esc(t(lang, 'troubleshooting.search', { count }))}" aria-label="${esc(t(lang, 'troubleshooting.searchLabel'))}"></div>
+      <div class="filters" role="group" aria-label="${esc(t(lang, 'troubleshooting.filters'))}">
+        <button class="filter" type="button" aria-pressed="true" data-area="">${esc(t(lang, 'troubleshooting.all'))}</button>
+${areas.map((area) => `        <button class="filter" type="button" aria-pressed="false" data-area="${esc(area)}">${esc(areaLabel(area))}</button>`).join('\n')}
       </div>
-      <p class="count" id="count" aria-live="polite">${errors.length} errors</p>
+      <p class="count" id="count" aria-live="polite">${esc(t(lang, 'troubleshooting.count', { count }))}</p>
       <div class="errors" id="errors">
 ${list}
       </div>
-      <p class="empty" id="empty" hidden>No error matches. Try fewer words, or ask on <a href="${DISCORD}">Discord</a>.</p>`,
-    toc: areas.map((area) => ({ id: 'top', text: area, pick: area })),
-    source: { label: 'packages/ui/src/locales/en.json', url: `${REPO}/blob/main/packages/ui/src/locales/en.json` }
+      <p class="empty" id="empty" hidden>${t(lang, 'troubleshooting.empty', { discord: DISCORD })}</p>`,
+    toc: areas.map((area) => ({ id: 'top', text: areaLabel(area), pick: area })),
+    source: { label: localeFile, url: `${REPO}/blob/main/${localeFile}` }
   })
 }
 
@@ -472,12 +604,11 @@ ${html.replace(/ id="/g, ` id="v${esc(version)}-`)}
   })
   return docsPage({
     path: '/releases/',
-    title: 'IPAForge release notes: what changed in every version',
-    description:
-      'What changed in each version of IPAForge, newest first: new features, fixes and the downloads for Windows, macOS and Linux.',
-    kicker: 'Release notes',
-    h1: 'Every version, newest first',
-    intro: "What changed in each release of IPAForge. The app shows the same changes in What's new.",
+    title: t(SOURCE, 'releases.title'),
+    description: t(SOURCE, 'releases.description'),
+    kicker: t(SOURCE, 'releases.kicker'),
+    h1: t(SOURCE, 'releases.h1'),
+    intro: t(SOURCE, 'releases.intro'),
     body: sections.join('\n'),
     toc: versions.map((version) => ({ id: `v${version}`, text: version })),
     source: { label: 'docs/releases/', url: `${REPO}/tree/main/docs/releases` }
@@ -515,35 +646,42 @@ ${entries.join('\n')}
 `
 }
 
-const faq = () =>
-  docsPage({
+const faq = (lang) => {
+  const items = t(lang, 'faq.items')
+
+  return docsPage({
+    lang,
     path: '/faq/',
-    title: 'IPAForge FAQ: cost, requirements, Apple ID and updates',
-    description: 'Short answers about IPAForge: what it costs, what you need, the warnings on first open, your password, updates and getting help.',
-    kicker: 'FAQ',
-    h1: 'Questions people ask',
-    intro: 'Short answers, each pointing to the page with the details.',
-    body: FAQ.map((item, index) => `      ${qa(item, index < 2)}`).join('\n'),
-    source: { label: 'src/content/faq.mjs', url: 'https://github.com/IPAForge/ipaforge.github.io/blob/main/src/content/faq.mjs' },
+    title: t(lang, 'faq.title'),
+    description: t(lang, 'faq.description'),
+    kicker: t(lang, 'faq.kicker'),
+    h1: t(lang, 'faq.h1'),
+    intro: t(lang, 'faq.intro'),
+    body: items.map((item, index) => `      ${qa(lang, item, index < 2)}`).join('\n'),
+    source: {
+      label: `src/i18n/${lang}.json`,
+      url: `https://github.com/IPAForge/ipaforge.github.io/blob/main/src/i18n/${lang}.json`
+    },
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: FAQ.map((item) => ({
+      mainEntity: items.map((item) => ({
         '@type': 'Question',
         name: item.q,
         acceptedAnswer: { '@type': 'Answer', text: item.a.replace(/<[^>]+>/g, '') }
       }))
     }
   })
+}
 
 const notFound = () =>
   docsPage({
     path: '/404.html',
-    title: 'Page not found · IPAForge',
-    description: 'This page does not exist.',
+    title: t(SOURCE, 'notFound.title'),
+    description: t(SOURCE, 'notFound.description'),
     kicker: '404',
-    h1: 'This page does not exist',
-    intro: 'The address may have changed. The pages are all in the sidebar, or go back to the <a href="/">home page</a>.',
+    h1: t(SOURCE, 'notFound.h1'),
+    intro: t(SOURCE, 'notFound.intro'),
     body: '',
     source: { label: 'scripts/build.mjs', url: 'https://github.com/IPAForge/ipaforge.github.io' },
     noindex: true
@@ -570,17 +708,19 @@ const SITE_REPO = 'IPAForge/ipaforge.github.io'
 const newest = (...dates) => dates.filter(Boolean).sort().at(-1)
 const latestRelease = Object.values(dates).filter(Boolean).sort().at(-1)
 lastmod = {
-  '/': newest(await lastCommitDate(SITE_REPO, 'src/pages/home.html'), await lastCommitDate(SITE_REPO, 'src/content/faq.mjs'), latestRelease),
+  '/': newest(await lastCommitDate(SITE_REPO, 'src/pages/home.html'), await lastCommitDate(SITE_REPO, 'src/i18n'), latestRelease),
   '/install/': await lastCommitDate(APP, 'docs/installing.md'),
-  '/troubleshooting/': await lastCommitDate(APP, 'packages/ui/src/locales/en.json'),
+  '/troubleshooting/': await lastCommitDate(APP, 'packages/ui/src/locales'),
   '/releases/': newest(latestRelease, await lastCommitDate(APP, 'docs/releases')),
-  '/faq/': await lastCommitDate(SITE_REPO, 'src/content/faq.mjs')
+  '/faq/': await lastCommitDate(SITE_REPO, 'src/i18n')
 }
-write('/', home())
+for (const { code } of LANGUAGES) {
+  write(localePath(code, '/'), home(code))
+  write(localePath(code, '/troubleshooting/'), troubleshooting(code))
+  write(localePath(code, '/faq/'), faq(code))
+}
 write('/install/', install())
-write('/troubleshooting/', troubleshooting())
 write('/releases/', releases(dates))
-write('/faq/', faq())
 write('/404.html', notFound())
 
 writeFileSync(join(DIST, 'releases/feed.xml'), releasesFeed(dates))
@@ -588,18 +728,28 @@ writeFileSync(join(DIST, 'releases/feed.xml'), releasesFeed(dates))
 for (const item of ['assets', 'img', 'og.png', 'favicon.ico', 'site.webmanifest', 'CNAME', 'robots.txt', 'google0b5838584fd20e84.html'])
   cpSync(join(ROOT, item), join(DIST, item), { recursive: true })
 
+// Every page in every language it has, each translated page naming its other languages.
+const sitemapEntries = ['/', ...NAV.map((item) => item.path)].flatMap((path) => {
+  const date = lastmod[path]?.slice(0, 10)
+  const codes = isTranslated(path) ? LANGUAGES.map((language) => language.code) : [SOURCE]
+  const links = isTranslated(path)
+    ? [...codes.map((code) => [code, localePath(code, path)]), ['x-default', path]]
+        .map(([code, page]) => `    <xhtml:link rel="alternate" hreflang="${code}" href="${SITE}${page}"/>\n`)
+        .join('')
+    : ''
+
+  return codes.map(
+    (code) =>
+      `  <url>\n    <loc>${SITE}${localePath(code, path)}</loc>\n${date ? `    <lastmod>${date}</lastmod>\n` : ''}${links}  </url>`
+  )
+})
 writeFileSync(
   join(DIST, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${['/', ...NAV.map((item) => item.path)]
-  .map((path) => {
-    const date = lastmod[path]?.slice(0, 10)
-    return `  <url>\n    <loc>${SITE}${path}</loc>\n${date ? `    <lastmod>${date}</lastmod>\n` : ''}  </url>`
-  })
-  .join('\n')}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${sitemapEntries.join('\n')}
 </urlset>
 `
 )
 
-console.log(`built ${NAV.length + 2} pages into dist/ from ${CONTENT}`)
+console.log(`built ${sitemapEntries.length + 1} pages in ${LANGUAGES.length} languages into dist/ from ${CONTENT}`)

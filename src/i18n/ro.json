@@ -1,0 +1,273 @@
+{
+  "language": {
+    "label": "Limbă",
+    "englishOnly": "În engleză"
+  },
+  "header": {
+    "pages": "Pagini",
+    "switchTheme": "Schimbă tema",
+    "toLight": "Treci la modul luminos",
+    "toDark": "Treci la modul întunecat"
+  },
+  "nav": {
+    "install": "Instalare",
+    "troubleshooting": "Depanare",
+    "releases": "Note de versiune",
+    "faq": "Întrebări frecvente"
+  },
+  "footer": {
+    "links": "Linkuri",
+    "license": "Licență AGPL-3.0",
+    "downloads": "Descărcări",
+    "report": "Raportează o problemă",
+    "patreon": "Susține pe Patreon"
+  },
+  "docs": {
+    "sidebar": "Documentație",
+    "heading": "Documentație",
+    "onThisPage": "Pe această pagină",
+    "page": "Pagină",
+    "madeFrom": "Generată din <code>{source}</code> din depozitul IPAForge.",
+    "edit": "Editează această pagină pe GitHub",
+    "report": "Raportează o problemă"
+  },
+  "meta": {
+    "ogImageAlt": "IPAForge: instalează SideStore și propriile aplicații pe iPhone și iPad din Windows, macOS și Linux.",
+    "feedTitle": "Versiunile IPAForge"
+  },
+  "home": {
+    "title": "IPAForge: instalează SideStore din Windows, macOS și Linux",
+    "description": "IPAForge este o aplicație desktop gratuită și open source pentru Windows, macOS și Linux, care instalează SideStore și propriile aplicații pe iPhone și iPad cu un Apple ID gratuit.",
+    "hero": {
+      "whatsNew": "Vezi noutățile",
+      "line1": "Instalează aplicații de pe orice computer.",
+      "line2": "Și păstrează-le funcționale.",
+      "lede": "IPAForge instalează SideStore și propriile aplicații pe iPhone și iPad cu un Apple ID gratuit, din Windows, macOS sau Linux. Verifică totul înainte să schimbe ceva, iar când ceva nu merge, îți spune cum să repari.",
+      "download": "Descarcă IPAForge",
+      "github": "Vezi pe GitHub",
+      "discord": "Intră pe Discord",
+      "intelQuestion": "Mac cu Intel?",
+      "intelLink": "Descarcă versiunea pentru Intel",
+      "openSource": "Gratuit și open source (AGPL-3.0)",
+      "systems": "Windows · macOS · Linux"
+    },
+    "showcase": {
+      "label": "Aplicația",
+      "tabs": "Ecrane",
+      "install-home": "Instalează SideStore",
+      "preload": "Preîncarcă aplicații",
+      "apps": "Aplicațiile tale",
+      "developer": "Portal pentru dezvoltatori",
+      "repair": "Repară SideStore",
+      "devices": "Lista dispozitivului",
+      "sidestore-qr": "Coduri QR"
+    },
+    "limits": {
+      "kicker": "Apple ID gratuit",
+      "title": "Limitele Apple, arătate înainte să le atingi.",
+      "sub": "Cu un Apple ID gratuit poți instala aplicații, după reguli pe care majoritatea uneltelor te lasă să le descoperi singur. IPAForge le numără pentru tine și îți spune ce va folosi o instalare.",
+      "appsUnit": "aplicații",
+      "apps": "odată pe fiecare dispozitiv. Când ajungi la limită, IPAForge te întreabă pe care s-o înlocuiască.",
+      "daysUnit": "zile",
+      "days": "per semnătură. IPAForge îți reîmprospătează singur aplicațiile înainte să expire.",
+      "appIdsUnit": "App ID-uri pe săptămână",
+      "appIds": "arătate înainte de instalare, cu momentul în care se eliberează următorul."
+    },
+    "features": {
+      "kicker": "Funcții",
+      "title": "Tot ce îți trebuie, într-o singură aplicație.",
+      "sidestore": { "title": "SideStore dintr-un clic", "body": "SideStore sau LiveContainer cu SideStore, Stabil sau Nightly. Fișierul de asociere și certificatul sunt puse pentru tine." },
+      "preload": { "title": "Preîncarcă aplicațiile", "body": "Trage fișiere .ipa, lipește un link sau răsfoiește catalogul, sursa SideStore și orice sursă în format AltStore pe care o adaugi." },
+      "refresh": { "title": "Aplicații care nu expiră", "body": "Vezi când expiră fiecare aplicație. Reîmprospătarea merge ca în SideStore: un profil nou cât timp certificatul e valid, fără nicio reinstalare." },
+      "repair": { "title": "Repară SideStore", "body": "Verifică rând cu rând ce împiedică SideStore să se reîmprospăteze singur și repară totul dintr-odată." },
+      "qr": { "title": "Coduri QR pentru SideStore", "body": "Adaugă o sursă în SideStore pe iPhone sau pune SideStore să instaleze o aplicație, scanând un cod." },
+      "checklist": { "title": "O listă pentru fiecare iPhone", "body": "Încredere, cod de acces, Modul dezvoltator, încrederea în Apple ID-ul tău, LocalDevVPN: ce cere versiunea ta de iOS, bifat pe măsură ce avansezi." },
+      "recovery": { "title": "Soluții, nu fundături", "body": "Fiecare eroare are un ecran cu remediile potrivite, diagnostice de copiat și un raport de eroare precompletat." },
+      "progress": { "title": "Progres în timp real", "body": "Fiecare pas arată ce face: viteza și timpul rămas la trimiterea aplicației, pașii Apple și progresul instalării în iOS, prin USB sau Wi-Fi." },
+      "logs": { "title": "Jurnale de trimis", "body": "Fiecare pas făcut de IPAForge, cu căutare și filtre, salvat într-un fișier de atașat la un raport de eroare." },
+      "accounts": { "title": "Mai multe Apple ID-uri", "body": "Autentificare în doi pași cu un cod pe dispozitive sau prin SMS. Păstrate în portcheiul sistemului, echipe gratuite și plătite, cu schimbare rapidă când Apple blochează unul pe un dispozitiv." },
+      "anisette": { "title": "Servere anisette cum vrei tu", "body": "IPAForge alege singur un server care funcționează din lista SideStore, cu unul de rezervă. Sau alege unul, adaugă-l pe al tău și testează-le pe fiecare." },
+      "updates": { "title": "Se actualizează singur", "body": "O versiune nouă se instalează când deschizi IPAForge, după ce semnătura versiunii e verificată, iar Noutăți îți spune ce s-a schimbat." },
+      "languages": { "title": "Limba ta, stilul tău", "body": "{count} limbi, inclusiv de la dreapta la stânga, și șase teme de culori, luminoase și întunecate." }
+    },
+    "how": {
+      "kicker": "Cum funcționează",
+      "title": "Trei pași până la SideStore.",
+      "step": "Pasul {number}",
+      "plug": { "title": "Conectează iPhone-ul", "body": "Deblochează-l și atinge „Ai încredere”. Lista arată ce mai cere versiunea ta de iOS, de exemplu Modul dezvoltator." },
+      "signIn": { "title": "Conectează-te cu Apple ID-ul", "body": "Merge și un cont gratuit. Parola ta ajunge doar la Apple, iar Apple ID-urile salvate rămân în portcheiul sistemului." },
+      "install": { "title": "Instalează", "body": "IPAForge semnează SideStore, îi pune fișierul de asociere și certificatul și îl instalează, arătând fiecare pas." }
+    },
+    "open": {
+      "kicker": "Deschis prin design",
+      "title": "Poți citi fiecare rând de cod și verifica fiecare descărcare.",
+      "typescript": "<b>Doar TypeScript, fără componente închise.</b> Semnarea codului, comunicarea cu dispozitivul și autentificarea la Apple sunt scrise de la zero și pot fi citite de oricine.",
+      "signs": "<b>Semnează ca Apple.</b> Pe fișierele de test, rezultatul semnării e identic, octet cu octet, cu cel al <span class=\"mono\">codesign</span> de la Apple, iar verificatorul Apple îl acceptă.",
+      "signed": "<b>Versiuni semnate.</b> Fiecare fișier al fiecărei versiuni are o semnătură Sigstore din fluxul de publicare, iar IPAForge o verifică înainte să instaleze o actualizare.",
+      "license": "<b>AGPL-3.0, și rămâne deschis.</b> Liber de folosit, studiat, modificat și distribuit, iar orice e construit pe baza lui trebuie să rămână și el open source.",
+      "terminalLabel": "Verificarea unei descărcări cu cosign",
+      "checkYourself": "# verifică singur o descărcare",
+      "appLogs": "# ce scrie aplicația în jurnal înainte să instaleze o actualizare"
+    },
+    "roadmap": {
+      "kicker": "Plan",
+      "title": "Încotro merge IPAForge.",
+      "done": "Gata",
+      "started": "Început",
+      "next": "Urmează",
+      "planned": "Planificat",
+      "engine": { "title": "Motorul și aplicația", "body": "Semnarea, comunicarea cu dispozitivul, autentificarea la Apple, serviciile pentru dezvoltatori, instalatorul și interfața." },
+      "guide": { "title": "Prima pornire ghidată", "body": "Un ghid de configurare la prima deschidere a IPAForge și un tur al fiecărei pagini." },
+      "install": { "title": "Instalare și preîncărcare", "body": "SideStore dintr-un clic, surse de aplicații, pagina Aplicații, Repară SideStore, coduri QR, lista de pași." },
+      "desktop": { "title": "Aplicația desktop", "body": "Instalatoare pentru Windows, macOS și Linux, versiuni semnate și actualizări automate." },
+      "management": { "title": "Unelte de gestionare", "body": "Pagina Portal pentru dezvoltatori: certificatele echipei și aplicațiile semnate de fiecare, App ID-uri, profiluri, grupuri de aplicații și dispozitive. Fișiere de asociere pentru fiecare aplicație, într-un singur loc." },
+      "wireless": { "title": "Asociere fără fir și la distanță", "body": "Fișierul de asociere la distanță pentru SideStore pe iOS 17.4+, Wi-Fi fără usbmuxd, tunelul către dispozitiv pe iOS 17.4+ și Apple TV și Vision Pro asociate prin cod. Urmează: instalarea pe Apple TV și Vision Pro." },
+      "release": { "title": "1.0", "body": "Semnarea codului pentru Windows și notarizarea Apple, mai multe limbi, un audit de securitate și semnătorul publicat pe npm." }
+    },
+    "faq": {
+      "kicker": "Întrebări frecvente",
+      "title": "Bine de știut.",
+      "all": "Toate întrebările"
+    },
+    "final": {
+      "title": "Descarcă IPAForge.",
+      "sub": "Gratuit pentru Windows, macOS și Linux. Se actualizează singur.",
+      "download": "Descarcă <span class=\"ltr\">{version}</span>",
+      "star": "Dă o stea pe GitHub",
+      "discord": "Intră pe Discord",
+      "patreon": "Susține pe Patreon"
+    },
+    "shots": {
+      "install-home": {
+        "alt": "Pagina Instalare din IPAForge: SideStore sau LiveContainer cu SideStore, canalul și planul instalării cu App ID-urile rămase săptămâna aceasta.",
+        "caption": "Alege SideStore sau LiveContainer cu SideStore și vezi ce va folosi instalarea înainte să se schimbe ceva: App ID-urile rămase săptămâna aceasta, locurile pentru aplicații gratuite, certificatul și echipa."
+      },
+      "preload": {
+        "alt": "Pagina Preîncărcare cu aplicații din catalog și un fișier .ipa ales, verificate și gata de instalat.",
+        "caption": "Adaugă aplicații din catalog, din surse, dintr-un link sau din fișiere .ipa. Fiecare e verificată mai întâi pentru iPhone-ul tău, apoi se instalează toate dintr-o rulare."
+      },
+      "apps": {
+        "alt": "Pagina Aplicații cu aplicațiile instalate și data la care expiră fiecare.",
+        "caption": "Fiecare aplicație instalată de tine și când expiră. Reîmprospătează, actualizează sau elimină una, ori lasă IPAForge să o reîmprospăteze singur înainte să expire."
+      },
+      "developer": {
+        "alt": "Pagina Portal pentru dezvoltatori: certificatele echipei, cu cine a creat fiecare certificat și ce aplicații de pe iPhone semnează.",
+        "caption": "Vezi ce are Apple ID-ul tău la Apple: certificatele și aplicațiile semnate de fiecare, App ID-urile și câte au mai rămas săptămâna aceasta, profilurile de pe iPhone, grupurile de aplicații și dispozitivele înregistrate. Curăță ce nu mai folosește nimic."
+      },
+      "repair": {
+        "alt": "Repară SideStore verificând SideStore rând cu rând.",
+        "caption": "Repară SideStore verifică cine l-a semnat, certificatul, fișierul de asociere și când expiră, apoi repară ce îl împiedică să se reîmprospăteze singur."
+      },
+      "devices": {
+        "alt": "Pagina Dispozitive cu lista de pași pentru un iPhone.",
+        "caption": "O listă pentru fiecare dispozitiv, potrivită versiunii sale de iOS: ce vede IPAForge se bifează singur, iar ce poți vedea doar tu pe iPhone are o casetă de bifat."
+      },
+      "sidestore-qr": {
+        "alt": "Un cod QR care adaugă o sursă în SideStore.",
+        "caption": "Scanează un cod cu iPhone-ul ca să adaugi o sursă în SideStore sau ca SideStore să instaleze singur o aplicație."
+      }
+    },
+    "downloadFor": "Descarcă pentru {os}"
+  },
+  "install": {
+    "title": "Instalează IPAForge pe Windows, macOS și Linux",
+    "description": "Descarcă IPAForge, deschide-l prima dată pe macOS, Windows sau Linux, conectează iPhone-ul și instalează SideStore.",
+    "kicker": "Instalare",
+    "h1": "Instalarea IPAForge",
+    "intro": "Descărcarea, prima deschidere pe fiecare sistem, ce îi trebuie iPhone-ului și prima pornire.",
+    "card": "IPAForge pentru computerul tău",
+    "cardSystems": "Windows, macOS și Linux",
+    "download": "Descarcă",
+    "for": "IPAForge pentru {os}",
+    "mac": "Fișierul .dmg pentru Apple silicon (M1 și mai nou)",
+    "windows": "Instalatorul .exe, care se actualizează singur",
+    "linux": "AppImage sau un pachet .deb ori .rpm",
+    "intel": "Mac cu Intel?"
+  },
+  "troubleshooting": {
+    "title": "Depanare IPAForge: fiecare eroare și cum o rezolvi",
+    "description": "Ce înseamnă fiecare dintre cele {count} erori ale IPAForge și cum o rezolvi: dispozitiv, Apple ID, descărcări, semnare și instalare.",
+    "kicker": "Depanare",
+    "h1": "Când ceva nu merge",
+    "intro": "Fiecare eroare afișată de IPAForge are un cod. Caută-l, sau caută cuvintele de pe ecran, ca să vezi ce înseamnă și cum o rezolvi.",
+    "search": "Caută printre {count} erori: un cod ca apple.app_id_quota sau cuvinte ca „blocat”",
+    "searchLabel": "Caută erori",
+    "filters": "Filtrează după zonă",
+    "all": "Toate",
+    "count": "{count} erori",
+    "countOf": "{shown} din {count} erori",
+    "empty": "Nicio eroare nu se potrivește. Încearcă mai puține cuvinte sau întreabă pe <a href=\"{discord}\">Discord</a>.",
+    "link": "Link către această eroare",
+    "areas": {
+      "device": "iPhone sau iPad",
+      "apple": "Apple ID",
+      "catalog": "Descărcări și surse",
+      "app": "Aplicația",
+      "net": "Rețea",
+      "installer": "Instalare",
+      "ipaforge": "IPAForge însuși",
+      "other": "Altele"
+    }
+  },
+  "releases": {
+    "title": "Note de versiune IPAForge: ce s-a schimbat în fiecare versiune",
+    "description": "Ce s-a schimbat în fiecare versiune IPAForge, de la cea mai nouă: funcții noi, remedieri și descărcările pentru Windows, macOS și Linux.",
+    "kicker": "Note de versiune",
+    "h1": "Toate versiunile, de la cea mai nouă",
+    "intro": "Ce s-a schimbat în fiecare versiune IPAForge. Aplicația arată aceleași schimbări în Noutăți.",
+    "latest": "Cea mai nouă",
+    "downloads": "Descărcări",
+    "feedSubtitle": "Ce s-a schimbat în fiecare versiune IPAForge."
+  },
+  "faq": {
+    "title": "Întrebări frecvente IPAForge: cost, cerințe, Apple ID și actualizări",
+    "description": "Răspunsuri scurte despre IPAForge: cât costă, de ce ai nevoie, avertismentele la prima deschidere, parola ta, actualizările și unde găsești ajutor.",
+    "kicker": "Întrebări frecvente",
+    "h1": "Ce întreabă oamenii",
+    "intro": "Răspunsuri scurte, fiecare cu trimitere la pagina cu detalii.",
+    "items": [
+      {
+        "q": "IPAForge e gratuit?",
+        "a": "Da. IPAForge e gratuit și open source, sub licența GNU AGPL-3.0, iar un Apple ID gratuit e suficient ca să-l folosești. Toate funcțiile sunt gratuite pentru toată lumea; dacă îți economisește timp, îl poți susține pe <a href=\"https://patreon.com/IPAForge\">Patreon</a>."
+      },
+      {
+        "q": "Am nevoie de un cont de dezvoltator Apple plătit?",
+        "a": "Nu. Merge un Apple ID gratuit, în limitele Apple: 3 aplicații instalate manual odată pe fiecare dispozitiv, 7 zile per semnătură și 10 App ID-uri pe săptămână. IPAForge îți arată fiecare limită înainte să schimbe ceva și îți reîmprospătează aplicațiile înainte să expire. Merge și un cont plătit, fără aceste limite."
+      },
+      {
+        "q": "De ce mă avertizează macOS sau Windows când îl deschid?",
+        "a": "IPAForge nu e încă notarizat de Apple sau semnat pentru Windows. <a href=\"/install/#opening-ipaforge-the-first-time\">Instalare</a> arată pașii, făcuți o singură dată, pentru fiecare sistem. Amândouă vin odată cu 1.0."
+      },
+      {
+        "q": "De ce am nevoie pe Windows și Linux?",
+        "a": "Pe Windows, instalează Apple Devices din Microsoft Store, ca computerul să poată comunica cu iPhone-ul. Pe Linux, instalează usbmuxd. Pe macOS nu îți trebuie nimic în plus."
+      },
+      {
+        "q": "Ce iPhone-uri și iPad-uri merg?",
+        "a": "iOS 15 sau mai nou, cu un cod de acces. Pe iOS 16 și mai nou, Modul dezvoltator trebuie să fie activat; lista de pe pagina Dispozitive arată cum."
+      },
+      {
+        "q": "Unde ajunge parola Apple ID-ului meu?",
+        "a": "Doar la Apple. Dacă alegi s-o salvezi, rămâne criptată în portcheiul sistemului, pe computerul tău."
+      },
+      {
+        "q": "IPAForge se actualizează singur?",
+        "a": "Da. Caută o versiune nouă când se deschide și o instalează doar după ce semnătura versiunii e verificată. Copiile instalate dintr-un .msi, .deb sau .rpm îți spun când a apărut o versiune nouă și ce fișier să descarci. <a href=\"/releases/\">Notele de versiune</a> listează fiecare versiune."
+      },
+      {
+        "q": "O instalare a eșuat. Ce fac acum?",
+        "a": "Fiecare eroare are un cod și remediul ei chiar în aplicație. <a href=\"/troubleshooting/\">Depanare</a> listează fiecare cod. Tot nu merge? Întreabă pe <a href=\"https://discord.gg/kGJn7NC5Zf\">Discord</a> sau deschide un issue pe GitHub cu jurnalul atașat (Jurnal › Salvează în aplicație)."
+      },
+      {
+        "q": "IPAForge face parte din SideStore?",
+        "a": "Nu. IPAForge e un proiect independent care instalează SideStore și funcționează alături de el. Nu e afiliat cu SideStore sau Apple."
+      }
+    ]
+  },
+  "notFound": {
+    "title": "Pagina nu a fost găsită · IPAForge",
+    "description": "Această pagină nu există.",
+    "h1": "Această pagină nu există",
+    "intro": "Este posibil ca adresa să se fi schimbat. Toate paginile sunt în bara laterală, sau întoarce-te la <a href=\"/\">pagina principală</a>."
+  }
+}

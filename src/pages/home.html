@@ -1,35 +1,35 @@
 <main id="top">
   <section class="hero">
     <div class="wrap">
-      <a class="eyebrow" href="/releases/#v{{latest-version}}"><svg class="spark"><use href="#i-spark"/></svg><b>{{latest-version}}</b> See what's new<span aria-hidden="true">→</span></a>
-      <h1><span class="line">Sideload from any computer.</span> <em class="line">Keep it working.</em></h1>
-      <p class="lede">IPAForge installs SideStore and your own apps onto iPhone and iPad with a free Apple ID, from Windows, macOS or Linux. It checks everything before it changes anything, and when something fails, it tells you how to fix it.</p>
+      <a class="eyebrow" href="/releases/#v{{latest-version}}"><svg class="spark"><use href="#i-spark"/></svg><b class="ltr">{{latest-version}}</b> {{home.hero.whatsNew}}<span class="arrow" aria-hidden="true">→</span></a>
+      <h1><span class="line">{{home.hero.line1}}</span> <em class="line">{{home.hero.line2}}</em></h1>
+      <p class="lede">{{home.hero.lede}}</p>
       <div class="ctas">
-        <a class="btn primary" id="download" data-version="{{latest-version}}" href="https://github.com/IPAForge/ipaforge/releases/tag/v{{latest-version}}"><svg><use href="#i-down"/></svg><span id="download-label">Download IPAForge</span></a>
-        <a class="btn" href="https://github.com/IPAForge/ipaforge"><svg><use href="#i-gh"/></svg>View on GitHub</a>
-        <a class="btn" href="https://discord.gg/kGJn7NC5Zf"><svg><use href="#i-discord"/></svg>Join the Discord</a>
+        <a class="btn primary" id="download" data-version="{{latest-version}}" href="https://github.com/IPAForge/ipaforge/releases/tag/v{{latest-version}}"><svg><use href="#i-down"/></svg><span id="download-label">{{home.hero.download}}</span></a>
+        <a class="btn" href="https://github.com/IPAForge/ipaforge"><svg><use href="#i-gh"/></svg>{{home.hero.github}}</a>
+        <a class="btn" href="https://discord.gg/kGJn7NC5Zf"><svg><use href="#i-discord"/></svg>{{home.hero.discord}}</a>
       </div>
-      <p class="alt-download" id="alt-download" hidden>Intel Mac? <a id="alt-download-link" href="https://github.com/IPAForge/ipaforge/releases/download/v{{latest-version}}/IPAForge-{{latest-version}}-mac-x64.dmg">Download the Intel build</a></p>
-      <div class="meta"><span>Free and open source (AGPL-3.0)</span><span>Windows · macOS · Linux</span><span>English, Deutsch, Română, Русский, العربية, 日本語</span></div>
+      <p class="alt-download" id="alt-download" hidden>{{home.hero.intelQuestion}} <a id="alt-download-link" href="https://github.com/IPAForge/ipaforge/releases/download/v{{latest-version}}/IPAForge-{{latest-version}}-mac-x64.dmg">{{home.hero.intelLink}}</a></p>
+      <div class="meta"><span>{{home.hero.openSource}}</span><span>{{home.hero.systems}}</span><span>{{app-languages}}</span></div>
     </div>
   </section>
 
-  <section class="showcase" aria-label="The app">
+  <section class="showcase" aria-label="{{home.showcase.label}}">
     <div class="wrap">
-      <div class="tabs" role="tablist" aria-label="Screens">
-        <button class="tab" role="tab" id="tab-install" aria-selected="true" data-shot="install-home">Install SideStore</button>
-        <button class="tab" role="tab" id="tab-preload" aria-selected="false" data-shot="preload">Preload apps</button>
-        <button class="tab" role="tab" id="tab-apps" aria-selected="false" data-shot="apps">Your apps</button>
-        <button class="tab" role="tab" id="tab-developer" aria-selected="false" data-shot="developer">Developer Portal</button>
-        <button class="tab" role="tab" id="tab-repair" aria-selected="false" data-shot="repair">Repair SideStore</button>
-        <button class="tab" role="tab" id="tab-devices" aria-selected="false" data-shot="devices">Device checklist</button>
-        <button class="tab" role="tab" id="tab-qr" aria-selected="false" data-shot="sidestore-qr">QR codes</button>
+      <div class="tabs" role="tablist" aria-label="{{home.showcase.tabs}}">
+        <button class="tab" role="tab" id="tab-install" aria-selected="true" data-shot="install-home">{{home.showcase.install-home}}</button>
+        <button class="tab" role="tab" id="tab-preload" aria-selected="false" data-shot="preload">{{home.showcase.preload}}</button>
+        <button class="tab" role="tab" id="tab-apps" aria-selected="false" data-shot="apps">{{home.showcase.apps}}</button>
+        <button class="tab" role="tab" id="tab-developer" aria-selected="false" data-shot="developer">{{home.showcase.developer}}</button>
+        <button class="tab" role="tab" id="tab-repair" aria-selected="false" data-shot="repair">{{home.showcase.repair}}</button>
+        <button class="tab" role="tab" id="tab-devices" aria-selected="false" data-shot="devices">{{home.showcase.devices}}</button>
+        <button class="tab" role="tab" id="tab-qr" aria-selected="false" data-shot="sidestore-qr">{{home.showcase.sidestore-qr}}</button>
       </div>
-      <p class="caption" id="caption" aria-live="polite">Pick SideStore, or LiveContainer with SideStore, and see what the install will use before anything changes: App IDs left this week, free-app slots, the certificate and the team.</p>
+      <p class="caption" id="caption" aria-live="polite">{{home.shots.install-home.caption}}</p>
       <div class="window" role="tabpanel" aria-labelledby="tab-install" id="panel">
         <div class="bar"><i></i><i></i><i></i><span>IPAForge</span></div>
         <div class="screen">
-          <img class="l" id="shot-l" src="/img/install-home.webp" width="1280" height="800" fetchpriority="high" alt="IPAForge's Install page: SideStore or LiveContainer with SideStore, the channel, and the install plan with App IDs left this week.">
+          <img class="l" id="shot-l" src="/img/install-home.webp" width="1280" height="800" fetchpriority="high" alt="{{home.shots.install-home.alt}}">
           <img class="d" id="shot-d" src="/img/install-home-dark.webp" width="1280" height="800" alt="">
         </div>
       </div>
@@ -38,47 +38,47 @@
 
   <section class="block" id="limits">
     <div class="wrap">
-      <p class="kicker">Free Apple ID</p>
-      <h2>Apple's limits, shown before you hit them.</h2>
-      <p class="sub">A free Apple ID can sideload, within rules most tools leave you to discover. IPAForge counts them for you and says what an install will use.</p>
+      <p class="kicker">{{home.limits.kicker}}</p>
+      <h2>{{home.limits.title}}</h2>
+      <p class="sub">{{home.limits.sub}}</p>
       <div class="limits">
-        <div class="limit"><div class="n">3<small>apps</small></div><p>at a time on each device. IPAForge asks which one to replace when you reach it.</p></div>
-        <div class="limit"><div class="n">7<small>days</small></div><p>per signature. IPAForge refreshes your apps by itself before they expire.</p></div>
-        <div class="limit"><div class="n">10<small>App IDs a week</small></div><p>shown before installing, with when the next one frees up.</p></div>
+        <div class="limit"><div class="n">3<small>{{home.limits.appsUnit}}</small></div><p>{{home.limits.apps}}</p></div>
+        <div class="limit"><div class="n">7<small>{{home.limits.daysUnit}}</small></div><p>{{home.limits.days}}</p></div>
+        <div class="limit"><div class="n">10<small>{{home.limits.appIdsUnit}}</small></div><p>{{home.limits.appIds}}</p></div>
       </div>
     </div>
   </section>
 
   <section class="block" id="features">
     <div class="wrap">
-      <p class="kicker">Features</p>
-      <h2>Everything sideloading needs, in one app.</h2>
+      <p class="kicker">{{home.features.kicker}}</p>
+      <h2>{{home.features.title}}</h2>
       <div class="features">
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></span><div><h3>One-click SideStore</h3><p>SideStore, or LiveContainer with SideStore, Stable or Nightly. The pairing file and certificate are placed for you.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></span><div><h3>Preload your apps</h3><p>Drop .ipa files, paste a link, or browse the catalog, SideStore's source and any AltStore-format source you add.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><div><h3>Apps that don't expire</h3><p>See when each app expires. Refresh works like SideStore's: a new profile while your certificate is valid, nothing reinstalled.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4Z"/></svg></span><div><h3>Repair SideStore</h3><p>Checks what keeps SideStore from refreshing by itself, line by line, and fixes it in one go.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg></span><div><h3>QR codes for SideStore</h3><p>Add a source to SideStore on your iPhone, or have SideStore install an app, by scanning a code.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="m9.5 11 1.8 1.8L15 9"/></svg></span><div><h3>A checklist for each iPhone</h3><p>Trust, passcode, Developer Mode, trusting your Apple ID, LocalDevVPN: what your iOS version needs, ticked as you go.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span><div><h3>Recovery, not dead ends</h3><p>Every failure has a screen with the fixes that apply, copyable diagnostics and a pre-filled bug report.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span><div><h3>Live progress</h3><p>Every step shows what it's doing: speed and time left while sending the app, Apple's steps, and iOS's own install progress, over USB or Wi-Fi.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><div><h3>Logs you can share</h3><p>Every step IPAForge took, with search and filters, saved to a file to attach to a bug report.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 20a6.5 6.5 0 0 0-3-5.5"/></svg></span><div><h3>Several Apple IDs</h3><p>Two-factor sign-in with a code on your devices or by text. Kept in your system keychain, free and paid teams, with a quick switch when Apple blocks one on a device.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span><div><h3>Anisette servers your way</h3><p>IPAForge picks a working server from SideStore's list by itself, with a backup. Or choose one, add your own, and test each.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 14 9l6.5 2-6.5 2-2 6.5-2-6.5-6.5-2L10 9Z"/></svg></span><div><h3>Updates itself</h3><p>A new version installs when IPAForge opens, after its release signature checks out, and What's new tells you what changed.</p></div></div>
-        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><div><h3>Your language, your look</h3><p>Six languages, right to left included, and six colour themes in light and dark.</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></span><div><h3>{{home.features.sidestore.title}}</h3><p>{{home.features.sidestore.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></span><div><h3>{{home.features.preload.title}}</h3><p>{{home.features.preload.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><div><h3>{{home.features.refresh.title}}</h3><p>{{home.features.refresh.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4Z"/></svg></span><div><h3>{{home.features.repair.title}}</h3><p>{{home.features.repair.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg></span><div><h3>{{home.features.qr.title}}</h3><p>{{home.features.qr.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="m9.5 11 1.8 1.8L15 9"/></svg></span><div><h3>{{home.features.checklist.title}}</h3><p>{{home.features.checklist.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span><div><h3>{{home.features.recovery.title}}</h3><p>{{home.features.recovery.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span><div><h3>{{home.features.progress.title}}</h3><p>{{home.features.progress.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><div><h3>{{home.features.logs.title}}</h3><p>{{home.features.logs.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 20a6.5 6.5 0 0 0-3-5.5"/></svg></span><div><h3>{{home.features.accounts.title}}</h3><p>{{home.features.accounts.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span><div><h3>{{home.features.anisette.title}}</h3><p>{{home.features.anisette.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 14 9l6.5 2-6.5 2-2 6.5-2-6.5-6.5-2L10 9Z"/></svg></span><div><h3>{{home.features.updates.title}}</h3><p>{{home.features.updates.body}}</p></div></div>
+        <div class="feature"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><div><h3>{{home.features.languages.title}}</h3><p>{{home.features.languages.body|count=languages}}</p></div></div>
       </div>
     </div>
   </section>
 
   <section class="block" id="how">
     <div class="wrap">
-      <p class="kicker">How it works</p>
-      <h2>Three steps to SideStore.</h2>
+      <p class="kicker">{{home.how.kicker}}</p>
+      <h2>{{home.how.title}}</h2>
       <div class="steps">
-        <div class="step"><span class="no">Step 1</span><h3>Plug in your iPhone</h3><p>Unlock it and tap Trust. The checklist shows what else your iOS version needs, like Developer Mode.</p></div>
-        <div class="step"><span class="no">Step 2</span><h3>Sign in with your Apple ID</h3><p>A free account works. Your password goes only to Apple, and saved Apple IDs stay in your system keychain.</p></div>
-        <div class="step"><span class="no">Step 3</span><h3>Install</h3><p>IPAForge signs SideStore, places its pairing file and certificate, and installs it, showing every step as it goes.</p></div>
+        <div class="step"><span class="no">{{home.how.step|number=1}}</span><h3>{{home.how.plug.title}}</h3><p>{{home.how.plug.body}}</p></div>
+        <div class="step"><span class="no">{{home.how.step|number=2}}</span><h3>{{home.how.signIn.title}}</h3><p>{{home.how.signIn.body}}</p></div>
+        <div class="step"><span class="no">{{home.how.step|number=3}}</span><h3>{{home.how.install.title}}</h3><p>{{home.how.install.body}}</p></div>
       </div>
     </div>
   </section>
@@ -86,18 +86,18 @@
   <section class="block" id="open">
     <div class="wrap trust">
       <div>
-        <p class="kicker">Open by design</p>
-        <h2>You can read every line, and check every download.</h2>
+        <p class="kicker">{{home.open.kicker}}</p>
+        <h2>{{home.open.title}}</h2>
         <ul>
-          <li><svg><use href="#i-check"/></svg><span><b>All TypeScript, no closed helpers.</b> Code signing, talking to the device and signing in to Apple are written from scratch and open to read.</span></li>
-          <li><svg><use href="#i-check"/></svg><span><b>Signs like Apple.</b> The signer's output matches Apple's own <span class="mono">codesign</span> byte for byte on its test fixtures, and Apple's verifier accepts it.</span></li>
-          <li><svg><use href="#i-check"/></svg><span><b>Signed releases.</b> Every file of every release carries a Sigstore signature from the release workflow, and IPAForge checks it before installing an update.</span></li>
-          <li><svg><use href="#i-check"/></svg><span><b>AGPL-3.0, and it stays open.</b> Free to use, study, change and share, and anything built from it must stay open source too.</span></li>
+          <li><svg><use href="#i-check"/></svg><span>{{home.open.typescript}}</span></li>
+          <li><svg><use href="#i-check"/></svg><span>{{home.open.signs}}</span></li>
+          <li><svg><use href="#i-check"/></svg><span>{{home.open.signed}}</span></li>
+          <li><svg><use href="#i-check"/></svg><span>{{home.open.license}}</span></li>
         </ul>
       </div>
-      <div class="terminal" aria-label="Checking a download with cosign">
+      <div class="terminal" aria-label="{{home.open.terminalLabel}}" dir="ltr">
         <div class="tb"><i></i><i></i><i></i></div>
-<pre><span class="c"># check a download yourself</span>
+<pre><span class="c">{{home.open.checkYourself}}</span>
 $ cosign verify-blob \
     --bundle IPAForge-{{latest-version}}-mac-arm64.dmg.sigstore.json \
     --certificate-identity-regexp \
@@ -106,7 +106,7 @@ $ cosign verify-blob \
     IPAForge-{{latest-version}}-mac-arm64.dmg
 <span class="g">Verified OK</span>
 
-<span class="c"># what the app logs before an update installs</span>
+<span class="c">{{home.open.appLogs}}</span>
 <span class="y">[info]</span> the update is signed by IPAForge's release
 </pre>
       </div>
@@ -115,41 +115,41 @@ $ cosign verify-blob \
 
   <section class="block" id="roadmap">
     <div class="wrap">
-      <p class="kicker">Roadmap</p>
-      <h2>Where IPAForge is going.</h2>
+      <p class="kicker">{{home.roadmap.kicker}}</p>
+      <h2>{{home.roadmap.title}}</h2>
       <div class="roadmap">
-        <div class="phase"><span class="pn">0–6</span><div><h3>The engine and the app</h3><p>Signer, device layer, Apple sign-in, developer services, the installer and the interface.</p></div><span class="chip done">Done</span></div>
-        <div class="phase"><span class="pn">8</span><div><h3>Install and preload</h3><p>One-click SideStore, app sources, the Apps page, Repair SideStore, QR codes, the checklist.</p></div><span class="chip done">Done</span></div>
-        <div class="phase"><span class="pn">9</span><div><h3>Desktop app</h3><p>Installers for Windows, macOS and Linux, signed releases, and automatic updates.</p></div><span class="chip done">Done</span></div>
-        <div class="phase"><span class="pn">10</span><div><h3>Management tools</h3><p>The Developer Portal page: your team's certificates and the apps each one signs, App IDs, profiles, app groups and devices. Pairing files per app, in one place.</p></div><span class="chip done">Done</span></div>
-        <div class="phase"><span class="pn">7</span><div><h3>Guided first run</h3><p>A step-by-step setup the first time you open IPAForge, covering every part of the app.</p></div><span class="chip next">Next</span></div>
-        <div class="phase"><span class="pn">11</span><div><h3>Wireless and remote pairing</h3><p>The iOS 17+ remote pairing file for SideStore is in. Still to come: pairing a new device over Wi-Fi and finding devices on your network.</p></div><span class="chip next">Started</span></div>
-        <div class="phase"><span class="pn">12</span><div><h3>1.0</h3><p>Windows code signing and Apple notarisation, a docs site, more languages and a security review.</p></div><span class="chip next">Planned</span></div>
+        <div class="phase"><span class="pn">0-6</span><div><h3>{{home.roadmap.engine.title}}</h3><p>{{home.roadmap.engine.body}}</p></div><span class="chip done">{{home.roadmap.done}}</span></div>
+        <div class="phase"><span class="pn">7</span><div><h3>{{home.roadmap.guide.title}}</h3><p>{{home.roadmap.guide.body}}</p></div><span class="chip done">{{home.roadmap.done}}</span></div>
+        <div class="phase"><span class="pn">8</span><div><h3>{{home.roadmap.install.title}}</h3><p>{{home.roadmap.install.body}}</p></div><span class="chip done">{{home.roadmap.done}}</span></div>
+        <div class="phase"><span class="pn">9</span><div><h3>{{home.roadmap.desktop.title}}</h3><p>{{home.roadmap.desktop.body}}</p></div><span class="chip done">{{home.roadmap.done}}</span></div>
+        <div class="phase"><span class="pn">10</span><div><h3>{{home.roadmap.management.title}}</h3><p>{{home.roadmap.management.body}}</p></div><span class="chip done">{{home.roadmap.done}}</span></div>
+        <div class="phase"><span class="pn">11</span><div><h3>{{home.roadmap.wireless.title}}</h3><p>{{home.roadmap.wireless.body}}</p></div><span class="chip next">{{home.roadmap.started}}</span></div>
+        <div class="phase"><span class="pn">12</span><div><h3>{{home.roadmap.release.title}}</h3><p>{{home.roadmap.release.body}}</p></div><span class="chip next">{{home.roadmap.next}}</span></div>
       </div>
     </div>
   </section>
 
   <section class="block" id="faq">
     <div class="wrap">
-      <p class="kicker">FAQ</p>
-      <h2>Good to know.</h2>
+      <p class="kicker">{{home.faq.kicker}}</p>
+      <h2>{{home.faq.title}}</h2>
       <div class="faq">
 {{faq-home}}
       </div>
-      <p class="faq-more"><a class="btn" href="/faq/">All questions</a></p>
+      <p class="faq-more"><a class="btn" href="/faq/">{{home.faq.all}}</a></p>
     </div>
   </section>
 
   <section class="final">
     <div class="wrap">
       <img src="/img/icon.svg" alt="" width="72" height="72" loading="lazy">
-      <h2>Get IPAForge.</h2>
-      <p class="sub" style="margin-top:0">Free for Windows, macOS and Linux. It keeps itself up to date.</p>
+      <h2>{{home.final.title}}</h2>
+      <p class="sub" style="margin-top:0">{{home.final.sub}}</p>
       <div class="ctas">
-        <a class="btn primary" href="https://github.com/IPAForge/ipaforge/releases/tag/v{{latest-version}}"><svg><use href="#i-down"/></svg>Download <span>{{latest-version}}</span></a>
-        <a class="btn" href="https://github.com/IPAForge/ipaforge"><svg><use href="#i-gh"/></svg>Star on GitHub</a>
-        <a class="btn" href="https://discord.gg/kGJn7NC5Zf"><svg><use href="#i-discord"/></svg>Join the Discord</a>
-        <a class="btn" href="https://patreon.com/IPAForge"><svg><use href="#i-heart"/></svg>Support on Patreon</a>
+        <a class="btn primary" href="https://github.com/IPAForge/ipaforge/releases/tag/v{{latest-version}}"><svg><use href="#i-down"/></svg>{{home.final.download|version=latest}}</a>
+        <a class="btn" href="https://github.com/IPAForge/ipaforge"><svg><use href="#i-gh"/></svg>{{home.final.star}}</a>
+        <a class="btn" href="https://discord.gg/kGJn7NC5Zf"><svg><use href="#i-discord"/></svg>{{home.final.discord}}</a>
+        <a class="btn" href="https://patreon.com/IPAForge"><svg><use href="#i-heart"/></svg>{{home.final.patreon}}</a>
       </div>
     </div>
   </section>
