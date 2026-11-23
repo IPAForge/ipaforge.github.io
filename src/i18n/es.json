@@ -1,0 +1,273 @@
+{
+  "language": {
+    "label": "Idioma",
+    "englishOnly": "En inglés"
+  },
+  "header": {
+    "pages": "Páginas",
+    "switchTheme": "Cambiar tema",
+    "toLight": "Cambiar al modo claro",
+    "toDark": "Cambiar al modo oscuro"
+  },
+  "nav": {
+    "install": "Instalación",
+    "troubleshooting": "Solución de problemas",
+    "releases": "Notas de la versión",
+    "faq": "Preguntas frecuentes"
+  },
+  "footer": {
+    "links": "Enlaces",
+    "license": "Licencia AGPL-3.0",
+    "downloads": "Descargas",
+    "report": "Informar de un problema",
+    "patreon": "Apoyar en Patreon"
+  },
+  "docs": {
+    "sidebar": "Documentación",
+    "heading": "Documentación",
+    "onThisPage": "En esta página",
+    "page": "Página",
+    "madeFrom": "Generado a partir de <code>{source}</code> en el repositorio de IPAForge.",
+    "edit": "Editar esta página en GitHub",
+    "report": "Informar de un problema"
+  },
+  "meta": {
+    "ogImageAlt": "IPAForge: instala SideStore y tus propias apps en iPhone y iPad desde Windows, macOS y Linux.",
+    "feedTitle": "Versiones de IPAForge"
+  },
+  "home": {
+    "title": "IPAForge: instala SideStore desde Windows, macOS y Linux",
+    "description": "IPAForge es una app de escritorio gratuita y de código abierto para Windows, macOS y Linux que instala SideStore y tus propias apps en iPhone y iPad con un Apple ID gratuito.",
+    "hero": {
+      "whatsNew": "Ver las novedades",
+      "line1": "Haz sideloading desde cualquier ordenador.",
+      "line2": "Y que siga funcionando.",
+      "lede": "IPAForge instala SideStore y tus propias apps en iPhone y iPad con un Apple ID gratuito, desde Windows, macOS o Linux. Lo comprueba todo antes de cambiar nada y, cuando algo falla, te dice cómo solucionarlo.",
+      "download": "Descargar IPAForge",
+      "github": "Ver en GitHub",
+      "discord": "Únete al Discord",
+      "intelQuestion": "¿Mac con Intel?",
+      "intelLink": "Descarga la versión para Intel",
+      "openSource": "Gratuito y de código abierto (AGPL-3.0)",
+      "systems": "Windows · macOS · Linux"
+    },
+    "showcase": {
+      "label": "La app",
+      "tabs": "Pantallas",
+      "install-home": "Instalar SideStore",
+      "preload": "Precargar apps",
+      "apps": "Tus apps",
+      "developer": "Portal de desarrolladores",
+      "repair": "Reparar SideStore",
+      "devices": "Lista del dispositivo",
+      "sidestore-qr": "Códigos QR"
+    },
+    "limits": {
+      "kicker": "Apple ID gratuito",
+      "title": "Los límites de Apple, a la vista antes de alcanzarlos.",
+      "sub": "Con un Apple ID gratuito puedes hacer sideloading, dentro de unas reglas que la mayoría de herramientas te dejan descubrir por tu cuenta. IPAForge las cuenta por ti y te dice qué va a usar cada instalación.",
+      "appsUnit": "apps",
+      "apps": "a la vez en cada dispositivo. Al llegar al límite, IPAForge te pregunta cuál sustituir.",
+      "daysUnit": "días",
+      "days": "por firma. IPAForge renueva tus apps por sí solo antes de que caduquen.",
+      "appIdsUnit": "App IDs por semana",
+      "appIds": "a la vista antes de instalar, junto con cuándo se libera el siguiente."
+    },
+    "features": {
+      "kicker": "Funciones",
+      "title": "Todo lo que necesita el sideloading, en una sola app.",
+      "sidestore": { "title": "SideStore con un clic", "body": "SideStore, o LiveContainer con SideStore, Estable o Nightly. El archivo de emparejamiento y el certificado se colocan por ti." },
+      "preload": { "title": "Precarga tus apps", "body": "Suelta archivos .ipa, pega un enlace o explora el catálogo, la fuente de SideStore y cualquier fuente en formato AltStore que añadas." },
+      "refresh": { "title": "Apps que no caducan", "body": "Mira cuándo caduca cada app. Renovar funciona como en SideStore: un perfil nuevo mientras tu certificado sea válido, sin reinstalar nada." },
+      "repair": { "title": "Reparar SideStore", "body": "Comprueba punto por punto qué impide a SideStore renovar por sí sola, y lo arregla de una vez." },
+      "qr": { "title": "Códigos QR para SideStore", "body": "Añade una fuente a SideStore en tu iPhone, o haz que SideStore instale una app, escaneando un código." },
+      "checklist": { "title": "Una lista para cada iPhone", "body": "Confiar, código, modo de desarrollador, confiar en tu Apple ID, LocalDevVPN: lo que necesita tu versión de iOS, marcado según avanzas." },
+      "recovery": { "title": "Soluciones, no callejones sin salida", "body": "Cada fallo tiene una pantalla con las soluciones que corresponden, un diagnóstico que se puede copiar y un informe de error ya rellenado." },
+      "progress": { "title": "Progreso en directo", "body": "Cada paso muestra lo que está haciendo: velocidad y tiempo restante al enviar la app, los pasos de Apple y el progreso de instalación del propio iOS, por USB o Wi-Fi." },
+      "logs": { "title": "Registros que puedes compartir", "body": "Cada paso que ha dado IPAForge, con búsqueda y filtros, guardado en un archivo para adjuntarlo a un informe de error." },
+      "accounts": { "title": "Varios Apple IDs", "body": "Inicio de sesión de doble factor con un código en tus dispositivos o por SMS. Guardados en el llavero de tu sistema, con equipos gratuitos y de pago, y cambio rápido cuando Apple bloquea uno en un dispositivo." },
+      "anisette": { "title": "Servidores de anisette a tu manera", "body": "IPAForge elige por sí solo un servidor que funcione de la lista de SideStore, con uno de reserva. O elige uno, añade el tuyo y prueba cada uno." },
+      "updates": { "title": "Se actualiza solo", "body": "Las versiones nuevas se instalan al abrir IPAForge, después de comprobar su firma de versión, y Novedades te cuenta qué ha cambiado." },
+      "languages": { "title": "Tu idioma, tu estilo", "body": "Idiomas disponibles: {count}, incluidos los de derecha a izquierda, y seis temas de color en claro y en oscuro." }
+    },
+    "how": {
+      "kicker": "Cómo funciona",
+      "title": "Tres pasos hasta SideStore.",
+      "step": "Paso {number}",
+      "plug": { "title": "Conecta tu iPhone", "body": "Desbloquéalo y toca Confiar. La lista te muestra qué más necesita tu versión de iOS, como el modo de desarrollador." },
+      "signIn": { "title": "Inicia sesión con tu Apple ID", "body": "Sirve una cuenta gratuita. Tu contraseña solo se envía a Apple, y los Apple IDs guardados se quedan en el llavero de tu sistema." },
+      "install": { "title": "Instala", "body": "IPAForge firma SideStore, coloca su archivo de emparejamiento y su certificado, y la instala, mostrando cada paso." }
+    },
+    "open": {
+      "kicker": "Abierto por diseño",
+      "title": "Puedes leer cada línea y comprobar cada descarga.",
+      "typescript": "<b>Todo en TypeScript, sin ayudantes cerrados.</b> La firma de código, la comunicación con el dispositivo y el inicio de sesión en Apple están escritos desde cero y se pueden leer.",
+      "signs": "<b>Firma como Apple.</b> La salida del firmador coincide byte a byte con la del propio <span class=\"mono\">codesign</span> de Apple en sus casos de prueba, y el verificador de Apple la acepta.",
+      "signed": "<b>Versiones firmadas.</b> Cada archivo de cada versión lleva una firma Sigstore del flujo de publicación, e IPAForge la comprueba antes de instalar una actualización.",
+      "license": "<b>AGPL-3.0, y seguirá siendo abierto.</b> Libre para usar, estudiar, modificar y compartir, y todo lo que se construya a partir de él también debe seguir siendo de código abierto.",
+      "terminalLabel": "Comprobar una descarga con cosign",
+      "checkYourself": "# comprueba tú mismo una descarga",
+      "appLogs": "# lo que registra la app antes de instalar una actualización"
+    },
+    "roadmap": {
+      "kicker": "Hoja de ruta",
+      "title": "Hacia dónde va IPAForge.",
+      "done": "Hecho",
+      "started": "En marcha",
+      "next": "Lo siguiente",
+      "planned": "Previsto",
+      "engine": { "title": "El motor y la app", "body": "Firmador, capa de dispositivos, inicio de sesión en Apple, servicios para desarrolladores, el instalador y la interfaz." },
+      "guide": { "title": "Primer uso guiado", "body": "Una guía de configuración la primera vez que abres IPAForge y un recorrido por todas las páginas." },
+      "install": { "title": "Instalar y precargar", "body": "SideStore con un clic, fuentes de apps, la página Apps, Reparar SideStore, códigos QR, la lista de comprobación." },
+      "desktop": { "title": "App de escritorio", "body": "Instaladores para Windows, macOS y Linux, versiones firmadas y actualizaciones automáticas." },
+      "management": { "title": "Herramientas de gestión", "body": "La página Portal de desarrolladores: los certificados de tu equipo y las apps que firma cada uno, App IDs, perfiles, grupos de apps y dispositivos. Archivos de emparejamiento por app, en un solo sitio." },
+      "wireless": { "title": "Emparejamiento inalámbrico y remoto", "body": "El archivo de emparejamiento remoto de iOS 17.4+ para SideStore, Wi-Fi sin usbmuxd, el túnel de dispositivo de iOS 17.4+, y Apple TV y Vision Pro emparejados con su código. Lo siguiente: instalar en Apple TV y Vision Pro." },
+      "release": { "title": "1.0", "body": "Firma de código para Windows y notarización de Apple, más idiomas, una revisión de seguridad y el firmador en npm." }
+    },
+    "faq": {
+      "kicker": "Preguntas frecuentes",
+      "title": "Conviene saberlo.",
+      "all": "Todas las preguntas"
+    },
+    "final": {
+      "title": "Consigue IPAForge.",
+      "sub": "Gratis para Windows, macOS y Linux. Se mantiene actualizado solo.",
+      "download": "Descargar <span class=\"ltr\">{version}</span>",
+      "star": "Dale una estrella en GitHub",
+      "discord": "Únete al Discord",
+      "patreon": "Apoyar en Patreon"
+    },
+    "shots": {
+      "install-home": {
+        "alt": "La página Instalar de IPAForge: SideStore o LiveContainer con SideStore, el canal y el plan de instalación con los App IDs que quedan esta semana.",
+        "caption": "Elige SideStore, o LiveContainer con SideStore, y mira lo que va a usar la instalación antes de que cambie nada: App IDs que quedan esta semana, huecos de apps gratuitas, el certificado y el equipo."
+      },
+      "preload": {
+        "alt": "La página Precargar con apps del catálogo y un archivo .ipa elegido, comprobadas y listas para instalar.",
+        "caption": "Añade apps del catálogo, de fuentes, de un enlace o de archivos .ipa. Primero se comprueba cada una con tu iPhone y luego se instalan todas de una vez."
+      },
+      "apps": {
+        "alt": "La página Apps con las apps instaladas y cuándo caduca cada una.",
+        "caption": "Cada app que has instalado por sideloading y cuándo caduca. Renuévala, actualízala o quítala, o deja que IPAForge la renueve por sí solo antes de que caduque."
+      },
+      "developer": {
+        "alt": "La página Portal de desarrolladores: los certificados del equipo, con quién creó cada uno y qué apps del iPhone firma.",
+        "caption": "Mira lo que tu Apple ID tiene en Apple: los certificados y las apps que firma cada uno, los App IDs y cuántos quedan esta semana, los perfiles de tu iPhone, los grupos de apps y los dispositivos registrados. Limpia lo que no se usa."
+      },
+      "repair": {
+        "alt": "Reparar SideStore comprobando SideStore punto por punto.",
+        "caption": "Reparar SideStore comprueba quién la firmó, su certificado, su archivo de emparejamiento y cuándo caduca, y luego arregla lo que le impide renovar por sí sola."
+      },
+      "devices": {
+        "alt": "La página Dispositivos con la lista de comprobación de un iPhone.",
+        "caption": "Una lista para cada dispositivo, según su versión de iOS: lo que IPAForge ve se marca solo, y lo que solo tú puedes ver en el iPhone tiene una casilla para marcar."
+      },
+      "sidestore-qr": {
+        "alt": "Un código QR que añade una fuente a SideStore.",
+        "caption": "Escanea un código con tu iPhone para añadir una fuente a SideStore, o para que SideStore instale una app por sí sola."
+      }
+    },
+    "downloadFor": "Descargar para {os}"
+  },
+  "install": {
+    "title": "Instalar IPAForge en Windows, macOS y Linux",
+    "description": "Descarga IPAForge, ábrelo por primera vez en macOS, Windows o Linux, conecta tu iPhone e instala SideStore.",
+    "kicker": "Instalación",
+    "h1": "Instalar IPAForge",
+    "intro": "La descarga, la primera apertura en cada sistema, lo que necesita tu iPhone y el primer uso.",
+    "card": "IPAForge para tu ordenador",
+    "cardSystems": "Windows, macOS y Linux",
+    "download": "Descargar",
+    "for": "IPAForge para {os}",
+    "mac": "El .dmg para chip de Apple (M1 y posteriores)",
+    "windows": "El instalador .exe, que se actualiza solo",
+    "linux": "El AppImage, o un paquete .deb o .rpm",
+    "intel": "¿Mac con Intel?"
+  },
+  "troubleshooting": {
+    "title": "Solución de problemas de IPAForge: cada error y cómo solucionarlo",
+    "description": "Qué significa cada uno de los errores de IPAForge ({count} en total) y cómo solucionarlo: dispositivo, Apple ID, descargas, firma e instalación.",
+    "kicker": "Solución de problemas",
+    "h1": "Cuando algo falla",
+    "intro": "Cada error que muestra IPAForge tiene un código. Búscalo, o busca las palabras que ves en pantalla, para saber qué significa y cómo solucionarlo.",
+    "search": "Buscar entre los errores ({count}): un código como apple.app_id_quota, o palabras como “bloqueado”",
+    "searchLabel": "Buscar errores",
+    "filters": "Filtrar por área",
+    "all": "Todos",
+    "count": "Errores: {count}",
+    "countOf": "Errores: {shown} de {count}",
+    "empty": "Ningún error coincide. Prueba con menos palabras o pregunta en <a href=\"{discord}\">Discord</a>.",
+    "link": "Enlace a este error",
+    "areas": {
+      "device": "iPhone o iPad",
+      "apple": "Apple ID",
+      "catalog": "Descargas y fuentes",
+      "app": "La app",
+      "net": "Red",
+      "installer": "Instalación",
+      "ipaforge": "El propio IPAForge",
+      "other": "Otros"
+    }
+  },
+  "releases": {
+    "title": "Notas de la versión de IPAForge: qué ha cambiado en cada versión",
+    "description": "Qué ha cambiado en cada versión de IPAForge, de la más reciente a la más antigua: funciones nuevas, correcciones y las descargas para Windows, macOS y Linux.",
+    "kicker": "Notas de la versión",
+    "h1": "Todas las versiones, de la más reciente a la más antigua",
+    "intro": "Qué ha cambiado en cada versión de IPAForge. La app muestra los mismos cambios en Novedades.",
+    "latest": "Más reciente",
+    "downloads": "Descargas",
+    "feedSubtitle": "Qué ha cambiado en cada versión de IPAForge."
+  },
+  "faq": {
+    "title": "Preguntas frecuentes sobre IPAForge: coste, requisitos, Apple ID y actualizaciones",
+    "description": "Respuestas breves sobre IPAForge: cuánto cuesta, qué necesitas, los avisos al abrirlo por primera vez, tu contraseña, las actualizaciones y cómo obtener ayuda.",
+    "kicker": "Preguntas frecuentes",
+    "h1": "Lo que suele preguntarse",
+    "intro": "Respuestas breves, cada una con un enlace a la página con los detalles.",
+    "items": [
+      {
+        "q": "¿IPAForge es gratis?",
+        "a": "Sí. IPAForge es gratuito y de código abierto bajo la GNU AGPL-3.0, y basta con un Apple ID gratuito para usarlo. Todas las funciones son gratis para todo el mundo; si te ahorra tiempo, puedes apoyarlo en <a href=\"https://patreon.com/IPAForge\">Patreon</a>."
+      },
+      {
+        "q": "¿Necesito una cuenta de desarrollador de Apple de pago?",
+        "a": "No. Sirve un Apple ID gratuito, dentro de los límites de Apple: 3 apps instaladas por sideloading a la vez en cada dispositivo, 7 días por firma y 10 App IDs por semana. IPAForge te muestra cada uno antes de cambiar nada y renueva tus apps antes de que caduquen. Una cuenta de pago también funciona, sin esos límites."
+      },
+      {
+        "q": "¿Por qué macOS o Windows me avisan al abrirlo?",
+        "a": "IPAForge aún no está notarizado por Apple ni tiene firma de código para Windows. <a href=\"/install/#opening-ipaforge-the-first-time\">Instalación</a> muestra los pasos que hay que hacer una sola vez en cada sistema. Ambas cosas llegarán con la 1.0."
+      },
+      {
+        "q": "¿Qué necesito en Windows y Linux?",
+        "a": "En Windows, instala Dispositivos Apple desde Microsoft Store para que tu ordenador pueda comunicarse con el iPhone. En Linux, instala usbmuxd. macOS no necesita nada más."
+      },
+      {
+        "q": "¿Qué iPhone y iPad son compatibles?",
+        "a": "iOS 15 o posterior con un código. En iOS 16 y posterior, el modo de desarrollador debe estar activado; la lista de la página Dispositivos te muestra cómo."
+      },
+      {
+        "q": "¿Adónde va la contraseña de mi Apple ID?",
+        "a": "Solo a Apple. Si decides guardarla, se queda cifrada en el llavero del sistema de tu ordenador."
+      },
+      {
+        "q": "¿IPAForge se actualiza solo?",
+        "a": "Sí. Busca una versión nueva al abrirse y solo la instala después de comprobar su firma de versión. Las copias instaladas desde un .msi, .deb o .rpm avisan cuando hay una versión nueva y te dicen qué archivo descargar. Las <a href=\"/releases/\">notas de la versión</a> recogen todas las versiones."
+      },
+      {
+        "q": "Una instalación ha fallado. ¿Y ahora qué?",
+        "a": "Cada error tiene un código y su solución en la propia app. <a href=\"/troubleshooting/\">Solución de problemas</a> recoge todos los códigos. ¿Sigues sin poder? Pregunta en <a href=\"https://discord.gg/kGJn7NC5Zf\">Discord</a> o abre una incidencia en GitHub con los registros adjuntos (Registros › Guardar en la app)."
+      },
+      {
+        "q": "¿IPAForge forma parte de SideStore?",
+        "a": "No. IPAForge es un proyecto independiente que instala SideStore y funciona junto a ella. No está afiliado a SideStore ni a Apple."
+      }
+    ]
+  },
+  "notFound": {
+    "title": "Página no encontrada · IPAForge",
+    "description": "Esta página no existe.",
+    "h1": "Esta página no existe",
+    "intro": "Puede que la dirección haya cambiado. Todas las páginas están en la barra lateral, o vuelve a la <a href=\"/\">página de inicio</a>."
+  }
+}
