@@ -1,7 +1,7 @@
 {
   "language": {
     "label": "Limbă",
-    "englishOnly": "În engleză"
+    "notTranslated": "Această parte nu este încă tradusă, așa că apare în engleză."
   },
   "header": {
     "pages": "Pagini",
@@ -20,7 +20,8 @@
     "license": "Licență AGPL-3.0",
     "downloads": "Descărcări",
     "report": "Raportează o problemă",
-    "patreon": "Susține pe Patreon"
+    "patreon": "Susține pe Patreon",
+    "translate": "Ajută la traducere"
   },
   "docs": {
     "sidebar": "Documentație",

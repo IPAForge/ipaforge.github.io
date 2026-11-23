@@ -1,7 +1,7 @@
 {
   "language": {
     "label": "Language",
-    "englishOnly": "In English"
+    "notTranslated": "This part isn't translated yet, so it's shown in English."
   },
   "header": {
     "pages": "Pages",
@@ -20,7 +20,8 @@
     "license": "AGPL-3.0 license",
     "downloads": "Downloads",
     "report": "Report a problem",
-    "patreon": "Support on Patreon"
+    "patreon": "Support on Patreon",
+    "translate": "Help translate"
   },
   "docs": {
     "sidebar": "Documentation",

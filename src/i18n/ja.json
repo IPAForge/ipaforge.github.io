@@ -1,7 +1,7 @@
 {
   "language": {
     "label": "言語",
-    "englishOnly": "英語のみ"
+    "notTranslated": "この部分はまだ翻訳されていないため、英語で表示しています。"
   },
   "header": {
     "pages": "ページ",
@@ -20,7 +20,8 @@
     "license": "AGPL-3.0 ライセンス",
     "downloads": "ダウンロード",
     "report": "問題を報告",
-    "patreon": "Patreon で支援"
+    "patreon": "Patreon で支援",
+    "translate": "翻訳に協力する"
   },
   "docs": {
     "sidebar": "ドキュメント",

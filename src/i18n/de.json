@@ -1,7 +1,7 @@
 {
   "language": {
     "label": "Sprache",
-    "englishOnly": "Auf Englisch"
+    "notTranslated": "Dieser Teil ist noch nicht übersetzt und wird deshalb auf Englisch angezeigt."
   },
   "header": {
     "pages": "Seiten",
@@ -20,7 +20,8 @@
     "license": "Lizenz AGPL-3.0",
     "downloads": "Downloads",
     "report": "Problem melden",
-    "patreon": "Auf Patreon unterstützen"
+    "patreon": "Auf Patreon unterstützen",
+    "translate": "Beim Übersetzen helfen"
   },
   "docs": {
     "sidebar": "Dokumentation",

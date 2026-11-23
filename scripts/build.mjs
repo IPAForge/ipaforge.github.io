@@ -1,15 +1,16 @@
 // Builds ipaforge.com into dist/: the hand-made landing page, and the docs pages made from the IPAForge repository
 // (the install guide, the release notes and the app's own error texts), all in one layout.
 //
-// Every language in src/i18n/ gets the landing page, Troubleshooting (from the app's own translated error texts) and
-// the FAQ, under its code (/de/faq/); English stays at the root. Install and the release notes are English only.
+// Every language in src/i18n/ gets every page under its code (/de/faq/); English stays at the root. Troubleshooting
+// comes from the app's own translated error texts, Install and the release notes from its translated docs
+// (docs/i18n/<lang>/), each falling back to English, with a note, where a translation isn't there yet.
 //
 //   CONTENT_DIR=../ipaforge node scripts/build.mjs
 //
 // CONTENT_DIR is a checkout of IPAForge/ipaforge (CI checks it out next to this repo). GITHUB_TOKEN, when set,
 // is used to read the release dates from GitHub's API.
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
-import { dirname, join, resolve } from 'node:path'
+import { dirname, join, posix, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { marked } from 'marked'
@@ -24,6 +25,8 @@ const SITE = 'https://ipaforge.com'
 const REPO = 'https://github.com/IPAForge/ipaforge'
 const DISCORD = 'https://discord.gg/kGJn7NC5Zf'
 const PATREON = 'https://patreon.com/IPAForge'
+/** The Weblate project where IPAForge is translated; /translate/ sends visitors there. */
+const WEBLATE = 'https://hosted.weblate.org/engage/ipaforge/'
 
 if (!existsSync(join(CONTENT, 'docs/installing.md')))
   throw new Error(`CONTENT_DIR (${CONTENT}) is not a checkout of IPAForge/ipaforge`)
@@ -41,16 +44,32 @@ const slug = (text) =>
 
 // ---------------------------------------------------------------------------------------------------------------
 // Markdown: headings get ids (the sidebar lists the h2s), tables scroll on their own, links to other docs files
-// go to the site's page for them or to the file on GitHub.
+// go to the site's page for them or to the file on GitHub. A translated page's headings take the English page's ids in
+// order (Weblate keeps the structure), or one written at the heading's end (`## Descargar {#download}`), so a link to
+// `#download` works in every language.
 
-const DOC_PAGES = { 'device.md': '/troubleshooting/', 'apple-account.md': '/troubleshooting/', 'installing.md': '/install/' }
+/** The site's page for a file in the app repository (by its path there), when it has one. */
+const DOC_PAGES = {
+  'docs/device.md': '/troubleshooting/',
+  'docs/apple-account.md': '/troubleshooting/',
+  'docs/installing.md': '/install/'
+}
+const HEADING_ID = /\s*\{#([\w-]+)\}\s*$/
 
-const markdown = (source, { demote = false } = {}) => {
+/**
+ * `file` is the Markdown file's path in the app repository: relative links resolve from its folder. `ids` are the
+ * English page's heading ids, in order, for a translation of it. Returns every heading's id too, in order.
+ */
+const markdown = (source, { demote = false, lang = SOURCE, file = 'docs/installing.md', ids: english = [] } = {}) => {
   const toc = []
+  const ids = []
   const renderer = new marked.Renderer()
   renderer.heading = function ({ tokens, depth }) {
-    const text = this.parser.parseInline(tokens)
-    const id = slug(text)
+    const rendered = this.parser.parseInline(tokens)
+    const explicit = rendered.match(HEADING_ID)?.[1]
+    const text = rendered.replace(HEADING_ID, '')
+    const id = explicit ?? english[ids.length] ?? (slug(text) || `section-${ids.length + 1}`)
+    ids.push(id)
     const level = demote ? depth + 1 : depth
     if (depth === 2) toc.push({ id, text: text.replace(/<[^>]+>/g, '') })
     return `<h${level} id="${id}">${text}</h${level}>\n`
@@ -62,15 +81,14 @@ const markdown = (source, { demote = false } = {}) => {
     const text = this.parser.parseInline(tokens)
     let target = href
     if (!/^([a-z]+:|#|\/)/.test(href)) {
-      const [file, hash] = href.split('#')
-      const name = file.split('/').pop()
-      target = DOC_PAGES[name]
-        ? DOC_PAGES[name] + (hash ? `#${hash}` : '')
-        : `${REPO}/blob/main/${join('docs', file).replace(/\\/g, '/')}${hash ? `#${hash}` : ''}`
+      const [path, hash] = href.split('#')
+      const linked = posix.normalize(posix.join(posix.dirname(file), path))
+      const anchor = hash ? `#${hash}` : ''
+      target = DOC_PAGES[linked] ? `${href_(lang, DOC_PAGES[linked])}${anchor}` : `${REPO}/blob/main/${linked}${anchor}`
     }
     return `<a href="${esc(target)}"${title ? ` title="${esc(title)}"` : ''}>${text}</a>`
   }
-  return { html: marked.parse(source, { renderer }), toc }
+  return { html: marked.parse(source, { renderer }), toc, ids }
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -83,14 +101,29 @@ const NAV = [
   { path: '/faq/', key: 'nav.faq' }
 ]
 
-/** The pages every language has; the others (Install, Release notes) are English only. */
-const TRANSLATED = ['/', '/troubleshooting/', '/faq/']
+/** The pages every language has (all of them; the 404 page is English only). */
+const TRANSLATED = ['/', '/install/', '/troubleshooting/', '/releases/', '/faq/']
 const isTranslated = (path) => TRANSLATED.includes(path)
 /** Where a link to the site's `path` goes from a page in `lang`: its own language's page, when there is one. */
 const href = (lang, path) => (isTranslated(path) ? localePath(lang, path) : path)
-/** Links written in a string (`/troubleshooting/`, `/faq/`, `/`) go to the page in the string's language. */
+/** The same, for the Markdown link renderer, whose own `href` argument hides `href`. */
+const href_ = (lang, path) => href(lang, path)
+/** Links written in a string (`/install/`, `/faq/`, `/`) go to the page in the string's language. */
 const localizeLinks = (lang, html) =>
-  html.replace(/href="(\/(?:troubleshooting\/|faq\/)?)([#"])/g, (_, path, end) => `href="${href(lang, path)}${end}`)
+  html.replace(/href="(\/(?:install\/|troubleshooting\/|releases\/|faq\/)?)([#"])/g, (_, path, end) => `href="${href(lang, path)}${end}`)
+
+/**
+ * A doc from the app repository in `lang`: its translation in docs/i18n/<lang>/ when there is one, else English.
+ * `rel` is its path under docs/ (`installing.md`, `releases/0.1.0-alpha.9.md`).
+ */
+const docIn = (lang, rel) => {
+  const translated = `docs/i18n/${lang}/${rel}`
+  const file = lang !== SOURCE && existsSync(join(CONTENT, translated)) ? translated : `docs/${rel}`
+
+  return { file, source: read(join(CONTENT, file)), isEnglish: file === `docs/${rel}` && lang !== SOURCE }
+}
+/** Said on a page, or a release, shown in English because its translation isn't there yet. */
+const englishNote = (lang) => `<p class="lang-note" role="note">${esc(t(lang, 'language.notTranslated'))}</p>`
 
 const languageOf = (code) => LANGUAGES.find((language) => language.code === code)
 
@@ -243,13 +276,9 @@ ${structuredData({ lang, path, title, description, jsonLd, pageType, noindex })}
 `
 }
 
-/** A nav link: to the page in this language, or to the English page, marked as English. */
-const navLink = (lang, item, current) => {
-  const englishOnly = lang !== SOURCE && !isTranslated(item.path)
-  const tag = englishOnly ? ` <span class="lang-tag" lang="en" title="${esc(t(lang, 'language.englishOnly'))}">EN</span>` : ''
-
-  return `<a href="${href(lang, item.path)}"${englishOnly ? ' hreflang="en"' : ''}${item.path === current ? ' aria-current="page"' : ''}>${esc(t(lang, item.key))}${tag}</a>`
-}
+/** A nav link, to the page in this language. */
+const navLink = (lang, item, current) =>
+  `<a href="${href(lang, item.path)}"${item.path === current ? ' aria-current="page"' : ''}>${esc(t(lang, item.key))}</a>`
 
 /** The language menu: this page in each language, or that language's home page when this page is English only. */
 const languageMenu = (lang, path) => {
@@ -317,6 +346,7 @@ const footer = (lang, kind) => `<footer class="site-footer">
       <a href="${REPO}/issues">${esc(t(lang, 'footer.report'))}</a>
       <a href="${DISCORD}">Discord</a>
       <a href="${PATREON}">${esc(t(lang, 'footer.patreon'))}</a>
+      <a href="/translate/">${esc(t(lang, 'footer.translate'))}</a>
     </nav>
   </div>
 </footer>
@@ -458,14 +488,19 @@ const home = (lang) => {
   )
 }
 
-const install = () => {
-  const source = read(join(CONTENT, 'docs/installing.md'))
+/** The install guide without its breadcrumb line and title: the page has its own. */
+const guideBody = (source) =>
+  source
     .split('\n')
     .filter((line) => !/^\[← /.test(line) && !/^# /.test(line))
     .join('\n')
-  const { html, toc } = markdown(source)
-  const lang = SOURCE
+
+const install = (lang) => {
+  const doc = docIn(lang, 'installing.md')
+  const { ids } = markdown(guideBody(docIn(SOURCE, 'installing.md').source))
+  const { html, toc } = markdown(guideBody(doc.source), { lang, file: doc.file, ids })
   return docsPage({
+    lang,
     path: '/install/',
     title: t(lang, 'install.title'),
     description: t(lang, 'install.description'),
@@ -474,9 +509,9 @@ const install = () => {
     h1: t(lang, 'install.h1'),
     intro: t(lang, 'install.intro'),
     body: `      <div class="os-card" id="os-card"><div><b>${esc(t(lang, 'install.card'))}</b><span>${esc(t(lang, 'install.cardSystems'))}</span></div><a class="btn primary" data-version="${latestVersion()}" href="${REPO}/releases">${esc(t(lang, 'install.download'))}</a></div>
-${html}`,
+${doc.isEnglish ? `      ${englishNote(lang)}\n` : ''}${doc.isEnglish ? `<div lang="en" dir="ltr">${html}</div>` : html}`,
     toc,
-    source: { label: 'docs/installing.md', url: `${REPO}/blob/main/docs/installing.md` }
+    source: { label: doc.file, url: `${REPO}/blob/main/${doc.file}` }
   })
 }
 
@@ -587,31 +622,43 @@ const releaseDates = async () => {
   }
 }
 
-const releases = (dates) => {
-  const dir = join(CONTENT, 'docs/releases')
+/**
+ * A release's notes without the sections that belong on the Install page (Downloads, Before you start), found by their
+ * English name or, in a translation, by their id.
+ */
+const withoutInstallSections = (source) =>
+  source.replace(/\n## (?:Downloads|Before you start|[^\n]*\{#(?:downloads|before-you-start)\})[^\n]*[\s\S]*?(?=\n## |$)/g, '\n')
+
+const releases = (lang, dates) => {
   const versions = shownVersions
   const formatDate = (iso) =>
-    new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+    new Date(iso).toLocaleDateString(lang === SOURCE ? 'en-GB' : lang, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+  const docs = versions.map((version) => docIn(lang, `releases/${version}.md`))
+  // None translated (the usual case: release notes are written in English): one note above them all.
+  const allEnglish = lang !== SOURCE && docs.every((doc) => doc.isEnglish)
   const sections = versions.map((version, index) => {
-    // Downloads and first-open steps are on the Install page; the notes keep what changed.
-    const source = read(join(dir, `${version}.md`)).replace(/\n## (Downloads|Before you start)[\s\S]*?(?=\n## |$)/g, '\n')
-    const { html } = markdown(source, { demote: true })
+    const doc = docs[index]
+    const { html } = markdown(withoutInstallSections(doc.source), { demote: true, lang, file: doc.file })
     const date = dates[version]
-    return `      <section class="release" id="v${esc(version)}">
-        <header><h2>${esc(version)}</h2>${date ? `<time datetime="${date.slice(0, 10)}">${formatDate(date)}</time>` : ''}${index === 0 ? '<span class="chip done">Latest</span>' : ''}<a class="downloads" href="${REPO}/releases/tag/v${esc(version)}">Downloads</a></header>
-${html.replace(/ id="/g, ` id="v${esc(version)}-`)}
+    return `      <section class="release" id="v${esc(version)}"${doc.isEnglish ? ' lang="en" dir="ltr"' : ''}>
+        <header><h2 class="ltr">${esc(version)}</h2>${date ? `<time datetime="${date.slice(0, 10)}">${formatDate(date)}</time>` : ''}${index === 0 ? `<span class="chip done">${esc(t(lang, 'releases.latest'))}</span>` : ''}<a class="downloads" href="${REPO}/releases/tag/v${esc(version)}">${esc(t(lang, 'releases.downloads'))}</a></header>
+${doc.isEnglish && !allEnglish ? `        ${englishNote(lang)}\n` : ''}${html.replace(/ id="/g, ` id="v${esc(version)}-`)}
       </section>`
   })
   return docsPage({
+    lang,
     path: '/releases/',
-    title: t(SOURCE, 'releases.title'),
-    description: t(SOURCE, 'releases.description'),
-    kicker: t(SOURCE, 'releases.kicker'),
-    h1: t(SOURCE, 'releases.h1'),
-    intro: t(SOURCE, 'releases.intro'),
-    body: sections.join('\n'),
+    title: t(lang, 'releases.title'),
+    description: t(lang, 'releases.description'),
+    kicker: t(lang, 'releases.kicker'),
+    h1: t(lang, 'releases.h1'),
+    intro: t(lang, 'releases.intro'),
+    body: `${allEnglish ? `      ${englishNote(lang)}\n` : ''}${sections.join('\n')}`,
     toc: versions.map((version) => ({ id: `v${version}`, text: version })),
-    source: { label: 'docs/releases/', url: `${REPO}/tree/main/docs/releases` }
+    source: {
+      label: lang === SOURCE ? 'docs/releases/' : `docs/i18n/${lang}/releases/`,
+      url: `${REPO}/tree/main/${lang === SOURCE ? 'docs/releases' : `docs/i18n/${lang}/releases`}`
+    }
   })
 }
 
@@ -619,7 +666,7 @@ ${html.replace(/ id="/g, ` id="v${esc(version)}-`)}
 const releasesFeed = (dates) => {
   const entries = shownVersions.map((version) => {
     const updated = dates[version] ?? new Date(0).toISOString()
-    const source = read(join(CONTENT, 'docs/releases', `${version}.md`)).replace(/\n## (Downloads|Before you start)[\s\S]*?(?=\n## |$)/g, '\n')
+    const source = withoutInstallSections(read(join(CONTENT, 'docs/releases', `${version}.md`)))
     return `  <entry>
     <title>IPAForge ${esc(version)}</title>
     <id>${SITE}/releases/#v${esc(version)}</id>
@@ -716,12 +763,30 @@ lastmod = {
 }
 for (const { code } of LANGUAGES) {
   write(localePath(code, '/'), home(code))
+  write(localePath(code, '/install/'), install(code))
   write(localePath(code, '/troubleshooting/'), troubleshooting(code))
+  write(localePath(code, '/releases/'), releases(code, dates))
   write(localePath(code, '/faq/'), faq(code))
 }
-write('/install/', install())
-write('/releases/', releases(dates))
 write('/404.html', notFound())
+// A short address for translators, to the Weblate project: a redirect, with a link for browsers that don't follow it.
+write(
+  '/translate/',
+  `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Translate IPAForge</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=${WEBLATE}">
+<link rel="canonical" href="${WEBLATE}">
+</head>
+<body>
+<p>IPAForge is translated on Weblate: <a href="${WEBLATE}">${WEBLATE}</a></p>
+</body>
+</html>
+`
+)
 
 writeFileSync(join(DIST, 'releases/feed.xml'), releasesFeed(dates))
 
