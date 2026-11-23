@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url'
 import { marked } from 'marked'
 
 import { FAQ_ON_HOME } from '../src/content/faq.mjs'
-import { LANGUAGES, localePath, nativeName, SOURCE, t } from '../src/i18n/index.mjs'
+import { LANGUAGES, localePath, nativeName, SOURCE, t, UNPUBLISHED } from '../src/i18n/index.mjs'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const CONTENT = resolve(ROOT, process.env.CONTENT_DIR ?? '../ipaforge')
@@ -818,3 +818,7 @@ ${sitemapEntries.join('\n')}
 )
 
 console.log(`built ${sitemapEntries.length + 1} pages in ${LANGUAGES.length} languages into dist/ from ${CONTENT}`)
+if (UNPUBLISHED.length > 0)
+  console.log(
+    `not published yet (under 90 % translated): ${UNPUBLISHED.map(({ code, completion }) => `${code} ${Math.floor(completion * 100)} %`).join(', ')}`
+  )
