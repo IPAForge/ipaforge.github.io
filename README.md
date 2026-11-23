@@ -24,7 +24,7 @@ Every language with a file in `src/i18n/` gets every page: English at the root, 
 - `src/pages/home.html` holds the landing page's markup, with `{{key}}` where a string goes.
 - Each page names its other languages for search engines (`hreflang`, and in `sitemap.xml`), and the top bar has a menu to switch.
 
-A language appears when Weblate adds its `src/i18n/<code>.json` (the code the app uses). Right-to-left languages (Arabic, Hebrew, Persian, Urdu) get `dir="rtl"`.
+A language's file comes from Weblate as soon as someone starts translating it (`src/i18n/<code>.json`, the code the app uses), but the site **publishes a language only once at least 90 % of its strings are translated** (`MIN_COMPLETION` in `src/i18n/index.mjs`); the build lists the others and how far each is. Right-to-left languages (Arabic, Hebrew, Persian, Urdu) get `dir="rtl"`.
 
 The docs pages are made from the app's repository, so they say what the app says: change `docs/installing.md` there, and the site follows on its next deploy.
 
