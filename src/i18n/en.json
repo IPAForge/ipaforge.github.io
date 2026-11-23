@@ -1,0 +1,273 @@
+{
+  "language": {
+    "label": "Language",
+    "englishOnly": "In English"
+  },
+  "header": {
+    "pages": "Pages",
+    "switchTheme": "Switch theme",
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode"
+  },
+  "nav": {
+    "install": "Install",
+    "troubleshooting": "Troubleshooting",
+    "releases": "Release notes",
+    "faq": "FAQ"
+  },
+  "footer": {
+    "links": "Links",
+    "license": "AGPL-3.0 license",
+    "downloads": "Downloads",
+    "report": "Report a problem",
+    "patreon": "Support on Patreon"
+  },
+  "docs": {
+    "sidebar": "Documentation",
+    "heading": "Docs",
+    "onThisPage": "On this page",
+    "page": "Page",
+    "madeFrom": "Made from <code>{source}</code> in the IPAForge repository.",
+    "edit": "Edit this page on GitHub",
+    "report": "Report a problem"
+  },
+  "meta": {
+    "ogImageAlt": "IPAForge: install SideStore and your own apps onto iPhone and iPad from Windows, macOS and Linux.",
+    "feedTitle": "IPAForge releases"
+  },
+  "home": {
+    "title": "IPAForge: install SideStore from Windows, macOS and Linux",
+    "description": "IPAForge is a free, open-source desktop app for Windows, macOS and Linux that installs SideStore and your own apps onto iPhone and iPad with a free Apple ID.",
+    "hero": {
+      "whatsNew": "See what's new",
+      "line1": "Sideload from any computer.",
+      "line2": "Keep it working.",
+      "lede": "IPAForge installs SideStore and your own apps onto iPhone and iPad with a free Apple ID, from Windows, macOS or Linux. It checks everything before it changes anything, and when something fails, it tells you how to fix it.",
+      "download": "Download IPAForge",
+      "github": "View on GitHub",
+      "discord": "Join the Discord",
+      "intelQuestion": "Intel Mac?",
+      "intelLink": "Download the Intel build",
+      "openSource": "Free and open source (AGPL-3.0)",
+      "systems": "Windows · macOS · Linux"
+    },
+    "showcase": {
+      "label": "The app",
+      "tabs": "Screens",
+      "install-home": "Install SideStore",
+      "preload": "Preload apps",
+      "apps": "Your apps",
+      "developer": "Developer Portal",
+      "repair": "Repair SideStore",
+      "devices": "Device checklist",
+      "sidestore-qr": "QR codes"
+    },
+    "limits": {
+      "kicker": "Free Apple ID",
+      "title": "Apple's limits, shown before you hit them.",
+      "sub": "A free Apple ID can sideload, within rules most tools leave you to discover. IPAForge counts them for you and says what an install will use.",
+      "appsUnit": "apps",
+      "apps": "at a time on each device. IPAForge asks which one to replace when you reach it.",
+      "daysUnit": "days",
+      "days": "per signature. IPAForge refreshes your apps by itself before they expire.",
+      "appIdsUnit": "App IDs a week",
+      "appIds": "shown before installing, with when the next one frees up."
+    },
+    "features": {
+      "kicker": "Features",
+      "title": "Everything sideloading needs, in one app.",
+      "sidestore": { "title": "One-click SideStore", "body": "SideStore, or LiveContainer with SideStore, Stable or Nightly. The pairing file and certificate are placed for you." },
+      "preload": { "title": "Preload your apps", "body": "Drop .ipa files, paste a link, or browse the catalog, SideStore's source and any AltStore-format source you add." },
+      "refresh": { "title": "Apps that don't expire", "body": "See when each app expires. Refresh works like SideStore's: a new profile while your certificate is valid, nothing reinstalled." },
+      "repair": { "title": "Repair SideStore", "body": "Checks what keeps SideStore from refreshing by itself, line by line, and fixes it in one go." },
+      "qr": { "title": "QR codes for SideStore", "body": "Add a source to SideStore on your iPhone, or have SideStore install an app, by scanning a code." },
+      "checklist": { "title": "A checklist for each iPhone", "body": "Trust, passcode, Developer Mode, trusting your Apple ID, LocalDevVPN: what your iOS version needs, ticked as you go." },
+      "recovery": { "title": "Recovery, not dead ends", "body": "Every failure has a screen with the fixes that apply, copyable diagnostics and a pre-filled bug report." },
+      "progress": { "title": "Live progress", "body": "Every step shows what it's doing: speed and time left while sending the app, Apple's steps, and iOS's own install progress, over USB or Wi-Fi." },
+      "logs": { "title": "Logs you can share", "body": "Every step IPAForge took, with search and filters, saved to a file to attach to a bug report." },
+      "accounts": { "title": "Several Apple IDs", "body": "Two-factor sign-in with a code on your devices or by text. Kept in your system keychain, free and paid teams, with a quick switch when Apple blocks one on a device." },
+      "anisette": { "title": "Anisette servers your way", "body": "IPAForge picks a working server from SideStore's list by itself, with a backup. Or choose one, add your own, and test each." },
+      "updates": { "title": "Updates itself", "body": "A new version installs when IPAForge opens, after its release signature checks out, and What's new tells you what changed." },
+      "languages": { "title": "Your language, your look", "body": "{count} languages, right to left included, and six colour themes in light and dark." }
+    },
+    "how": {
+      "kicker": "How it works",
+      "title": "Three steps to SideStore.",
+      "step": "Step {number}",
+      "plug": { "title": "Plug in your iPhone", "body": "Unlock it and tap Trust. The checklist shows what else your iOS version needs, like Developer Mode." },
+      "signIn": { "title": "Sign in with your Apple ID", "body": "A free account works. Your password goes only to Apple, and saved Apple IDs stay in your system keychain." },
+      "install": { "title": "Install", "body": "IPAForge signs SideStore, places its pairing file and certificate, and installs it, showing every step as it goes." }
+    },
+    "open": {
+      "kicker": "Open by design",
+      "title": "You can read every line, and check every download.",
+      "typescript": "<b>All TypeScript, no closed helpers.</b> Code signing, talking to the device and signing in to Apple are written from scratch and open to read.",
+      "signs": "<b>Signs like Apple.</b> The signer's output matches Apple's own <span class=\"mono\">codesign</span> byte for byte on its test fixtures, and Apple's verifier accepts it.",
+      "signed": "<b>Signed releases.</b> Every file of every release carries a Sigstore signature from the release workflow, and IPAForge checks it before installing an update.",
+      "license": "<b>AGPL-3.0, and it stays open.</b> Free to use, study, change and share, and anything built from it must stay open source too.",
+      "terminalLabel": "Checking a download with cosign",
+      "checkYourself": "# check a download yourself",
+      "appLogs": "# what the app logs before an update installs"
+    },
+    "roadmap": {
+      "kicker": "Roadmap",
+      "title": "Where IPAForge is going.",
+      "done": "Done",
+      "started": "Started",
+      "next": "Next",
+      "planned": "Planned",
+      "engine": { "title": "The engine and the app", "body": "Signer, device layer, Apple sign-in, developer services, the installer and the interface." },
+      "guide": { "title": "Guided first run", "body": "A setup guide the first time you open IPAForge, and a tour of every page." },
+      "install": { "title": "Install and preload", "body": "One-click SideStore, app sources, the Apps page, Repair SideStore, QR codes, the checklist." },
+      "desktop": { "title": "Desktop app", "body": "Installers for Windows, macOS and Linux, signed releases, and automatic updates." },
+      "management": { "title": "Management tools", "body": "The Developer Portal page: your team's certificates and the apps each one signs, App IDs, profiles, app groups and devices. Pairing files per app, in one place." },
+      "wireless": { "title": "Wireless and remote pairing", "body": "The iOS 17.4+ remote pairing file for SideStore, Wi-Fi without usbmuxd, the iOS 17.4+ device tunnel, and Apple TV and Vision Pro paired by their code. Next: installing to Apple TV and Vision Pro." },
+      "release": { "title": "1.0", "body": "Windows code signing and Apple notarisation, more languages, a security review, and the signer on npm." }
+    },
+    "faq": {
+      "kicker": "FAQ",
+      "title": "Good to know.",
+      "all": "All questions"
+    },
+    "final": {
+      "title": "Get IPAForge.",
+      "sub": "Free for Windows, macOS and Linux. It keeps itself up to date.",
+      "download": "Download <span class=\"ltr\">{version}</span>",
+      "star": "Star on GitHub",
+      "discord": "Join the Discord",
+      "patreon": "Support on Patreon"
+    },
+    "shots": {
+      "install-home": {
+        "alt": "IPAForge's Install page: SideStore or LiveContainer with SideStore, the channel, and the install plan with App IDs left this week.",
+        "caption": "Pick SideStore, or LiveContainer with SideStore, and see what the install will use before anything changes: App IDs left this week, free-app slots, the certificate and the team."
+      },
+      "preload": {
+        "alt": "The Preload page with apps from the catalog and a chosen .ipa file, checked and ready to install.",
+        "caption": "Add apps from the catalog, from sources, from a link or from .ipa files. Each one is checked against your iPhone first, then they install in one run."
+      },
+      "apps": {
+        "alt": "The Apps page listing installed apps with when each one expires.",
+        "caption": "Every app you sideloaded and when it expires. Refresh, update or remove it, or let IPAForge refresh it by itself before it expires."
+      },
+      "developer": {
+        "alt": "The Developer Portal page: the team's certificates, with who made each and which apps on the iPhone it signs.",
+        "caption": "See what your Apple ID holds at Apple: certificates and the apps each one signs, App IDs and how many are left this week, the profiles on your iPhone, app groups and registered devices. Clean up what nothing uses."
+      },
+      "repair": {
+        "alt": "Repair SideStore checking SideStore line by line.",
+        "caption": "Repair SideStore checks who signed it, its certificate, its pairing file and when it expires, then fixes what keeps it from refreshing by itself."
+      },
+      "devices": {
+        "alt": "The Devices page with the checklist for an iPhone.",
+        "caption": "A checklist for each device, for its iOS version: what IPAForge sees ticks itself, what only you can see on the iPhone has a box to tick."
+      },
+      "sidestore-qr": {
+        "alt": "A QR code that adds a source to SideStore.",
+        "caption": "Scan a code with your iPhone to add a source to SideStore, or to have SideStore install an app itself."
+      }
+    },
+    "downloadFor": "Download for {os}"
+  },
+  "install": {
+    "title": "Install IPAForge on Windows, macOS and Linux",
+    "description": "Download IPAForge, open it the first time on macOS, Windows or Linux, connect your iPhone, and install SideStore.",
+    "kicker": "Install",
+    "h1": "Installing IPAForge",
+    "intro": "Download, the first open on each system, what your iPhone needs, and the first run.",
+    "card": "IPAForge for your computer",
+    "cardSystems": "Windows, macOS and Linux",
+    "download": "Download",
+    "for": "IPAForge for {os}",
+    "mac": "The .dmg for Apple silicon (M1 and later)",
+    "windows": "The .exe installer, which updates itself",
+    "linux": "The AppImage, or a .deb or .rpm package",
+    "intel": "Intel Mac?"
+  },
+  "troubleshooting": {
+    "title": "Troubleshooting IPAForge: every error and how to fix it",
+    "description": "What each of IPAForge's {count} errors means and how to fix it: device, Apple ID, downloads, signing and installing.",
+    "kicker": "Troubleshooting",
+    "h1": "When something fails",
+    "intro": "Every error IPAForge shows has a code. Search for it, or for the words on your screen, to see what it means and how to fix it.",
+    "search": "Search {count} errors: a code like apple.app_id_quota, or words like “locked”",
+    "searchLabel": "Search errors",
+    "filters": "Filter by area",
+    "all": "All",
+    "count": "{count} errors",
+    "countOf": "{shown} of {count} errors",
+    "empty": "No error matches. Try fewer words, or ask on <a href=\"{discord}\">Discord</a>.",
+    "link": "Link to this error",
+    "areas": {
+      "device": "iPhone or iPad",
+      "apple": "Apple ID",
+      "catalog": "Downloads and sources",
+      "app": "The app",
+      "net": "Network",
+      "installer": "Installing",
+      "ipaforge": "IPAForge itself",
+      "other": "Other"
+    }
+  },
+  "releases": {
+    "title": "IPAForge release notes: what changed in every version",
+    "description": "What changed in each version of IPAForge, newest first: new features, fixes and the downloads for Windows, macOS and Linux.",
+    "kicker": "Release notes",
+    "h1": "Every version, newest first",
+    "intro": "What changed in each release of IPAForge. The app shows the same changes in What's new.",
+    "latest": "Latest",
+    "downloads": "Downloads",
+    "feedSubtitle": "What changed in each version of IPAForge."
+  },
+  "faq": {
+    "title": "IPAForge FAQ: cost, requirements, Apple ID and updates",
+    "description": "Short answers about IPAForge: what it costs, what you need, the warnings on first open, your password, updates and getting help.",
+    "kicker": "FAQ",
+    "h1": "Questions people ask",
+    "intro": "Short answers, each pointing to the page with the details.",
+    "items": [
+      {
+        "q": "Is IPAForge free?",
+        "a": "Yes. IPAForge is free and open source under the GNU AGPL-3.0, and a free Apple ID is enough to use it. Every feature is free for everyone; if it saves you time, you can support it on <a href=\"https://patreon.com/IPAForge\">Patreon</a>."
+      },
+      {
+        "q": "Do I need a paid Apple developer account?",
+        "a": "No. A free Apple ID works, within Apple's limits: 3 sideloaded apps at a time on each device, 7 days per signature and 10 App IDs a week. IPAForge shows each before it changes anything, and refreshes your apps before they expire. A paid account works too, without those limits."
+      },
+      {
+        "q": "Why does macOS or Windows warn me when I open it?",
+        "a": "IPAForge isn't notarised by Apple or code-signed for Windows yet. <a href=\"/install/#opening-ipaforge-the-first-time\">Install</a> shows the one-time steps for each system. Both come with 1.0."
+      },
+      {
+        "q": "What do I need on Windows and Linux?",
+        "a": "On Windows, install Apple Devices from the Microsoft Store, so your computer can talk to the iPhone. On Linux, install usbmuxd. macOS needs nothing extra."
+      },
+      {
+        "q": "Which iPhones and iPads work?",
+        "a": "iOS 15 or later with a passcode. On iOS 16 and later, Developer Mode must be on; the checklist on the Devices page shows how."
+      },
+      {
+        "q": "Where does my Apple ID password go?",
+        "a": "Only to Apple. If you choose to save it, it stays encrypted in your system keychain on your computer."
+      },
+      {
+        "q": "Does IPAForge update itself?",
+        "a": "Yes. It checks for a new version when it opens, and installs it only after its release signature checks out. Copies installed from a .msi, .deb or .rpm say when a new version is out, and which file to download. <a href=\"/releases/\">Release notes</a> list every version."
+      },
+      {
+        "q": "An install failed. What now?",
+        "a": "Every error has a code and its fix right in the app. <a href=\"/troubleshooting/\">Troubleshooting</a> lists every code. Still stuck? Ask on <a href=\"https://discord.gg/kGJn7NC5Zf\">Discord</a>, or open an issue on GitHub with the logs attached (Logs › Save in the app)."
+      },
+      {
+        "q": "Is IPAForge part of SideStore?",
+        "a": "No. IPAForge is an independent project that installs SideStore and works alongside it. It isn't affiliated with SideStore or Apple."
+      }
+    ]
+  },
+  "notFound": {
+    "title": "Page not found · IPAForge",
+    "description": "This page does not exist.",
+    "h1": "This page does not exist",
+    "intro": "The address may have changed. The pages are all in the sidebar, or go back to the <a href=\"/\">home page</a>."
+  }
+}

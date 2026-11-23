@@ -1,5 +1,7 @@
 // The docs pages: the page picker on a phone, and searching and filtering the errors on Troubleshooting.
 (() => {
+  const strings = window.siteStrings
+  const fill = window.fillString
   const picker = document.getElementById('docs-picker')
   if (picker) picker.addEventListener('change', () => (location.href = picker.value))
 
@@ -9,21 +11,21 @@
   if (osCard) {
     const ua = navigator.userAgent
     const os = /Mac/.test(ua)
-      ? ['macOS', 'The .dmg for Apple silicon (M1 and later)', 'mac-arm64.dmg']
+      ? ['macOS', strings.mac, 'mac-arm64.dmg']
       : /Win/.test(ua)
-        ? ['Windows', 'The .exe installer, which updates itself', 'win-x64.exe']
-        : ['Linux', 'The AppImage, or a .deb or .rpm package']
+        ? ['Windows', strings.windows, 'win-x64.exe']
+        : ['Linux', strings.linux]
     const button = osCard.querySelector('.btn')
     const version = button.dataset.version
     const file = (name) => `https://github.com/IPAForge/ipaforge/releases/download/v${version}/IPAForge-${version}-${name}`
-    osCard.querySelector('b').textContent = 'IPAForge for ' + os[0]
+    osCard.querySelector('b').textContent = fill(strings.installFor, { os: os[0] })
     const note = osCard.querySelector('span')
     note.textContent = os[1]
     if (version && os[2]) button.href = file(os[2])
     if (version && os[0] === 'macOS') {
       const intel = document.createElement('a')
       intel.href = file('mac-x64.dmg')
-      intel.textContent = 'Intel Mac?'
+      intel.textContent = strings.intel
       note.append(' · ', intel)
     }
   }
@@ -39,7 +41,7 @@
   let area = ''
 
   const apply = () => {
-    const words = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean)
+    const words = input.value.trim().toLocaleLowerCase(document.documentElement.lang).split(/\s+/).filter(Boolean)
     let shown = 0
     for (const item of items) {
       const text = item.dataset.text
@@ -47,7 +49,10 @@
       item.hidden = !match
       if (match) shown += 1
     }
-    count.textContent = shown === items.length ? `${items.length} errors` : `${shown} of ${items.length} errors`
+    count.textContent =
+      shown === items.length
+        ? fill(strings.count, { count: items.length })
+        : fill(strings.countOf, { shown, count: items.length })
     empty.hidden = shown > 0
   }
 

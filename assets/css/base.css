@@ -257,6 +257,87 @@ a {
   }
 }
 
+/* The language menu: a button in the top bar opening the list of languages, no script needed */
+.lang-menu {
+  position: relative;
+}
+
+.lang-menu summary {
+  list-style: none;
+}
+
+.lang-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.lang-menu svg {
+  width: 18px;
+  height: 18px;
+}
+
+.lang-menu ul {
+  position: absolute;
+  inset-inline-end: 0;
+  top: calc(100% + var(--space-2));
+  z-index: 20;
+  min-width: 180px;
+  max-height: min(70vh, 480px);
+  overflow-y: auto;
+  margin: 0;
+  padding: var(--space-1);
+  list-style: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.lang-menu a {
+  display: block;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: var(--text-sm);
+}
+
+.lang-menu a:hover {
+  background: var(--color-surface-2);
+}
+
+.lang-menu a[aria-current="true"] {
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+/* A link to a page that is in English only, from a page in another language */
+.lang-tag {
+  margin-inline-start: 4px;
+  padding: 0 4px;
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.7em;
+  vertical-align: 1px;
+}
+
+/* Arabic script joins its letters: spacing them out (labels, tight headings) would break the words apart */
+:is(:lang(ar), :lang(fa), :lang(ur)) * {
+  letter-spacing: normal !important;
+}
+
+/* Version numbers read left to right inside right-to-left text */
+.ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Arrows that point onwards point the other way in a right-to-left language */
+[dir="rtl"] .arrow {
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
 /* Footer */
 .site-footer {
   border-top: 1px solid var(--color-line);
