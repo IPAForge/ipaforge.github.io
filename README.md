@@ -9,21 +9,22 @@ Live at **https://ipaforge.com**.
 | Page | Made from |
 |---|---|
 | `/` | `src/pages/home.html`, by hand |
-| `/install/` | `docs/installing.md` in IPAForge/ipaforge |
+| `/install/` | `docs/installing.md` in IPAForge/ipaforge, or its translation in `docs/i18n/<lang>/installing.md` |
 | `/troubleshooting/` | every error the app shows, from the app's own locale files (`packages/ui/src/locales/<lang>.json`) in IPAForge/ipaforge |
 | `/releases/` | `docs/releases/*.md` in IPAForge/ipaforge, with the dates from its GitHub releases |
 | `/faq/` | `faq.items` in `src/i18n/<lang>.json` (the landing page shows its first questions) |
 
 ## Languages
 
-Every language with a file in `src/i18n/` gets the landing page, Troubleshooting and the FAQ: English at the root, every other language under its code (`/de/`, `/de/troubleshooting/`, `/de/faq/`). Install and the release notes are in English only, and the other languages' pages say so next to their links.
+Every language with a file in `src/i18n/` gets every page: English at the root, every other language under its code (`/de/`, `/de/install/`, `/de/troubleshooting/`, `/de/releases/`, `/de/faq/`). The translations are made on Weblate ([Translations](https://github.com/IPAForge/ipaforge/blob/main/docs/translations.md) in the app's repository); `/translate/` sends visitors there.
 
 - `src/i18n/en.json` is the source: every string the pages and their scripts show. A string another language doesn't have yet falls back to English.
 - Troubleshooting uses the app's own translations of its errors, so a language the app has needs nothing more there.
+- Install uses the app's translated guide (`docs/i18n/<lang>/installing.md`) where there is one; its headings take the English page's anchors in order, so links to a section work in every language. The release notes are written in English. A page or a release shown in English says so.
 - `src/pages/home.html` holds the landing page's markup, with `{{key}}` where a string goes.
 - Each page names its other languages for search engines (`hreflang`, and in `sitemap.xml`), and the top bar has a menu to switch.
 
-To add a language: copy `en.json` to `src/i18n/<code>.json` (the code the app uses) and translate it. Right-to-left languages (Arabic, Hebrew, Persian, Urdu) get `dir="rtl"`.
+A language appears when Weblate adds its `src/i18n/<code>.json` (the code the app uses). Right-to-left languages (Arabic, Hebrew, Persian, Urdu) get `dir="rtl"`.
 
 The docs pages are made from the app's repository, so they say what the app says: change `docs/installing.md` there, and the site follows on its next deploy.
 

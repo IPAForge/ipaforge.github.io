@@ -1,7 +1,7 @@
 {
   "language": {
     "label": "اللغة",
-    "englishOnly": "بالإنجليزية"
+    "notTranslated": "لم يُترجَم هذا الجزء بعد، لذا يظهر باللغة الإنجليزية."
   },
   "header": {
     "pages": "الصفحات",
@@ -20,7 +20,8 @@
     "license": "رخصة AGPL-3.0",
     "downloads": "التنزيلات",
     "report": "الإبلاغ عن مشكلة",
-    "patreon": "ادعمنا على Patreon"
+    "patreon": "ادعمنا على Patreon",
+    "translate": "ساعد في الترجمة"
   },
   "docs": {
     "sidebar": "التوثيق",

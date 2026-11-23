@@ -1,7 +1,7 @@
 {
   "language": {
     "label": "Язык",
-    "englishOnly": "На английском"
+    "notTranslated": "Этот раздел ещё не переведён, поэтому показан на английском."
   },
   "header": {
     "pages": "Страницы",
@@ -20,7 +20,8 @@
     "license": "Лицензия AGPL-3.0",
     "downloads": "Загрузки",
     "report": "Сообщить о проблеме",
-    "patreon": "Поддержать на Patreon"
+    "patreon": "Поддержать на Patreon",
+    "translate": "Помочь с переводом"
   },
   "docs": {
     "sidebar": "Документация",
